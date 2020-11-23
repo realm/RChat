@@ -8,6 +8,8 @@
 import RealmSwift
 
 class UserPreferences: EmbeddedObject {
-    @objc dynamic var displayName = ""
+    @objc dynamic var displayName: String?
     @objc dynamic var avatarImage: Data?
+
+    var isEmpty: Bool { displayName == nil }
 }

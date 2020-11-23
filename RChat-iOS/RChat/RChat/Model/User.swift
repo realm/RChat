@@ -16,6 +16,8 @@ class User: Object {
     @objc dynamic var lastSeenAt: Date?
     let conversations = List<Conversation>()
 
+    var isProfileSet: Bool { !(userPreferences?.isEmpty ?? true) }
+
     override static func primaryKey() -> String? {
         return "_id"
     }

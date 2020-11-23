@@ -24,13 +24,13 @@ struct InputField: View {
         VStack(spacing: Dimensions.noSpacing) {
             CaptionLabel(title: title)
             HStack(spacing: Dimensions.noSpacing) {
-                if !showingSecureField {
-                    TextField("", text: $text)
+                if showingSecureField {
+                    SecureField("", text: $text)
                         .padding(.bottom, Dimensions.bottomPadding)
                         .foregroundColor(.primary)
                         .font(.body)
                 } else {
-                    SecureField("", text: $text)
+                    TextField("", text: $text)
                         .padding(.bottom, Dimensions.bottomPadding)
                         .foregroundColor(.primary)
                         .font(.body)
