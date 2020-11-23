@@ -24,41 +24,41 @@ class AppState: ObservableObject {
         app.currentUser != nil && app.currentUser?.state == .loggedIn
     }
 
-//    init() {
-//        
-//        loginPublisher
-//            .receive(on: DispatchQueue.main)
-//            .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
-//                self.shouldIndicateActivity = true
-//                var realmConfig = user.configuration(partitionValue: "user=\(user.id)")
-//                realmConfig.objectTypes = [User.self, Project.self]
-//                return Realm.asyncOpen(configuration: realmConfig)
-//            }
-//            .receive(on: DispatchQueue.main)
-//            .map {
-//                self.shouldIndicateActivity = false
-//                return $0
-//            }
-//            .subscribe(userRealmPublisher)
-//            .store(in: &self.cancellables)
-//        
-//        userRealmPublisher
-//            .sink(receiveCompletion: { result in
-//                if case let .failure(error) = result {
-//                    self.error = "Failed to log in and open realm: \(error.localizedDescription)"
-//                }
-//            }, receiveValue: { realm in
-//                print("Realm User file location: \(realm.configuration.fileURL!.path)")
-//                self.user = realm.objects(User.self).first
-//            })
-//            .store(in: &cancellables)
-//        
-//        logoutPublisher
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveCompletion: { _ in
-//            }, receiveValue: { _ in
-//                self.user = nil
-//            })
-//            .store(in: &cancellables)
-//    }
+    init() {
+
+        loginPublisher
+            .receive(on: DispatchQueue.main)
+            .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
+                self.shouldIndicateActivity = true
+                var realmConfig = user.configuration(partitionValue: "user=\(user.id)")
+                realmConfig.objectTypes = [User.self, UserPreferences.self, Conversation.self]
+                return Realm.asyncOpen(configuration: realmConfig)
+            }
+            .receive(on: DispatchQueue.main)
+            .map {
+                self.shouldIndicateActivity = false
+                return $0
+            }
+            .subscribe(userRealmPublisher)
+            .store(in: &self.cancellables)
+
+        userRealmPublisher
+            .sink(receiveCompletion: { result in
+                if case let .failure(error) = result {
+                    self.error = "Failed to log in and open realm: \(error.localizedDescription)"
+                }
+            }, receiveValue: { realm in
+                print("Realm User file location: \(realm.configuration.fileURL!.path)")
+                self.user = realm.objects(User.self).first
+            })
+            .store(in: &cancellables)
+
+        logoutPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+            }, receiveValue: { _ in
+                self.user = nil
+            })
+            .store(in: &cancellables)
+    }
 }
