@@ -26,6 +26,8 @@ class AppState: ObservableObject {
 
     init() {
 
+        _  = app.currentUser?.logOut()
+
         loginPublisher
             .receive(on: DispatchQueue.main)
             .flatMap { user -> RealmPublishers.AsyncOpenPublisher in

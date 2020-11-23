@@ -21,6 +21,7 @@ struct ProfileSheet: View {
                 }
         }
             .navigationBarTitle("Update Profile", displayMode: .inline)
+            .navigationBarItems(leading: Button("Cancel") { presentationMode.wrappedValue.dismiss() })
         }
     }
 }
