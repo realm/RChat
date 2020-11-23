@@ -13,3 +13,9 @@ class UserPreferences: EmbeddedObject {
     @objc dynamic var shouldShareLocation = false
     @objc dynamic var shouldSharePresence = false
 }
+
+// TODO: Store in AppStorage
+class UserAppPreferences {
+    var shouldShareLocation = false
+    var shouldSharePresence = false
+}
