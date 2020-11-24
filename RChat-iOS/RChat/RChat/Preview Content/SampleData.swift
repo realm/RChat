@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol Samplable {
     associatedtype Item
@@ -48,5 +49,23 @@ extension AppState: Samplable {
         let state = AppState()
         state.user = .sample
         return state
+    }
+}
+
+extension UIColor {
+    func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { rendererContext in
+            self.setFill()
+            rendererContext.fill(CGRect(origin: .zero, size: size))
+        }
+    }
+}
+
+extension Photo: Samplable {
+    static var sample: Photo {
+        let photo = Photo()
+        photo.picture = UIColor.orange.image(CGSize(width: 256, height: 256)).jpegData(compressionQuality: 0.8)
+        photo.picture = UIColor.yellow.image(CGSize(width: 64, height: 64)).jpegData(compressionQuality: 0.8)
+        return photo
     }
 }

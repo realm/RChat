@@ -5,6 +5,7 @@ line_length:
 disabled_rules:
 - todo
 - multiple_closures_with_trailing_closure
+- trailing_whitespace
 
 identifier_name:
   min_length: 2

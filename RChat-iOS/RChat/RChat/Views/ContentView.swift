@@ -14,17 +14,22 @@ struct ContentView: View {
 
     @EnvironmentObject var state: AppState
 
-    @State var showingProfileSheet = false
+    @State var showingProfileView = false
 
     var body: some View {
         NavigationView {
             ZStack {
                 VStack {
                     if state.loggedIn {
-                        if (state.user != nil) && !state.user!.isProfileSet {
-                            NewProfileView()
+                        if (state.user != nil) && !state.user!.isProfileSet || showingProfileView {
+                            SetProfileView(isPresented: $showingProfileView)
                         } else {
                             Text("Logged in")
+                            .navigationBarTitle("RChat", displayMode: .inline)
+                            .navigationBarItems(
+                                leading: state.loggedIn ? LogoutButton() : nil,
+                                trailing: state.loggedIn ? UserProfileButton { showingProfileView.toggle() } : nil
+                            )
                         }
                     } else {
                         LoginView()
@@ -39,11 +44,6 @@ struct ContentView: View {
                     OpaqueProgressView("Working With Realm")
                 }
             }
-            .navigationBarItems(
-                leading: state.loggedIn ? LogoutButton() : nil,
-                trailing: state.loggedIn ? UserProfileButton { showingProfileSheet.toggle() } : nil
-            )
-            .sheet(isPresented: $showingProfileSheet) { ProfileSheet() }
         }
     }
 }
