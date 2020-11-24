@@ -8,10 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    // TODO: Move these to where they're used
-    @AppStorage("shouldShareLocation") var shouldShareLocation = false
-    @AppStorage("shouldSharePresence") var shouldSharePresence = false
-
     @EnvironmentObject var state: AppState
 
     @State var showingProfileView = false

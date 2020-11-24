@@ -39,6 +39,8 @@
 		49012B5D256D2D9700C3614B /* PhotoFullSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B5C256D2D9700C3614B /* PhotoFullSizeView.swift */; };
 		49012B62256D2E2B00C3614B /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B61256D2E2B00C3614B /* BackButton.swift */; };
 		49012B70256D527800C3614B /* SetProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B6F256D527800C3614B /* SetProfileView.swift */; };
+		49012B75256D658000C3614B /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B74256D658000C3614B /* PhotoButton.swift */; };
+		49012B7E256D841900C3614B /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B7D256D841900C3614B /* LocationHelper.swift */; };
 		78EAB1EB31CF1777BA973ACE /* Pods_RChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2658CD9D3BA99AE6F00036BB /* Pods_RChat.framework */; };
 		C491F2B83FFA93C15191F2C1 /* Pods_RChat_RChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0A885564A6F4FEDABE47BE /* Pods_RChat_RChatUITests.framework */; };
 		D23F832BBC9959BDB1706C28 /* Pods_RChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A1E1EC30143D526D40E8ED /* Pods_RChatTests.framework */; };
@@ -103,6 +105,8 @@
 		49012B5C256D2D9700C3614B /* PhotoFullSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFullSizeView.swift; sourceTree = "<group>"; };
 		49012B61256D2E2B00C3614B /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		49012B6F256D527800C3614B /* SetProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileView.swift; sourceTree = "<group>"; };
+		49012B74256D658000C3614B /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
+		49012B7D256D841900C3614B /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		5FD04B2636422E3DBF2E1963 /* Pods-RChat-RChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.debug.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		72DF7A905CCC4C56866A00DB /* Pods-RChat-RChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.release.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		87D2A42A1819B58A76DA3152 /* Pods-RChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChatTests.release.xcconfig"; path = "Target Support Files/Pods-RChatTests/Pods-RChatTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 				49012ACB256BEFFA00C3614B /* AppState.swift */,
 				49012A77256BEDB300C3614B /* Views */,
 				49012A76256BEDA500C3614B /* Model */,
+				49012B79256D83F000C3614B /* Helpers */,
 				49012A32256BEA4E00C3614B /* Assets.xcassets */,
 				49012A37256BEA4E00C3614B /* Info.plist */,
 				49012A34256BEA4E00C3614B /* Preview Content */,
@@ -276,11 +281,20 @@
 			isa = PBXGroup;
 			children = (
 				49012B3F256D154400C3614B /* PhotoThumbNailView.swift */,
-				49012B52256D25BC00C3614B /* PhotoCaptureController.swift */,
 				49012B57256D2BF600C3614B /* UIImage+Thumbnail.swift */,
 				49012B5C256D2D9700C3614B /* PhotoFullSizeView.swift */,
+				49012B74256D658000C3614B /* PhotoButton.swift */,
 			);
 			path = Pictures;
+			sourceTree = "<group>";
+		};
+		49012B79256D83F000C3614B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				49012B52256D25BC00C3614B /* PhotoCaptureController.swift */,
+				49012B7D256D841900C3614B /* LocationHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		4CD9E9413A83BDDF1EE583D7 /* Pods */ = {
@@ -572,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49012A6F256BECF200C3614B /* PreviewHelpers.swift in Sources */,
+				49012B7E256D841900C3614B /* LocationHelper.swift in Sources */,
 				49012B5D256D2D9700C3614B /* PhotoFullSizeView.swift in Sources */,
 				49012B70256D527800C3614B /* SetProfileView.swift in Sources */,
 				49012B58256D2BF600C3614B /* UIImage+Thumbnail.swift in Sources */,
@@ -581,6 +596,7 @@
 				49012AFC256BF90100C3614B /* Conversation.swift in Sources */,
 				49012A31256BEA4C00C3614B /* ContentView.swift in Sources */,
 				49012B0D256C23F800C3614B /* SignupView.swift in Sources */,
+				49012B75256D658000C3614B /* PhotoButton.swift in Sources */,
 				49012B45256D162D00C3614B /* Photo.swift in Sources */,
 				49012AC7256BEFAB00C3614B /* OpaqueProgressView.swift in Sources */,
 				49012B12256C240F00C3614B /* LogoutButton.swift in Sources */,

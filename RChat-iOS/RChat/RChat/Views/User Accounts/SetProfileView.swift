@@ -11,27 +11,45 @@ import RealmSwift
 
 struct SetProfileView: View {
     @EnvironmentObject var state: AppState
+    
     @Binding var isPresented: Bool
+    
+    @AppStorage("shouldShareLocation") var shouldShareLocation = false
+    @AppStorage("shouldSharePresence") var shouldSharePresence = false
+    
     @State var displayName = ""
     @State var photo: Photo?
     @State var photoAdded = false
     
     var body: some View {
-        VStack {
-            Spacer()
-            if let photo = photo {
-                Button(action: { self.showPhotoTaker() }) {
-                    PhotoThumbNailView(photo: photo)
+        Form {
+            Section(header: Text("User Profile")) {
+                if let photo = photo {
+                    PhotoButton(photo: photo) {
+                        self.showPhotoTaker()
+                    }
                 }
-            }
-            if photo == nil {
-                Button(action: { self.showPhotoTaker() }) {
-                    Text("Add Photo")
+                if photo == nil {
+                    Button(action: { self.showPhotoTaker() }) {
+                        Text("Add Photo")
+                    }
                 }
+                InputField(title: "Display Name", text: $displayName)
+                CallToActionButton(title: "Save User Profile", action: saveProfile)
             }
-            InputField(title: "Display Name", text: $displayName)
-            CallToActionButton(title: "Save", action: saveProfile)
-            Spacer()
+            Section(header: Text("Device Settings")) {
+                Toggle(isOn: $shouldShareLocation, label: {
+                    Text("Share Location")
+                })
+                .onChange(of: shouldShareLocation) { value in
+                    if value {
+                        _ = LocationHelper.currentLocation
+                    }
+                }
+                Toggle(isOn: $shouldSharePresence, label: {
+                    Text("Share Presence")
+                })
+            }
         }
         .onAppear { initData() }
         .padding()
@@ -74,7 +92,7 @@ struct SetProfileView: View {
                             state.user?.userPreferences?.avatarImage = newPhoto
                         }
                     }
-                    isPresented = false
+//                    isPresented = false
                 } catch {
                     state.error = "Unable to open Realm write transaction"
                 }
@@ -96,7 +114,9 @@ struct SetProfileView_Previews: PreviewProvider {
     static var previews: some View {
         let previewState: AppState = .sample
         return AppearancePreviews(
-            SetProfileView(isPresented: .constant(true))
+            NavigationView {
+                SetProfileView(isPresented: .constant(true))
+            }
         )
         .environmentObject(previewState)
     }

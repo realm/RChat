@@ -15,6 +15,8 @@ class User: Object {
     let location = List<Double>()
     @objc dynamic var lastSeenAt: Date?
     let conversations = List<Conversation>()
+    
+    // TODO: Add presence state
 
     var isProfileSet: Bool { !(userPreferences?.isEmpty ?? true) }
 
