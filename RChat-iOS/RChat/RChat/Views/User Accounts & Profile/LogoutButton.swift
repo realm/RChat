@@ -11,6 +11,8 @@ import SwiftUI
 struct LogoutButton: View {
     @EnvironmentObject var state: AppState
     
+    var action: () -> Void = {}
+    
     @AppStorage("shouldSharePresence") var shouldSharePresence = false
     
     var body: some View {
@@ -38,21 +40,27 @@ struct LogoutButton: View {
                         } catch {
                             state.error = "Unable to open Realm write transaction"
                         }
+                        logout()
                         state.shouldIndicateActivity = false
                     })
                     .store(in: &self.state.cancellables)
+            } else {
+                logout()
             }
-            
-            app.currentUser?.logOut()
-                .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { _ in
-                }, receiveValue: {
-                    state.shouldIndicateActivity = false
-                    state.logoutPublisher.send($0)
-                })
-                .store(in: &state.cancellables)
         }
         .disabled(state.shouldIndicateActivity)
+    }
+    
+    func logout() {
+        action()
+        app.currentUser?.logOut()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+            }, receiveValue: {
+                state.shouldIndicateActivity = false
+                state.logoutPublisher.send($0)
+            })
+            .store(in: &state.cancellables)
     }
 }
 

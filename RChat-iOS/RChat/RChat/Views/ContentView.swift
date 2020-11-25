@@ -27,7 +27,7 @@ struct ContentView: View {
                             Text("Logged in")
                             .navigationBarTitle("RChat", displayMode: .inline)
                             .navigationBarItems(
-                                leading: state.loggedIn ? LogoutButton() : nil,
+//                                leading: state.loggedIn ? LogoutButton() : nil,
                                 trailing: state.loggedIn ? UserAvatarView(
                                     photo: state.user?.userPreferences?.avatarImage,
                                     online: true) {
