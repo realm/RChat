@@ -16,8 +16,6 @@ class User: Object {
     @objc dynamic var lastSeenAt: Date?
     let conversations = List<Conversation>()
     @objc dynamic var presence = "Off-Line"
-    
-    // TODO: Add presence state
 
     var isProfileSet: Bool { !(userPreferences?.isEmpty ?? true) }
     var presenceState: Presence {

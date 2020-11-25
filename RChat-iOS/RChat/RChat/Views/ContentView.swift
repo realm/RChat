@@ -28,8 +28,10 @@ struct ContentView: View {
                             .navigationBarTitle("RChat", displayMode: .inline)
                             .navigationBarItems(
                                 leading: state.loggedIn ? LogoutButton() : nil,
-                                trailing: state.loggedIn ? UserProfileButton { showingProfileView.toggle() } : nil
-                            )
+                                trailing: state.loggedIn ? UserAvatarView(
+                                    photo: state.user?.userPreferences?.avatarImage,
+                                    online: true) {
+                                    showingProfileView.toggle() } : nil)
                         }
                     } else {
                         LoginView()

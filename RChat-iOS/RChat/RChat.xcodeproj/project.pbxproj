@@ -46,6 +46,7 @@
 		49012B93256D8DB000C3614B /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B92256D8DB000C3614B /* PhotoView.swift */; };
 		49012B98256D8FDD00C3614B /* BlankPersonIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */; };
 		49012BA5256E83EB00C3614B /* OnlineAlertSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */; };
+		499E1E8A256EB6F50036614F /* Chatster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E89256EB6F50036614F /* Chatster.swift */; };
 		78EAB1EB31CF1777BA973ACE /* Pods_RChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2658CD9D3BA99AE6F00036BB /* Pods_RChat.framework */; };
 		C491F2B83FFA93C15191F2C1 /* Pods_RChat_RChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0A885564A6F4FEDABE47BE /* Pods_RChat_RChatUITests.framework */; };
 		D23F832BBC9959BDB1706C28 /* Pods_RChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A1E1EC30143D526D40E8ED /* Pods_RChatTests.framework */; };
@@ -117,6 +118,7 @@
 		49012B92256D8DB000C3614B /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankPersonIconView.swift; sourceTree = "<group>"; };
 		49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineAlertSettings.swift; sourceTree = "<group>"; };
+		499E1E89256EB6F50036614F /* Chatster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatster.swift; sourceTree = "<group>"; };
 		5FD04B2636422E3DBF2E1963 /* Pods-RChat-RChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.debug.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		72DF7A905CCC4C56866A00DB /* Pods-RChat-RChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.release.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		87D2A42A1819B58A76DA3152 /* Pods-RChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChatTests.release.xcconfig"; path = "Target Support Files/Pods-RChatTests/Pods-RChatTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			children = (
 				49012AEC256BF2DF00C3614B /* User.swift */,
 				49012AF1256BF44700C3614B /* UserPreferences.swift */,
+				499E1E89256EB6F50036614F /* Chatster.swift */,
 				49012AF6256BF59200C3614B /* ChatMessage.swift */,
 				49012AFB256BF90100C3614B /* Conversation.swift */,
 				49012B44256D162D00C3614B /* Photo.swift */,
@@ -621,6 +624,7 @@
 				49012ACC256BEFFA00C3614B /* AppState.swift in Sources */,
 				49012AF7256BF59200C3614B /* ChatMessage.swift in Sources */,
 				49012AA1256BEEC500C3614B /* LabeledText.swift in Sources */,
+				499E1E8A256EB6F50036614F /* Chatster.swift in Sources */,
 				49012B62256D2E2B00C3614B /* BackButton.swift in Sources */,
 				49012B53256D25BC00C3614B /* PhotoCaptureController.swift in Sources */,
 				49012AED256BF2DF00C3614B /* User.swift in Sources */,
