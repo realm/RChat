@@ -11,8 +11,9 @@ import RealmSwift
 struct LoginView: View {
 
     @EnvironmentObject var state: AppState
-    @State private var username = ""
-    @State private var password = ""
+    
+    @State private var username = "rod"
+    @State private var password = "billyfish"
 
     private enum Dimensions {
         static let padding: CGFloat = 16.0

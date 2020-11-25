@@ -41,6 +41,11 @@
 		49012B70256D527800C3614B /* SetProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B6F256D527800C3614B /* SetProfileView.swift */; };
 		49012B75256D658000C3614B /* PhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B74256D658000C3614B /* PhotoButton.swift */; };
 		49012B7E256D841900C3614B /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B7D256D841900C3614B /* LocationHelper.swift */; };
+		49012B89256D89F100C3614B /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B88256D89F100C3614B /* UserAvatarView.swift */; };
+		49012B8E256D8A7700C3614B /* OnOffCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B8D256D8A7700C3614B /* OnOffCircleView.swift */; };
+		49012B93256D8DB000C3614B /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B92256D8DB000C3614B /* PhotoView.swift */; };
+		49012B98256D8FDD00C3614B /* BlankPersonIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */; };
+		49012BA5256E83EB00C3614B /* OnlineAlertSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */; };
 		78EAB1EB31CF1777BA973ACE /* Pods_RChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2658CD9D3BA99AE6F00036BB /* Pods_RChat.framework */; };
 		C491F2B83FFA93C15191F2C1 /* Pods_RChat_RChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0A885564A6F4FEDABE47BE /* Pods_RChat_RChatUITests.framework */; };
 		D23F832BBC9959BDB1706C28 /* Pods_RChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A1E1EC30143D526D40E8ED /* Pods_RChatTests.framework */; };
@@ -107,6 +112,11 @@
 		49012B6F256D527800C3614B /* SetProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileView.swift; sourceTree = "<group>"; };
 		49012B74256D658000C3614B /* PhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoButton.swift; sourceTree = "<group>"; };
 		49012B7D256D841900C3614B /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
+		49012B88256D89F100C3614B /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
+		49012B8D256D8A7700C3614B /* OnOffCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnOffCircleView.swift; sourceTree = "<group>"; };
+		49012B92256D8DB000C3614B /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankPersonIconView.swift; sourceTree = "<group>"; };
+		49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineAlertSettings.swift; sourceTree = "<group>"; };
 		5FD04B2636422E3DBF2E1963 /* Pods-RChat-RChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.debug.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		72DF7A905CCC4C56866A00DB /* Pods-RChat-RChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.release.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		87D2A42A1819B58A76DA3152 /* Pods-RChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChatTests.release.xcconfig"; path = "Target Support Files/Pods-RChatTests/Pods-RChatTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -236,7 +246,7 @@
 			children = (
 				49012A30256BEA4C00C3614B /* ContentView.swift */,
 				49012A9F256BEEAB00C3614B /* Components */,
-				49012B03256C239C00C3614B /* User Accounts */,
+				49012B03256C239C00C3614B /* User Accounts & Profile */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +263,7 @@
 				49012AC1256BEF9200C3614B /* SwiftUIView.swift */,
 				49012AC6256BEFAB00C3614B /* OpaqueProgressView.swift */,
 				49012B61256D2E2B00C3614B /* BackButton.swift */,
+				49012B8D256D8A7700C3614B /* OnOffCircleView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -265,7 +276,7 @@
 			path = swiftlint;
 			sourceTree = "<group>";
 		};
-		49012B03256C239C00C3614B /* User Accounts */ = {
+		49012B03256C239C00C3614B /* User Accounts & Profile */ = {
 			isa = PBXGroup;
 			children = (
 				49012B04256C23CB00C3614B /* LoginView.swift */,
@@ -273,8 +284,10 @@
 				49012B11256C240F00C3614B /* LogoutButton.swift */,
 				49012B28256C678E00C3614B /* UserProfileButton.swift */,
 				49012B6F256D527800C3614B /* SetProfileView.swift */,
+				49012B88256D89F100C3614B /* UserAvatarView.swift */,
+				49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */,
 			);
-			path = "User Accounts";
+			path = "User Accounts & Profile";
 			sourceTree = "<group>";
 		};
 		49012B3E256D144F00C3614B /* Pictures */ = {
@@ -284,6 +297,8 @@
 				49012B57256D2BF600C3614B /* UIImage+Thumbnail.swift */,
 				49012B5C256D2D9700C3614B /* PhotoFullSizeView.swift */,
 				49012B74256D658000C3614B /* PhotoButton.swift */,
+				49012B92256D8DB000C3614B /* PhotoView.swift */,
+				49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */,
 			);
 			path = Pictures;
 			sourceTree = "<group>";
@@ -589,6 +604,7 @@
 				49012B7E256D841900C3614B /* LocationHelper.swift in Sources */,
 				49012B5D256D2D9700C3614B /* PhotoFullSizeView.swift in Sources */,
 				49012B70256D527800C3614B /* SetProfileView.swift in Sources */,
+				49012BA5256E83EB00C3614B /* OnlineAlertSettings.swift in Sources */,
 				49012B58256D2BF600C3614B /* UIImage+Thumbnail.swift in Sources */,
 				49012B24256C4F4F00C3614B /* SampleData.swift in Sources */,
 				49012AB8256BEF6E00C3614B /* CallToActionButton.swift in Sources */,
@@ -600,6 +616,7 @@
 				49012B45256D162D00C3614B /* Photo.swift in Sources */,
 				49012AC7256BEFAB00C3614B /* OpaqueProgressView.swift in Sources */,
 				49012B12256C240F00C3614B /* LogoutButton.swift in Sources */,
+				49012B93256D8DB000C3614B /* PhotoView.swift in Sources */,
 				49012ABD256BEF8000C3614B /* LabeledButton.swift in Sources */,
 				49012ACC256BEFFA00C3614B /* AppState.swift in Sources */,
 				49012AF7256BF59200C3614B /* ChatMessage.swift in Sources */,
@@ -607,6 +624,7 @@
 				49012B62256D2E2B00C3614B /* BackButton.swift in Sources */,
 				49012B53256D25BC00C3614B /* PhotoCaptureController.swift in Sources */,
 				49012AED256BF2DF00C3614B /* User.swift in Sources */,
+				49012B89256D89F100C3614B /* UserAvatarView.swift in Sources */,
 				49012AF2256BF44700C3614B /* UserPreferences.swift in Sources */,
 				49012AAB256BEF1700C3614B /* CaptionLabel.swift in Sources */,
 				49012B29256C678F00C3614B /* UserProfileButton.swift in Sources */,
@@ -614,6 +632,8 @@
 				49012AA6256BEEFA00C3614B /* InputField.swift in Sources */,
 				49012B05256C23CB00C3614B /* LoginView.swift in Sources */,
 				49012A2F256BEA4C00C3614B /* RChatApp.swift in Sources */,
+				49012B98256D8FDD00C3614B /* BlankPersonIconView.swift in Sources */,
+				49012B8E256D8A7700C3614B /* OnOffCircleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

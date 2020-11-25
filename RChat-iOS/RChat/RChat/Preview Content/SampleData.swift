@@ -65,7 +65,7 @@ extension Photo: Samplable {
     static var sample: Photo {
         let photo = Photo()
         photo.picture = UIColor.orange.image(CGSize(width: 256, height: 256)).jpegData(compressionQuality: 0.8)
-        photo.picture = UIColor.yellow.image(CGSize(width: 64, height: 64)).jpegData(compressionQuality: 0.8)
+        photo.thumbNail = UIColor.yellow.image(CGSize(width: 64, height: 64)).jpegData(compressionQuality: 0.8)
         return photo
     }
 }

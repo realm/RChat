@@ -10,6 +10,8 @@ import SwiftUI
 import Combine
 
 class AppState: ObservableObject {
+    @AppStorage("shouldSharePresence") var shouldSharePresence = false
+    
     var loginPublisher = PassthroughSubject<RealmSwift.User, Error>()
     var logoutPublisher = PassthroughSubject<Void, Error>()
     let userRealmPublisher = PassthroughSubject<Realm, Error>()
@@ -50,8 +52,15 @@ class AppState: ObservableObject {
                     self.error = "Failed to log in and open realm: \(error.localizedDescription)"
                 }
             }, receiveValue: { realm in
-                print("Realm User file location: \(realm.configuration.fileURL!.path)")
-                self.user = realm.objects(User.self).first
+            print("Realm User file location: \(realm.configuration.fileURL!.path)")
+            self.user = realm.objects(User.self).first
+                do {
+                    try realm.write {
+                        self.user?.presenceState = self.shouldSharePresence ? .onLine : .hidden
+                    }
+                } catch {
+                    self.error = "Unable to open Realm write transaction"
+                }
             })
             .store(in: &cancellables)
 
