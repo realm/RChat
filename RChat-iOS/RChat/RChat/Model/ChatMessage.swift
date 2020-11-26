@@ -10,10 +10,11 @@ import RealmSwift
 class ChatMessage: Object {
     @objc dynamic var _id = UUID().uuidString
     @objc dynamic var partition = "" // "conversation=<conversation-id>"
-    @objc dynamic var conversation = ""
-    @objc dynamic var user: User?
+    @objc dynamic var author: User?
+    @objc dynamic var text = ""
     @objc dynamic var image: Photo?
     @objc dynamic var timestamp = Date()
+    let whoHasRead = List<String>() // usernames
 
     override static func primaryKey() -> String? {
         return "_id"

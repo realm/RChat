@@ -7,9 +7,11 @@
 
 import RealmSwift
 
-class Conversation: EmbeddedObject, Identifiable {
-    @objc dynamic var id = UUID().uuidString
+class Conversation: EmbeddedObject, ObservableObject, Identifiable {
+    @objc dynamic var id = UUID().uuidString // TODO: This should be a global ID the same for each user's copies
     @objc dynamic var displayName = ""
     @objc dynamic var unreadCount = 0
-    let members = LinkingObjects(fromType: User.self, property: "conversations")
+    
+    // TODO: Replace with an array of Strings (usernames)
+    let members = List<String>() // User.username
 }

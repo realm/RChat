@@ -20,18 +20,12 @@ struct PhotoThumbNailView: View {
         VStack {
             if photo.thumbNail != nil || photo.picture != nil {
                 if let photo = photo.thumbNail {
-                    Image(uiImage: UIImage(data: photo) ?? UIImage())
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    Thumbnail(imageData: photo)
                 } else {
                     if let photo = photo.picture {
-                        Image(uiImage: UIImage(data: photo) ?? UIImage())
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        Thumbnail(imageData: photo)
                     } else {
-                        Image(uiImage: UIImage())
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        Thumbnail(imageData: UIImage().jpegData(compressionQuality: 0.8)!)
                     }
                 }
             }
@@ -39,6 +33,7 @@ struct PhotoThumbNailView: View {
         .frame(width: imageSize, height: imageSize)
         .background(Color.gray)
         .cornerRadius(Dimensions.radius)
+        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
     }
 }
 

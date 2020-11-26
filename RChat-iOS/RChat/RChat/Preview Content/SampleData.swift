@@ -5,67 +5,183 @@
 //  Created by Andrew Morgan on 23/11/2020.
 //
 
-import Foundation
+import RealmSwift
 import UIKit
 
 protocol Samplable {
     associatedtype Item
     static var sample: Item { get }
+    static var samples: [Item] { get }
 }
 
-extension User: Samplable {
-    static var sample: User {
-        let user = User()
-        user.partition = "dummy-partition"
-        user.username = "fred@flinstone.com"
-        user.userPreferences = .sample
-        user.location.append(-0.10689139236939127)
-        user.location.append(51.506520923981554)
-        user.lastSeenAt = Date()
-        user.conversations.append(.sample)
-        return user
+extension Date {
+    static var random: Date {
+        Date(timeIntervalSince1970: (50 * 365 * 24 * 3600 + Double.random(in: 0..<(3600 * 24 * 365))))
     }
 }
 
-extension UserPreferences: Samplable {
-    static var sample: UserPreferences {
-        let userPref = UserPreferences()
-        userPref.displayName = "Fred Flinstone"
-        return userPref
-    }
-}
-
-extension Conversation: Samplable {
-    static var sample: Conversation {
-        let conv = Conversation()
-        conv.displayName = "Sample Chat"
-        conv.unreadCount = 3
-        return conv
-    }
-}
-
-extension AppState: Samplable {
-    static var sample: AppState {
-        let state = AppState()
-        state.user = .sample
-        return state
-    }
-}
-
-extension UIColor {
-    func image(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
-        return UIGraphicsImageRenderer(size: size).image { rendererContext in
-            self.setFill()
-            rendererContext.fill(CGRect(origin: .zero, size: size))
+extension User {
+    convenience init(username: String, userPreferences: UserPreferences, conversations: [Conversation]) {
+        self.init()
+        partition = "user=\(_id)"
+        self.username = username
+        self.userPreferences = userPreferences
+        self.location.append(-0.10689139236939127 + Double.random(in: -10..<10))
+        self.location.append(51.506520923981554 + Double.random(in: -10..<10))
+        self.lastSeenAt = Date.random
+        conversations.forEach() { conversation in
+            self.conversations.append(conversation)
         }
     }
 }
 
-extension Photo: Samplable {
-    static var sample: Photo {
+extension User: Samplable {
+    static var samples: [User] { [sample, sample2, sample3] }
+    static var sample: User {
+        User(username: "rod@contoso.com", userPreferences: .sample, conversations: [.sample, .sample2, .sample3])
+    }
+    static var sample2: User {
+        User(username: "jane@contoso.com", userPreferences: .sample2, conversations: [.sample, .sample2])
+    }
+    static var sample3: User {
+        User(username: "freddy@contoso.com", userPreferences: .sample3, conversations: [.sample, .sample3])
+    }
+}
+
+extension UserPreferences {
+    convenience init(displayName: String, photo: Photo) {
+        self.init()
+        self.displayName = displayName
+        self.avatarImage = photo
+    }
+}
+
+extension UserPreferences: Samplable {
+    static var samples: [UserPreferences] { [sample, sample2, sample3] }
+    static var sample = UserPreferences(displayName: "Rod Burton", photo: .sample)
+    static var sample2 = UserPreferences(displayName: "Jane Tucker", photo: .sample)
+    static var sample3 = UserPreferences(displayName: "Freddy Marks", photo: .sample)
+}
+
+extension Conversation {
+    convenience init(displayName: String, unreadCount: Int, members: [String]) {
+        self.init()
+        self.displayName = displayName
+        self.unreadCount = unreadCount
+        members.forEach() { username in
+            self.members.append(username)
+        }
+    }
+}
+
+extension Conversation: Samplable {
+    static var samples: [Conversation] { [sample, sample2, sample3] }
+    static var sample: Conversation {
+        Conversation(displayName: "Sample chat", unreadCount: 2, members: ["rod@contoso.com", "jane@contoso.com", "freddy@contoso.com"])
+    }
+    static var sample2: Conversation {
+        Conversation(displayName: "Second chat", unreadCount: 1, members: ["rod@contoso.com", "jane@contoso.com"])
+    }
+    static var sample3: Conversation {
+        Conversation(displayName: "Second chat", unreadCount: 1, members: ["rod@contoso.com", "freddy@contoso.com"])
+    }
+}
+
+extension Chatster {
+    convenience init(user: User) {
+        self.init()
+        self._id = user._id
+        self.userName = user.username
+        self.displayName = user.userPreferences!.displayName
+        self.avatarImage = user.userPreferences!.avatarImage
+        lastSeenAt = Date.random
+        self.presence = user.presence
+    }
+}
+
+extension Chatster: Samplable {
+    static var samples: [Chatster] { [sample, sample2, sample3] }
+    static var sample: Chatster { Chatster(user: .sample) }
+    static var sample2: Chatster { Chatster(user: .sample2) }
+    static var sample3: Chatster { Chatster(user: .sample3) }
+}
+
+extension AppState {
+    convenience init(user: User) {
+        self.init()
+        self.user = user
+    }
+}
+
+extension AppState: Samplable {
+    static var samples: [AppState] { [sample, sample2, sample3] }
+    static var sample: AppState { AppState(user: .sample) }
+    static var sample2: AppState { AppState(user: .sample2) }
+    static var sample3: AppState { AppState(user: .sample3) }
+}
+
+extension Photo {
+    convenience init(photoName: String) {
+        self.init()
         let photo = Photo()
-        photo.picture = UIColor.orange.image(CGSize(width: 256, height: 256)).jpegData(compressionQuality: 0.8)
-        photo.thumbNail = UIColor.yellow.image(CGSize(width: 64, height: 64)).jpegData(compressionQuality: 0.8)
-        return photo
+        photo.thumbNail = (UIImage(named: photoName) ?? UIImage()).jpegData(compressionQuality: 0.8)
+        photo.picture = (UIImage(named: photoName) ?? UIImage()).jpegData(compressionQuality: 0.8)
+        photo.date = Date.random
+    }
+}
+
+extension Photo: Samplable {
+    static var samples: [Photo] { [sample, sample2, sample3]}
+    static var sample: Photo { Photo(photoName: "rod") }
+    static var sample2: Photo { Photo(photoName: "jane") }
+    static var sample3: Photo { Photo(photoName: "freddy") }
+    static var spud: Photo { Photo(photoName: "spud\(Int.random(in: 1...8))") }
+}
+
+extension ChatMessage {
+    convenience init(conversation: Conversation, author: User, text: String = "This is the text for the message", includePhoto: Bool = false, readers: [User]) {
+        self.init()
+        partition = "conversation=\(conversation.id)"
+        self.author = author
+        self.text = text
+        self.image = image
+        self.timestamp = Date.random
+        readers.forEach() { user in
+            self.whoHasRead.append(user.username)
+        }
+    }
+}
+
+extension ChatMessage: Samplable {
+    static var samples: [ChatMessage] { [sample, sample2, sample3, sample20, sample22, sample23, sample30, sample32, sample33] }
+    static var sample: ChatMessage { ChatMessage(conversation: .sample, author: .sample, readers: [.sample2]) }
+    static var sample2: ChatMessage { ChatMessage(conversation: .sample, author: .sample2, readers: [.sample, .sample3]) }
+    static var sample3: ChatMessage { ChatMessage(conversation: .sample, author: .sample3, text: "Thoughts on this spud?", includePhoto: true, readers: [.sample3])}
+    static var sample20: ChatMessage { ChatMessage(conversation: .sample2, author: .sample, readers: [.sample2]) }
+    static var sample22: ChatMessage { ChatMessage(conversation: .sample2, author: .sample2, readers: [.sample, .sample3]) }
+    static var sample23: ChatMessage { ChatMessage(conversation: .sample2, author: .sample3, text: "Fancy trying this?", includePhoto: true, readers: [.sample3])}
+    static var sample30: ChatMessage { ChatMessage(conversation: .sample3, author: .sample, readers: [.sample2]) }
+    static var sample32: ChatMessage { ChatMessage(conversation: .sample3, author: .sample2, readers: [.sample, .sample3]) }
+    static var sample33: ChatMessage { ChatMessage(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's spaces for it all to fit in", includePhoto: true, readers: [.sample3])}
+}
+
+
+extension Realm: Samplable {
+    static var samples: [Realm] { [sample] }
+    static var sample: Realm {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+            User.samples.forEach() { user in
+                realm.add(user)
+            }
+            Chatster.samples.forEach() { chatster in
+                realm.add(chatster)
+            }
+            ChatMessage.samples.forEach() { message in
+                realm.add(message)
+            }
+        }
+        return realm
     }
 }
