@@ -11,22 +11,27 @@ import RealmSwift
 struct ConversationListView: View {
     @EnvironmentObject var state: AppState
     
-    @State var chatsterRealm: Realm?
-    @State var userRealm: Realm?
+    @Binding var chatsterRealm: Realm?
+    @Binding var userRealm: Realm?
+    @Binding var conversationId: String?
+    @Binding var showConversation: Bool
+    
     @State var realmUserNotificationToken: NotificationToken?
     @State var realmChatsterNotificationToken: NotificationToken?
     @State var lastSync: Date?
-    @State var showConversation = false
-    @State var conversationId: String?
+    
+    private let sortDescriptors = [
+        SortDescriptor(keyPath: "unreadCount", ascending: false),
+        SortDescriptor(keyPath: "displayName", ascending: true)
+    ]
     
     var body: some View {
         VStack {
-            Text("Chats:")
             if let conversations = state.user?.conversations {
                 if let chatsterRealm = chatsterRealm {
                     if let userRealm = userRealm {
                         List {
-                            ForEach(conversations.freeze()) { conversation in
+                            ForEach(conversations.sorted(by: sortDescriptors)) { conversation in
                                 // TODO: Why is ! needed?
                                 Button(action: {
                                     conversationId = conversation.id
@@ -45,11 +50,12 @@ struct ConversationListView: View {
             if let lastSync = lastSync {
                 LastSync(date: lastSync)
             }
-            NavigationLink(
-                destination: ConversationView(
-                    conversationId: conversationId, userRealm: userRealm,
-                    chatsterRealm: chatsterRealm),
-                isActive: $showConversation) { EmptyView() }
+//            NavigationLink(
+//                destination: ConversationView(
+//                    conversationId: conversationId,
+//                    userRealm: userRealm,
+//                    chatsterRealm: chatsterRealm),
+//                isActive: $showConversation) { EmptyView() }
         }
         .onAppear { initData() }
         .onDisappear { stopWatching() }
@@ -68,7 +74,7 @@ struct ConversationListView: View {
                     state.shouldIndicateActivity = false
                 }
             }, receiveValue: { realm in
-                print("Realm Chatster file location: \(realm.configuration.fileURL!.path)")
+//                print("Realm Chatster file location: \(realm.configuration.fileURL!.path)")
                 chatsterRealm = realm
                 realmChatsterNotificationToken = realm.observe {_, _ in
                     lastSync = Date()
@@ -110,11 +116,11 @@ struct ConversationListView: View {
     }
 }
 
-struct ConversationListViewPreviews: PreviewProvider {
-    static var previews: some View {
-        AppearancePreviews(
-            ConversationListView(lastSync: Date())
-        )
-        .environmentObject(AppState.sample)
-    }
-}
+//struct ConversationListViewPreviews: PreviewProvider {
+//    static var previews: some View {
+//        AppearancePreviews(
+//            ConversationListView(lastSync: Date())
+//        )
+//        .environmentObject(AppState.sample)
+//    }
+//}

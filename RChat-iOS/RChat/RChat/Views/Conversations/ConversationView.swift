@@ -14,20 +14,15 @@ struct ConversationView: View {
     @State var userRealm: Realm?
     @State var chatsterRealm: Realm?
     var body: some View {
-        NavigationView {
-            ZStack {
-                VStack {
-                    if let conversationId = conversationId {
-                        Text("Existing conversation: \(conversationId)")
-                    } else {
-                        NewConversationView(conversationId: $conversationId)
-                    }
-                }
+        VStack {
+            if let conversationId = conversationId {
+                Text("Existing conversation: \(conversationId)")
+            } else {
+                NewConversationView(conversationId: $conversationId, userRealm: userRealm)
             }
+        }
             .onAppear { initData() }
             .onDisappear { stopWatching() }
-        }
-        
     }
 
     func initData() {
@@ -38,8 +33,6 @@ struct ConversationView: View {
         
     }
 }
-
-
 
 struct ConversationView_Previews: PreviewProvider {
     static var previews: some View {

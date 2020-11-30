@@ -13,7 +13,7 @@ struct ConversationCardContentsView: View {
     let chatsters: [Chatster]
     
     private struct Dimensions {
-        static let mugWidth: CGFloat = 100
+        static let mugWidth: CGFloat = 110
         static let cornerRadius: CGFloat = 5
         static let lineWidth: CGFloat = 1
         static let padding: CGFloat = 5

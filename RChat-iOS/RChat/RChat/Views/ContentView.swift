@@ -15,6 +15,10 @@ struct ContentView: View {
     @AppStorage("shouldRemindOnlineUser") var shouldRemindOnlineUser = false
     @AppStorage("onlineUserReminderHours") var onlineUserReminderHours = 8.0
     
+    @State var chatsterRealm: Realm?
+    @State var userRealm: Realm?
+    @State var conversationId: String?
+    
     @State var showingProfileView = false
     @State var showConversation = false
 
@@ -26,8 +30,17 @@ struct ContentView: View {
                         if (state.user != nil) && !state.user!.isProfileSet || showingProfileView {
                             SetProfileView(isPresented: $showingProfileView)
                         } else {
-                            ConversationListView()
-                            NavigationLink(destination: ConversationView(), isActive: $showConversation) { EmptyView() }
+                            ConversationListView(
+                                chatsterRealm: $chatsterRealm,
+                                userRealm: $userRealm,
+                                conversationId: $conversationId,
+                                showConversation: $showConversation)
+                            NavigationLink(
+                                destination: ConversationView(
+                                    conversationId: conversationId,
+                                    userRealm: userRealm,
+                                    chatsterRealm: chatsterRealm),
+                                isActive: $showConversation) { EmptyView() }
                             .navigationBarTitle("Chats", displayMode: .inline)
                             .navigationBarItems(
                                 leading: state.loggedIn && !state.shouldIndicateActivity ? Button("New Chat") { showConversation.toggle() } : nil,
