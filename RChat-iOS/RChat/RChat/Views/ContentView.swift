@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UserNotifications
+import RealmSwift
 
 struct ContentView: View {
     @EnvironmentObject var state: AppState
@@ -15,6 +16,7 @@ struct ContentView: View {
     @AppStorage("onlineUserReminderHours") var onlineUserReminderHours = 8.0
     
     @State var showingProfileView = false
+    @State var showConversation = false
 
     var body: some View {
         NavigationView {
@@ -24,13 +26,14 @@ struct ContentView: View {
                         if (state.user != nil) && !state.user!.isProfileSet || showingProfileView {
                             SetProfileView(isPresented: $showingProfileView)
                         } else {
-                            Text("Logged in")
-                            .navigationBarTitle("RChat", displayMode: .inline)
+                            ConversationListView()
+                            NavigationLink(destination: ConversationView(), isActive: $showConversation) { EmptyView() }
+                            .navigationBarTitle("Chats", displayMode: .inline)
                             .navigationBarItems(
-                                trailing: state.loggedIn ? UserAvatarView(
+                                leading: state.loggedIn && !state.shouldIndicateActivity ? Button("New Chat") { showConversation.toggle() } : nil,
+                                trailing: state.loggedIn && !state.shouldIndicateActivity ? UserAvatarView(
                                     photo: state.user?.userPreferences?.avatarImage,
-                                    online: true) {
-                                    showingProfileView.toggle() } : nil)
+                                    online: true) { showingProfileView.toggle() } : nil)
                         }
                     } else {
                         LoginView()

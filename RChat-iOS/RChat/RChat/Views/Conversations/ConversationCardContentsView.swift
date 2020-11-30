@@ -10,43 +10,43 @@ import RealmSwift
 
 struct ConversationCardContentsView: View {
     let conversation: Conversation
-    let chatsters: Results<Chatster>
+    let chatsters: [Chatster]
     
     private struct Dimensions {
-        static let mugWidth: CGFloat = 200
-        static let cornerRadius: CGFloat = 16
-        static let lineWidth: CGFloat = 4
+        static let mugWidth: CGFloat = 100
+        static let cornerRadius: CGFloat = 5
+        static let lineWidth: CGFloat = 1
+        static let padding: CGFloat = 5
     }
     
     var body: some View {
         HStack {
             MugShotGridView(photos: chatsters.compactMap { $0.avatarImage })
                 .frame(width: Dimensions.mugWidth)
+                .padding(.trailing)
             VStack(alignment: .leading) {
                 Text(conversation.displayName)
-                Text(conversation.unreadCount == 0 ? "" :
-                        "\(conversation.unreadCount) new \(conversation.unreadCount == 1 ? "message" : "messages")")
                     .fontWeight(conversation.unreadCount > 0 ? .bold : .regular)
-                    .italic()
+                CaptionLabel(title: conversation.unreadCount == 0 ? "" :
+                        "\(conversation.unreadCount) new \(conversation.unreadCount == 1 ? "message" : "messages")")
             }
+            Spacer()
         }
-        .padding()
+        .padding(Dimensions.padding)
         .overlay(
             RoundedRectangle(cornerRadius: Dimensions.cornerRadius)
                 .stroke(Color.gray, lineWidth: Dimensions.lineWidth)
         )
-
     }
 }
 
 struct ConversationCardContentsView_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            ConversationCardContentsView(
-                conversation: .sample, chatsters: [.sample, .sample, .sample]
-            )
+            ForEach(Conversation.samples) { conversation in
+                ConversationCardContentsView(conversation: conversation, chatsters: [.sample, .sample2, .sample3, .sample, .sample2, .sample3])
+            }
         )
-        .padding()
         .previewLayout(.sizeThatFits)
     }
 }

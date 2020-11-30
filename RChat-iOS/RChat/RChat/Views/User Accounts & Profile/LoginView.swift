@@ -12,7 +12,7 @@ struct LoginView: View {
 
     @EnvironmentObject var state: AppState
     
-    @State private var username = "rod"
+    @State private var username = "rod@contoso.com"
     @State private var password = "billyfish"
 
     private enum Dimensions {

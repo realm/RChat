@@ -10,7 +10,7 @@ import RealmSwift
 class ChatMessage: Object {
     @objc dynamic var _id = UUID().uuidString
     @objc dynamic var partition = "" // "conversation=<conversation-id>"
-    @objc dynamic var author: User?
+    @objc dynamic var author: String? // username
     @objc dynamic var text = ""
     @objc dynamic var image: Photo?
     @objc dynamic var timestamp = Date()

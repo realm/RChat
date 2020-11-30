@@ -52,6 +52,9 @@
 		499E1E8A256EB6F50036614F /* Chatster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E89256EB6F50036614F /* Chatster.swift */; };
 		499E1E97256ED6410036614F /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E96256ED6410036614F /* ConversationListView.swift */; };
 		499E1EA2256FAACC0036614F /* ConversationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1EA1256FAACC0036614F /* ConversationCardView.swift */; };
+		49F00E892571129600ADC23F /* LastSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F00E882571129600ADC23F /* LastSync.swift */; };
+		49F00E9D25715C0100ADC23F /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F00E9C25715C0000ADC23F /* NewConversationView.swift */; };
+		49F00EA225715D4700ADC23F /* ConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F00EA125715D4700ADC23F /* ConversationView.swift */; };
 		78EAB1EB31CF1777BA973ACE /* Pods_RChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2658CD9D3BA99AE6F00036BB /* Pods_RChat.framework */; };
 		C491F2B83FFA93C15191F2C1 /* Pods_RChat_RChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0A885564A6F4FEDABE47BE /* Pods_RChat_RChatUITests.framework */; };
 		D23F832BBC9959BDB1706C28 /* Pods_RChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A1E1EC30143D526D40E8ED /* Pods_RChatTests.framework */; };
@@ -129,6 +132,9 @@
 		499E1E89256EB6F50036614F /* Chatster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatster.swift; sourceTree = "<group>"; };
 		499E1E96256ED6410036614F /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
 		499E1EA1256FAACC0036614F /* ConversationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCardView.swift; sourceTree = "<group>"; };
+		49F00E882571129600ADC23F /* LastSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSync.swift; sourceTree = "<group>"; };
+		49F00E9C25715C0000ADC23F /* NewConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationView.swift; sourceTree = "<group>"; };
+		49F00EA125715D4700ADC23F /* ConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationView.swift; sourceTree = "<group>"; };
 		5FD04B2636422E3DBF2E1963 /* Pods-RChat-RChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.debug.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		72DF7A905CCC4C56866A00DB /* Pods-RChat-RChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.release.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		87D2A42A1819B58A76DA3152 /* Pods-RChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChatTests.release.xcconfig"; path = "Target Support Files/Pods-RChatTests/Pods-RChatTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -279,6 +285,7 @@
 				49012AC6256BEFAB00C3614B /* OpaqueProgressView.swift */,
 				49012B61256D2E2B00C3614B /* BackButton.swift */,
 				49012B8D256D8A7700C3614B /* OnOffCircleView.swift */,
+				49F00E882571129600ADC23F /* LastSync.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -335,6 +342,8 @@
 				499E1EA1256FAACC0036614F /* ConversationCardView.swift */,
 				4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */,
 				4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */,
+				49F00EA125715D4700ADC23F /* ConversationView.swift */,
+				49F00E9C25715C0000ADC23F /* NewConversationView.swift */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -636,6 +645,7 @@
 			files = (
 				4950E10D256FD9F300FA7E26 /* MugShotGridView.swift in Sources */,
 				49012A6F256BECF200C3614B /* PreviewHelpers.swift in Sources */,
+				49F00EA225715D4700ADC23F /* ConversationView.swift in Sources */,
 				49012B7E256D841900C3614B /* LocationHelper.swift in Sources */,
 				49012B5D256D2D9700C3614B /* PhotoFullSizeView.swift in Sources */,
 				49012B70256D527800C3614B /* SetProfileView.swift in Sources */,
@@ -655,6 +665,7 @@
 				49012AC7256BEFAB00C3614B /* OpaqueProgressView.swift in Sources */,
 				4950E108256FD61400FA7E26 /* ConversationCardContentsView.swift in Sources */,
 				49012B12256C240F00C3614B /* LogoutButton.swift in Sources */,
+				49F00E892571129600ADC23F /* LastSync.swift in Sources */,
 				49012B93256D8DB000C3614B /* PhotoView.swift in Sources */,
 				49012ABD256BEF8000C3614B /* LabeledButton.swift in Sources */,
 				49012ACC256BEFFA00C3614B /* AppState.swift in Sources */,
@@ -663,6 +674,7 @@
 				499E1E8A256EB6F50036614F /* Chatster.swift in Sources */,
 				49012B62256D2E2B00C3614B /* BackButton.swift in Sources */,
 				49012B53256D25BC00C3614B /* PhotoCaptureController.swift in Sources */,
+				49F00E9D25715C0100ADC23F /* NewConversationView.swift in Sources */,
 				49012AED256BF2DF00C3614B /* User.swift in Sources */,
 				49012B89256D89F100C3614B /* UserAvatarView.swift in Sources */,
 				49012AF2256BF44700C3614B /* UserPreferences.swift in Sources */,
@@ -836,7 +848,7 @@
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RChat/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -859,7 +871,7 @@
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RChat/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

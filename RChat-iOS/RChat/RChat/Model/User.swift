@@ -10,7 +10,7 @@ import RealmSwift
 class User: Object {
     @objc dynamic var _id = UUID().uuidString
     @objc dynamic var partition = "" // "user=_id"
-    @objc dynamic var username = ""
+    @objc dynamic var userName = ""
     @objc dynamic var userPreferences: UserPreferences?
     let location = List<Double>()
     @objc dynamic var lastSeenAt: Date?

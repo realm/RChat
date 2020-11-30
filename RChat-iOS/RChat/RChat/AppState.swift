@@ -17,9 +17,26 @@ class AppState: ObservableObject {
     let userRealmPublisher = PassthroughSubject<Realm, Error>()
     var cancellables = Set<AnyCancellable>()
 
-    @Published var shouldIndicateActivity = false
     @Published var error: String?
+    @Published var busyCount = 0
 
+    var shouldIndicateActivity: Bool {
+        get {
+            return busyCount > 0
+        }
+        set (newState) {
+            if newState {
+                busyCount += 1
+            } else {
+                if busyCount > 0 {
+                    busyCount -= 1
+                } else {
+                    print("Attempted to decrement busyCount below 1")
+                }
+            }
+        }
+    }
+    
     var user: User?
 
     var loggedIn: Bool {

@@ -11,8 +11,8 @@ import RealmSwift
 struct SignupView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var state: AppState
-    @State private var username = ""
-    @State private var password = ""
+    @State private var username = "rod@contoso.com"
+    @State private var password = "billyfish"
 
     private enum Dimensions {
         static let topInputFieldPadding: CGFloat = 32.0

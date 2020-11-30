@@ -5,6 +5,9 @@
 //  Created by Andrew Morgan on 23/11/2020.
 //
 
+// swiftlint:disable line_length
+// swiftlint:disable force_try
+
 import RealmSwift
 import UIKit
 
@@ -24,12 +27,12 @@ extension User {
     convenience init(username: String, userPreferences: UserPreferences, conversations: [Conversation]) {
         self.init()
         partition = "user=\(_id)"
-        self.username = username
+        self.userName = username
         self.userPreferences = userPreferences
         self.location.append(-0.10689139236939127 + Double.random(in: -10..<10))
         self.location.append(51.506520923981554 + Double.random(in: -10..<10))
         self.lastSeenAt = Date.random
-        conversations.forEach() { conversation in
+        conversations.forEach { conversation in
             self.conversations.append(conversation)
         }
     }
@@ -59,8 +62,8 @@ extension UserPreferences {
 extension UserPreferences: Samplable {
     static var samples: [UserPreferences] { [sample, sample2, sample3] }
     static var sample = UserPreferences(displayName: "Rod Burton", photo: .sample)
-    static var sample2 = UserPreferences(displayName: "Jane Tucker", photo: .sample)
-    static var sample3 = UserPreferences(displayName: "Freddy Marks", photo: .sample)
+    static var sample2 = UserPreferences(displayName: "Jane Tucker", photo: .sample2)
+    static var sample3 = UserPreferences(displayName: "Freddy Marks", photo: .sample3)
 }
 
 extension Conversation {
@@ -68,7 +71,7 @@ extension Conversation {
         self.init()
         self.displayName = displayName
         self.unreadCount = unreadCount
-        members.forEach() { username in
+        members.forEach { username in
             self.members.append(username)
         }
     }
@@ -80,10 +83,10 @@ extension Conversation: Samplable {
         Conversation(displayName: "Sample chat", unreadCount: 2, members: ["rod@contoso.com", "jane@contoso.com", "freddy@contoso.com"])
     }
     static var sample2: Conversation {
-        Conversation(displayName: "Second chat", unreadCount: 1, members: ["rod@contoso.com", "jane@contoso.com"])
+        Conversation(displayName: "Fishy chat", unreadCount: 0, members: ["rod@contoso.com", "jane@contoso.com"])
     }
     static var sample3: Conversation {
-        Conversation(displayName: "Second chat", unreadCount: 1, members: ["rod@contoso.com", "freddy@contoso.com"])
+        Conversation(displayName: "Third chat", unreadCount: 1, members: ["rod@contoso.com", "freddy@contoso.com"])
     }
 }
 
@@ -91,9 +94,9 @@ extension Chatster {
     convenience init(user: User) {
         self.init()
         self._id = user._id
-        self.userName = user.username
+        self.userName = user.userName
         self.displayName = user.userPreferences!.displayName
-        self.avatarImage = user.userPreferences!.avatarImage
+        self.avatarImage = Photo(photo: user.userPreferences!.avatarImage!)
         lastSeenAt = Date.random
         self.presence = user.presence
     }
@@ -123,10 +126,15 @@ extension AppState: Samplable {
 extension Photo {
     convenience init(photoName: String) {
         self.init()
-        let photo = Photo()
-        photo.thumbNail = (UIImage(named: photoName) ?? UIImage()).jpegData(compressionQuality: 0.8)
-        photo.picture = (UIImage(named: photoName) ?? UIImage()).jpegData(compressionQuality: 0.8)
-        photo.date = Date.random
+        self.thumbNail = (UIImage(named: photoName) ?? UIImage()).jpegData(compressionQuality: 0.8)
+        self.picture = (UIImage(named: photoName) ?? UIImage()).jpegData(compressionQuality: 0.8)
+        self.date = Date.random
+    }
+    convenience init(photo: Photo) {
+        self.init()
+        self.thumbNail = photo.thumbNail
+        self.picture = photo.picture
+        self.date = photo.date
     }
 }
 
@@ -142,12 +150,12 @@ extension ChatMessage {
     convenience init(conversation: Conversation, author: User, text: String = "This is the text for the message", includePhoto: Bool = false, readers: [User]) {
         self.init()
         partition = "conversation=\(conversation.id)"
-        self.author = author
+        self.author = author.userName
         self.text = text
-        self.image = image
+        self.image = Photo.spud
         self.timestamp = Date.random
-        readers.forEach() { user in
-            self.whoHasRead.append(user.username)
+        readers.forEach { user in
+            self.whoHasRead.append(user.userName)
         }
     }
 }
@@ -165,20 +173,19 @@ extension ChatMessage: Samplable {
     static var sample33: ChatMessage { ChatMessage(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's spaces for it all to fit in", includePhoto: true, readers: [.sample3])}
 }
 
-
 extension Realm: Samplable {
     static var samples: [Realm] { [sample] }
     static var sample: Realm {
         let realm = try! Realm()
         try! realm.write {
             realm.deleteAll()
-            User.samples.forEach() { user in
+            User.samples.forEach { user in
                 realm.add(user)
             }
-            Chatster.samples.forEach() { chatster in
+            Chatster.samples.forEach { chatster in
                 realm.add(chatster)
             }
-            ChatMessage.samples.forEach() { message in
+            ChatMessage.samples.forEach { message in
                 realm.add(message)
             }
         }
