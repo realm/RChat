@@ -11,31 +11,35 @@ import RealmSwift
 struct ConversationCardView: View {
 
     let realm: Realm
-    @ObservedObject var conversation: Conversation
+    @State var conversation: Conversation?
     
     @State var chatsters = [Chatster]()
     @State var shouldIndicateActivity = false
     
     var body: some View {
-        ZStack {
-            VStack {
-                ConversationCardContentsView(conversation: conversation, chatsters: chatsters)
+        if let conversation = conversation {
+            ZStack {
+                VStack {
+                    ConversationCardContentsView(conversation: conversation, chatsters: chatsters)
+                }
+                if shouldIndicateActivity {
+                    OpaqueProgressView("Fetching Conversation")
+                }
             }
-            if shouldIndicateActivity {
-                OpaqueProgressView("Fetching Conversation")
-            }
+            .onAppear { initData() }
         }
-        .onAppear { initData() }
     }
     
     func initData() {
-        shouldIndicateActivity = true
-        chatsters = []
-        let allChatsters = realm.objects(Chatster.self)
-        for member in conversation.members {
-            chatsters.append(contentsOf: allChatsters.filter("userName = %@", member.userName))
+        if let conversation = conversation {
+            shouldIndicateActivity = true
+            chatsters = []
+            let allChatsters = realm.objects(Chatster.self)
+            for member in conversation.members {
+                chatsters.append(contentsOf: allChatsters.filter("userName = %@", member.userName))
+            }
+            shouldIndicateActivity = false
         }
-        shouldIndicateActivity = false
     }
 }
 

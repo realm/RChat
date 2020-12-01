@@ -32,15 +32,13 @@ struct ConversationListView: View {
                     if let userRealm = userRealm {
                         List {
                             ForEach(conversations) { conversation in
-//                            ForEach(conversations.sorted(by: sortDescriptors)) { conversation in
-                                // TODO: Why is ! needed?
                                 Button(action: {
                                     conversationId = conversation.id
                                     showConversation.toggle()
                                 }) {
                                 ConversationCardView(
                                     realm: chatsterRealm,
-                                    conversation: userRealm.resolve(ThreadSafeReference(to: conversation))!)
+                                    conversation: userRealm.resolve(ThreadSafeReference(to: conversation)))
                                 }
                             }
                         }
