@@ -87,9 +87,9 @@ struct NewConversationView: View {
             state.error = "User Realm not set"
             return
         }
-        conversation.members.append(userName)
-        members.forEach { member in
-            conversation.members.append(member)
+        conversation.members.append(Member(userName: userName, state: .active))
+        members.forEach { username in
+            conversation.members.append(Member(username))
         }
         state.shouldIndicateActivity = true
         do {

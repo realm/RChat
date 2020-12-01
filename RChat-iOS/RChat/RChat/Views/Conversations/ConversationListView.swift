@@ -20,10 +20,10 @@ struct ConversationListView: View {
     @State var realmChatsterNotificationToken: NotificationToken?
     @State var lastSync: Date?
     
-    private let sortDescriptors = [
-        SortDescriptor(keyPath: "unreadCount", ascending: false),
-        SortDescriptor(keyPath: "displayName", ascending: true)
-    ]
+//    private let sortDescriptors = [
+//        SortDescriptor(keyPath: "unreadCount", ascending: false),
+//        SortDescriptor(keyPath: "displayName", ascending: true)
+//    ]
     
     var body: some View {
         VStack {
@@ -31,7 +31,8 @@ struct ConversationListView: View {
                 if let chatsterRealm = chatsterRealm {
                     if let userRealm = userRealm {
                         List {
-                            ForEach(conversations.sorted(by: sortDescriptors)) { conversation in
+                            ForEach(conversations) { conversation in
+//                            ForEach(conversations.sorted(by: sortDescriptors)) { conversation in
                                 // TODO: Why is ! needed?
                                 Button(action: {
                                     conversationId = conversation.id
@@ -87,7 +88,7 @@ struct ConversationListView: View {
     
     func watchUserRealm(user: RealmSwift.User) {
         var realmConfig = user.configuration(partitionValue: "user=\(user.id)")
-        realmConfig.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self]
+        realmConfig.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
         Realm.asyncOpen(configuration: realmConfig)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { result in

@@ -32,8 +32,8 @@ struct ConversationCardView: View {
         shouldIndicateActivity = true
         chatsters = []
         let allChatsters = realm.objects(Chatster.self)
-        for userName in conversation.members {
-            chatsters.append(contentsOf: allChatsters.filter("userName = %@", userName))
+        for member in conversation.members {
+            chatsters.append(contentsOf: allChatsters.filter("userName = %@", member.userName))
         }
         shouldIndicateActivity = false
     }

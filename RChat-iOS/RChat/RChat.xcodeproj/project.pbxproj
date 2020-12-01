@@ -49,6 +49,7 @@
 		4950E100256FAE0600FA7E26 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */; };
 		4950E108256FD61400FA7E26 /* ConversationCardContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */; };
 		4950E10D256FD9F300FA7E26 /* MugShotGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */; };
+		497EF90D2576719B0045A5EA /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497EF90C2576719B0045A5EA /* Member.swift */; };
 		499E1E8A256EB6F50036614F /* Chatster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E89256EB6F50036614F /* Chatster.swift */; };
 		499E1E97256ED6410036614F /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E96256ED6410036614F /* ConversationListView.swift */; };
 		499E1EA2256FAACC0036614F /* ConversationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1EA1256FAACC0036614F /* ConversationCardView.swift */; };
@@ -129,6 +130,7 @@
 		4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCardContentsView.swift; sourceTree = "<group>"; };
 		4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MugShotGridView.swift; sourceTree = "<group>"; };
+		497EF90C2576719B0045A5EA /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		499E1E89256EB6F50036614F /* Chatster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatster.swift; sourceTree = "<group>"; };
 		499E1E96256ED6410036614F /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
 		499E1EA1256FAACC0036614F /* ConversationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCardView.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				499E1E89256EB6F50036614F /* Chatster.swift */,
 				49012AF6256BF59200C3614B /* ChatMessage.swift */,
 				49012AFB256BF90100C3614B /* Conversation.swift */,
+				497EF90C2576719B0045A5EA /* Member.swift */,
 				49012B44256D162D00C3614B /* Photo.swift */,
 			);
 			path = Model;
@@ -686,6 +689,7 @@
 				49012A2F256BEA4C00C3614B /* RChatApp.swift in Sources */,
 				49012B98256D8FDD00C3614B /* BlankPersonIconView.swift in Sources */,
 				49012B8E256D8A7700C3614B /* OnOffCircleView.swift in Sources */,
+				497EF90D2576719B0045A5EA /* Member.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

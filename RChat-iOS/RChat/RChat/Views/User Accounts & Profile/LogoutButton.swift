@@ -24,7 +24,7 @@ struct LogoutButton: View {
                     state.error = "Cannot get Realm config from current user"
                     return
                 }
-                config.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self]
+                config.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
                 Realm.asyncOpen(configuration: config)
                     .receive(on: DispatchQueue.main)
                     .sink(receiveCompletion: { result in

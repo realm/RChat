@@ -72,7 +72,7 @@ extension Conversation {
         self.displayName = displayName
         self.unreadCount = unreadCount
         members.forEach { username in
-            self.members.append(username)
+            self.members.append(Member(username))
         }
     }
 }

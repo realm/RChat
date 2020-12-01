@@ -52,7 +52,7 @@ class AppState: ObservableObject {
             .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
                 self.shouldIndicateActivity = true
                 var realmConfig = user.configuration(partitionValue: "user=\(user.id)")
-                realmConfig.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self]
+                realmConfig.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
                 return Realm.asyncOpen(configuration: realmConfig)
             }
             .receive(on: DispatchQueue.main)
