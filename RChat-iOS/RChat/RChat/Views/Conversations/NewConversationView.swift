@@ -11,7 +11,7 @@ import RealmSwift
 struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     
-    @Binding var conversationId: String?
+    @Binding var conversation: Conversation?
     let userRealm: Realm?
     
     @State var name = ""
@@ -102,7 +102,7 @@ struct NewConversationView: View {
             return
         }
         state.shouldIndicateActivity = false
-        conversationId = conversation.id
+        self.conversation = conversation
     }
 }
 
@@ -110,7 +110,7 @@ struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             AppearancePreviews(
-                NewConversationView(conversationId: .constant(nil), userRealm: .sample)
+                NewConversationView(conversation: .constant(.sample), userRealm: .sample)
             )
         }
     }

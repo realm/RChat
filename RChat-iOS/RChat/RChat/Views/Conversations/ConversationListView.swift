@@ -13,32 +13,27 @@ struct ConversationListView: View {
     
     @Binding var chatsterRealm: Realm?
     @Binding var userRealm: Realm?
-    @Binding var conversationId: String?
+    @Binding var conversation: Conversation?
     @Binding var showConversation: Bool
     
     @State var realmUserNotificationToken: NotificationToken?
     @State var realmChatsterNotificationToken: NotificationToken?
     @State var lastSync: Date?
-    
-//    private let sortDescriptors = [
-//        SortDescriptor(keyPath: "unreadCount", ascending: false),
-//        SortDescriptor(keyPath: "displayName", ascending: true)
-//    ]
-    
+       
     var body: some View {
         VStack {
-            if let conversations = state.user?.conversations {
+            if let conversations = state.user?.conversations.freeze() {
                 if let chatsterRealm = chatsterRealm {
-                    if let userRealm = userRealm {
+                    if userRealm != nil {
                         List {
                             ForEach(conversations) { conversation in
                                 Button(action: {
-                                    conversationId = conversation.id
+                                    self.conversation = conversation
                                     showConversation.toggle()
                                 }) {
                                 ConversationCardView(
                                     realm: chatsterRealm,
-                                    conversation: userRealm.resolve(ThreadSafeReference(to: conversation)))
+                                    conversation: conversation)
                                 }
                             }
                         }
@@ -49,12 +44,6 @@ struct ConversationListView: View {
             if let lastSync = lastSync {
                 LastSync(date: lastSync)
             }
-//            NavigationLink(
-//                destination: ConversationView(
-//                    conversationId: conversationId,
-//                    userRealm: userRealm,
-//                    chatsterRealm: chatsterRealm),
-//                isActive: $showConversation) { EmptyView() }
         }
         .onAppear { initData() }
         .onDisappear { stopWatching() }
@@ -73,7 +62,6 @@ struct ConversationListView: View {
                     state.shouldIndicateActivity = false
                 }
             }, receiveValue: { realm in
-//                print("Realm Chatster file location: \(realm.configuration.fileURL!.path)")
                 chatsterRealm = realm
                 realmChatsterNotificationToken = realm.observe {_, _ in
                     lastSync = Date()
@@ -95,7 +83,6 @@ struct ConversationListView: View {
                     state.shouldIndicateActivity = false
                 }
             }, receiveValue: { realm in
-                print("Realm User file location: \(realm.configuration.fileURL!.path)")
                 userRealm = realm
                 realmUserNotificationToken = realm.observe {_, _ in
                     lastSync = Date()
@@ -115,11 +102,16 @@ struct ConversationListView: View {
     }
 }
 
-//struct ConversationListViewPreviews: PreviewProvider {
-//    static var previews: some View {
-//        AppearancePreviews(
-//            ConversationListView(lastSync: Date())
-//        )
-//        .environmentObject(AppState.sample)
-//    }
-//}
+struct ConversationListViewPreviews: PreviewProvider {
+    static var previews: some View {
+        AppearancePreviews(
+            ConversationListView(
+                chatsterRealm: .constant(.sample),
+                userRealm: .constant(.sample),
+                conversation: .constant(.sample),
+                showConversation: .constant(true),
+                lastSync: Date())
+        )
+        .environmentObject(AppState.sample)
+    }
+}

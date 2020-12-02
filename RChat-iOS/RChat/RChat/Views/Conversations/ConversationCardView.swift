@@ -11,10 +11,20 @@ import RealmSwift
 struct ConversationCardView: View {
 
     let realm: Realm
-    @State var conversation: Conversation?
+    let conversation: Conversation?
     
-    @State var chatsters = [Chatster]()
     @State var shouldIndicateActivity = false
+    
+    var chatsters: [Chatster] {
+        var chatsterList = [Chatster]()
+        if let conversation = conversation {
+            let allChatsters = realm.objects(Chatster.self)
+            for member in conversation.members {
+                chatsterList.append(contentsOf: allChatsters.filter("userName = %@", member.userName))
+            }
+        }
+        return chatsterList
+    }
     
     var body: some View {
         if let conversation = conversation {
@@ -26,19 +36,6 @@ struct ConversationCardView: View {
                     OpaqueProgressView("Fetching Conversation")
                 }
             }
-            .onAppear { initData() }
-        }
-    }
-    
-    func initData() {
-        if let conversation = conversation {
-            shouldIndicateActivity = true
-            chatsters = []
-            let allChatsters = realm.objects(Chatster.self)
-            for member in conversation.members {
-                chatsters.append(contentsOf: allChatsters.filter("userName = %@", member.userName))
-            }
-            shouldIndicateActivity = false
         }
     }
 }

@@ -9,16 +9,16 @@ import SwiftUI
 import RealmSwift
 
 struct ConversationView: View {
-    @State var conversationId: String?
+    @State var conversation: Conversation?
     
     @State var userRealm: Realm?
     @State var chatsterRealm: Realm?
     var body: some View {
         VStack {
-            if let conversationId = conversationId {
-                Text("Existing conversation: \(conversationId)")
+            if let conversation = conversation {
+                ActiveConversationView(conversation: $conversation, userRealm: userRealm)
             } else {
-                NewConversationView(conversationId: $conversationId, userRealm: userRealm)
+                NewConversationView(conversation: $conversation, userRealm: userRealm)
             }
         }
             .onAppear { initData() }
@@ -39,7 +39,7 @@ struct ConversationView_Previews: PreviewProvider {
         AppearancePreviews(
             Group {
                 ConversationView(userRealm: .sample, chatsterRealm: .sample)
-                ConversationView(conversationId: "My conversation", userRealm: .sample, chatsterRealm: .sample)
+                ConversationView(conversation: .sample, userRealm: .sample, chatsterRealm: .sample)
             }
         )
     }
