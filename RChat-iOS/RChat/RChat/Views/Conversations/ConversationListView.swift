@@ -19,10 +19,15 @@ struct ConversationListView: View {
     @State var realmUserNotificationToken: NotificationToken?
     @State var realmChatsterNotificationToken: NotificationToken?
     @State var lastSync: Date?
-       
+    
+    private let sortDescriptors = [
+        SortDescriptor(keyPath: "unreadCount", ascending: false),
+        SortDescriptor(keyPath: "displayName", ascending: true)
+    ]
+    
     var body: some View {
         VStack {
-            if let conversations = state.user?.conversations.freeze() {
+            if let conversations = state.user?.conversations.freeze().sorted(by: sortDescriptors) {
                 if let chatsterRealm = chatsterRealm {
                     if userRealm != nil {
                         List {
@@ -37,6 +42,7 @@ struct ConversationListView: View {
                                 }
                             }
                         }
+                        .animation(.easeIn(duration: 0.5))
                     }
                 }
             }
