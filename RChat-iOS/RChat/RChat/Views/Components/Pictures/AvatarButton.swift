@@ -1,5 +1,5 @@
 //
-//  PhotoButton.swift
+//  AvatarButton.swift
 //  RChat
 //
 //  Created by Andrew Morgan on 24/11/2020.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct PhotoButton: View {
+struct AvatarButton: View {
     let photo: Photo
     let action: () -> Void
     var body: some View {
         ZStack {
             Button(action: action) {
-                PhotoThumbNailView(photo: photo)
+                AvatarThumbNailView(photo: photo)
             }
             Image(systemName: "camera.fill")
                 .resizable()
@@ -24,10 +24,10 @@ struct PhotoButton: View {
     }
 }
 
-struct PhotoButton_Previews: PreviewProvider {
+struct AvatarButton_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            PhotoButton(photo: .sample, action: {})
+            AvatarButton(photo: .sample, action: {})
         )
         .padding()
         .previewLayout(.sizeThatFits)

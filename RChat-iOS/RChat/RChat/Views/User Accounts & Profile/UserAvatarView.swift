@@ -38,7 +38,7 @@ struct UserAvatarView: View {
     var image: some View {
         Group<AnyView> {
             if let image = photo {
-                return AnyView(PhotoView(photo: image, imageSize: imageSize))
+                return AnyView(ThumbnailPhotoView(photo: image, imageSize: imageSize))
             } else {
                 return AnyView(BlankPersonIconView().frame(width: imageSize, height: imageSize))
             }

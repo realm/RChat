@@ -1,5 +1,5 @@
 //
-//  PhotoThumbNailView.swift
+//  AvatarThumbNailView.swift
 //  RChat
 //
 //  Created by Andrew Morgan on 24/11/2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PhotoThumbNailView: View {
+struct AvatarThumbNailView: View {
     let photo: Photo
     let imageSize: CGFloat = 102
 
@@ -18,15 +18,13 @@ struct PhotoThumbNailView: View {
 
     var body: some View {
         VStack {
-            if photo.thumbNail != nil || photo.picture != nil {
-                if let photo = photo.thumbNail {
+            if let photo = photo {
+                ThumbNailView(photo: photo)
+            } else {
+                if let photo = photo.picture {
                     Thumbnail(imageData: photo)
                 } else {
-                    if let photo = photo.picture {
-                        Thumbnail(imageData: photo)
-                    } else {
-                        Thumbnail(imageData: UIImage().jpegData(compressionQuality: 0.8)!)
-                    }
+                    Thumbnail(imageData: UIImage().jpegData(compressionQuality: 0.8)!)
                 }
             }
         }
@@ -37,10 +35,10 @@ struct PhotoThumbNailView: View {
     }
 }
 
-struct PhotoThumbNailView_Previews: PreviewProvider {
+struct AvatarThumbNailView_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            PhotoThumbNailView(photo: .sample)
+            AvatarThumbNailView(photo: .sample)
                 .padding()
                 .previewLayout(.sizeThatFits)
         )

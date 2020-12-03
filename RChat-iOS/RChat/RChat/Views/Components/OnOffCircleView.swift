@@ -11,14 +11,14 @@ struct OnOffCircleView: View {
     let online: Bool
     let size: Size
     
-    private var mapFrameSize: CGFloat { size == .small ? 14.0 : 25.0 }
+    private var frameSize: CGFloat { size == .small ? 14.0 : 25.0 }
     private var innerCircleSize: CGFloat { size == .small ? 10.0 : 18.0 }
     
     var body: some View {
         ZStack {
             Circle()
                 .fill(Color.gray)
-                .frame(width: mapFrameSize, height: mapFrameSize)
+                .frame(width: frameSize, height: frameSize)
             Circle()
                 .fill(online ? Color.green : Color.red)
                 .frame(width: innerCircleSize, height: innerCircleSize)

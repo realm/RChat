@@ -1,5 +1,5 @@
 //
-//  PhotoView.swift
+//  ThumbnailPhotoView.swift
 //  RChat
 //
 //  Created by Andrew Morgan on 24/11/2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PhotoView: View {
+struct ThumbnailPhotoView: View {
     var photo: Photo
     
     var imageSize: CGFloat = 64
@@ -28,8 +28,8 @@ struct PhotoView: View {
     }
 }
 
-struct PhotoView_Previews: PreviewProvider {
+struct ThumbnailPhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoView(photo: .sample)
+        ThumbnailPhotoView(photo: .sample)
     }
 }

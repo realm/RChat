@@ -24,7 +24,7 @@ struct SetProfileView: View {
         Form {
             Section(header: Text("User Profile")) {
                 if let photo = photo {
-                    PhotoButton(photo: photo) {
+                    AvatarButton(photo: photo) {
                         self.showPhotoTaker()
                     }
                 }
