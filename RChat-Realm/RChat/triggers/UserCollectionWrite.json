@@ -1,0 +1,21 @@
+{
+    "name": "UserCollectionWrite",
+    "type": "DATABASE",
+    "config": {
+        "operation_types": [
+            "INSERT",
+            "UPDATE",
+            "DELETE",
+            "REPLACE"
+        ],
+        "database": "RChat",
+        "collection": "User",
+        "service_name": "mongodb-atlas",
+        "match": {},
+        "project": {},
+        "full_document": true,
+        "unordered": false
+    },
+    "function_name": "userDocWrittenTo",
+    "disabled": false
+}

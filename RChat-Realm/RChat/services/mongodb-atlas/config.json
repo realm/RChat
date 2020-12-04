@@ -1,0 +1,23 @@
+{
+    "name": "mongodb-atlas",
+    "type": "mongodb-atlas",
+    "config": {
+        "clusterName": "Cluster0",
+        "readPreference": "primary",
+        "sync": {
+            "state": "enabled",
+            "database_name": "RChat",
+            "partition": {
+                "key": "partition",
+                "type": "string",
+                "required": true,
+                "permissions": {
+                    "read": true,
+                    "write": true
+                }
+            }
+        },
+        "wireProtocolEnabled": false
+    },
+    "version": 1
+}

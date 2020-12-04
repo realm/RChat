@@ -1,0 +1,12 @@
+{
+    "name": "defaultLocation",
+    "value": [
+        {
+            "$numberDouble": "-0.10689139236939127"
+        },
+        {
+            "$numberDouble": "51.506520923981554"
+        }
+    ],
+    "from_secret": false
+}
