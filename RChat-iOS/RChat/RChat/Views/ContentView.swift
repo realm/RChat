@@ -58,7 +58,7 @@ struct ContentView: View {
                             .foregroundColor(Color.red)
                     }
                 }
-                if state.shouldIndicateActivity {
+                if state.busyCount > 0 {
                     OpaqueProgressView("Working With Realm")
                 }
             }

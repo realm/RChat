@@ -22,6 +22,7 @@ struct LogoutButton: View {
                 let realmConfig = app.currentUser?.configuration(partitionValue: state.user?.partition ?? "")
                 guard var config = realmConfig else {
                     state.error = "Cannot get Realm config from current user"
+                    state.shouldIndicateActivity = false
                     return
                 }
                 config.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
@@ -41,7 +42,6 @@ struct LogoutButton: View {
                             state.error = "Unable to open Realm write transaction"
                         }
                         logout()
-                        state.shouldIndicateActivity = false
                     })
                     .store(in: &self.state.cancellables)
             } else {

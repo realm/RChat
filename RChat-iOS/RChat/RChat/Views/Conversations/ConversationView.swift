@@ -16,7 +16,7 @@ struct ConversationView: View {
     var body: some View {
         VStack {
             if let conversation = conversation {
-                ActiveConversationView(conversation: $conversation, userRealm: userRealm)
+                ChatRoomView(conversation: conversation)
             } else {
                 NewConversationView(conversation: $conversation, userRealm: userRealm)
             }
@@ -38,8 +38,10 @@ struct ConversationView_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
             Group {
-                ConversationView(userRealm: .sample, chatsterRealm: .sample)
-                ConversationView(conversation: .sample, userRealm: .sample, chatsterRealm: .sample)
+                ConversationView()
+                ConversationView(conversation: .sample)
+//                ConversationView(userRealm: .sample, chatsterRealm: .sample)
+//                ConversationView(conversation: .sample, userRealm: .sample, chatsterRealm: .sample)
             }
         )
     }

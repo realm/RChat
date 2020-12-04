@@ -54,6 +54,7 @@
 		496F1AC02577E2EE00B946A9 /* AddPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F1ABF2577E2EE00B946A9 /* AddPhotoButton.swift */; };
 		496F1AE02577EC1F00B946A9 /* ThumbNailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F1ADF2577EC1F00B946A9 /* ThumbNailView.swift */; };
 		497EF90D2576719B0045A5EA /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497EF90C2576719B0045A5EA /* Member.swift */; };
+		498CD5A425795B24007396DC /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CD5A325795B24007396DC /* ChatRoomView.swift */; };
 		499E1E8A256EB6F50036614F /* Chatster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E89256EB6F50036614F /* Chatster.swift */; };
 		499E1E97256ED6410036614F /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E96256ED6410036614F /* ConversationListView.swift */; };
 		499E1EA2256FAACC0036614F /* ConversationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1EA1256FAACC0036614F /* ConversationCardView.swift */; };
@@ -145,6 +146,7 @@
 		496F1ABF2577E2EE00B946A9 /* AddPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoButton.swift; sourceTree = "<group>"; };
 		496F1ADF2577EC1F00B946A9 /* ThumbNailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbNailView.swift; sourceTree = "<group>"; };
 		497EF90C2576719B0045A5EA /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		498CD5A325795B24007396DC /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		499E1E89256EB6F50036614F /* Chatster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatster.swift; sourceTree = "<group>"; };
 		499E1E96256ED6410036614F /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
 		499E1EA1256FAACC0036614F /* ConversationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCardView.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				496F1ABA2577D9C700B946A9 /* ChatInputBox.swift */,
+				498CD5A325795B24007396DC /* ChatRoomView.swift */,
 			);
 			path = "Chat Messages";
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				49012A2F256BEA4C00C3614B /* RChatApp.swift in Sources */,
 				49CF1CAB25792AB600DF251E /* DeleteButton.swift in Sources */,
 				49012B98256D8FDD00C3614B /* BlankPersonIconView.swift in Sources */,
+				498CD5A425795B24007396DC /* ChatRoomView.swift in Sources */,
 				49012B8E256D8A7700C3614B /* OnOffCircleView.swift in Sources */,
 				497EF90D2576719B0045A5EA /* Member.swift in Sources */,
 			);

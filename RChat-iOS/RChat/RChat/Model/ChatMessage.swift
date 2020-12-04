@@ -19,6 +19,15 @@ class ChatMessage: Object {
     override static func primaryKey() -> String? {
         return "_id"
     }
+    
+    convenience init(conversationId: String, author: String, text: String, image: Photo?) {
+        self.init()
+        self.partition = "conversation=\(conversationId)"
+        self.author = author
+        self.text = text
+        self.image = image ?? nil
+        whoHasRead.append(author)
+    }
 }
 
 extension ChatMessage: Identifiable {

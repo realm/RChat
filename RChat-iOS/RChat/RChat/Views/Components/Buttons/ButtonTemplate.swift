@@ -15,7 +15,7 @@ struct ButtonTemplate: View {
     var padding: CGFloat = 4
     
     private enum Dimensions {
-        static let buttonSize: CGFloat = 40
+        static let buttonSize: CGFloat = 60
     }
     
     var body: some View {

@@ -44,7 +44,6 @@ class AppState: ObservableObject {
     }
 
     init() {
-
         _  = app.currentUser?.logOut()
 
         loginPublisher
@@ -69,7 +68,7 @@ class AppState: ObservableObject {
                     self.error = "Failed to log in and open realm: \(error.localizedDescription)"
                 }
             }, receiveValue: { realm in
-            print("Realm User file location: \(realm.configuration.fileURL!.path)")
+//            print("Realm User file location: \(realm.configuration.fileURL!.path)")
             self.user = realm.objects(User.self).first
                 do {
                     try realm.write {

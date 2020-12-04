@@ -11,6 +11,7 @@ import RealmSwift
 struct SignupView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var state: AppState
+    // TODO: Remove the username/password examples
     @State private var username = "rod@contoso.com"
     @State private var password = "billyfish"
 
@@ -59,7 +60,12 @@ struct SignupView: View {
         app.emailPasswordAuth.registerUser(email: username, password: password)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {
-                state.shouldIndicateActivity = false
+                // Allow time for the backend trigger to run before letting the new
+                // user log in
+                let secondsToDelay = 5.0
+                DispatchQueue.main.asyncAfter(deadline: .now() + secondsToDelay) {
+                    state.shouldIndicateActivity = false
+                }
                 switch $0 {
                 case .finished:
                     break

@@ -11,5 +11,5 @@ class UserPreferences: EmbeddedObject {
     @objc dynamic var displayName: String?
     @objc dynamic var avatarImage: Photo?
 
-    var isEmpty: Bool { displayName == nil || displayName == "Please provide name" }
+    var isEmpty: Bool { displayName == nil || displayName == "" }
 }

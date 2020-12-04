@@ -69,6 +69,7 @@ struct SetProfileView: View {
         let realmConfig = app.currentUser?.configuration(partitionValue: state.user?.partition ?? "")
         guard var config = realmConfig else {
             state.error = "Cannot get Realm config from current user"
+            state.shouldIndicateActivity = false
             return
         }
         config.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
@@ -87,6 +88,7 @@ struct SetProfileView: View {
                         if photoAdded {
                             guard let newPhoto = photo else {
                                 print("Missing photo")
+                                state.shouldIndicateActivity = false
                                 return
                             }
                             state.user?.userPreferences?.avatarImage = newPhoto

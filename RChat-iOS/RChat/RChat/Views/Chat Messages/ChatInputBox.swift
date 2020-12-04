@@ -10,14 +10,15 @@ import UIKit
 
 struct ChatInputBox: View {
     var send: (String, Photo?) -> Void
+    var focusAction: () -> Void = {}
     
     private enum Dimensions {
         static let maxHeight: CGFloat = 100
         static let minHeight: CGFloat = 100
         static let radius: CGFloat = 10
         static let imageSize: CGFloat = 70
-        static let padding: CGFloat = 4
-        static let toolStripHeight: CGFloat = 25
+        static let padding: CGFloat = 15
+        static let toolStripHeight: CGFloat = 35
     }
     
     @State var photo: Photo?
@@ -32,6 +33,7 @@ struct ChatInputBox: View {
                     ThumbnailWithDelete(photo: photo, action: deletePhoto)
                 }
                 TextEditor(text: $chatText)
+                    .onTapGesture(perform: focusAction)
                     .padding(Dimensions.padding)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: Dimensions.minHeight, maxHeight: Dimensions.maxHeight)
                     .background(Color("GreenBackground"))
@@ -45,6 +47,7 @@ struct ChatInputBox: View {
             }
             .frame(height: Dimensions.toolStripHeight)
         }
+        .padding(Dimensions.padding)
         .onAppear(perform: { clearBackground() })
     }
     
@@ -68,6 +71,8 @@ struct ChatInputBox: View {
     
     func sendChat() {
         send(chatText, photo)
+        photo = nil
+        chatText = ""
     }
     
     func clearBackground() {

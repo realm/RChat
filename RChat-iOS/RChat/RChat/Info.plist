@@ -4,6 +4,10 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>RChat would like to record your location when you post a chat message. You can turn this off in your profile.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>You have the chance to include photos in your messages</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>RChat would like to give you the option to include photos from your library in your messages</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

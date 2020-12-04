@@ -5,6 +5,8 @@
 //  Created by Andrew Morgan on 02/12/2020.
 //
 
+// TODO: Remove if not used
+
 import SwiftUI
 import RealmSwift
 
@@ -12,7 +14,8 @@ struct ActiveConversationView: View {
     @EnvironmentObject var state: AppState
     
     @Binding var conversation: Conversation?
-    let userRealm: Realm?
+    var userRealm: Realm?
+//    var userRealm: Realm? = .sample
     
     @State var name = ""
     @State var members = [String]()
@@ -48,7 +51,11 @@ struct ActiveConversationView: View {
 }
 
 struct ActiveConversationView_Previews: PreviewProvider {
+    var realm = Realm.sample
+    
     static var previews: some View {
-        ActiveConversationView(conversation: .constant(.sample), userRealm: .sample)
+        ActiveConversationView(conversation: .constant(.sample))
+//        ActiveConversationView(conversation: .constant(.sample), userRealm: .sample)
+            .environmentObject(AppState.sample)
     }
 }
