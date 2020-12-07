@@ -65,44 +65,46 @@ struct SetProfileView: View {
     }
     
     func saveProfile() {
-        state.shouldIndicateActivity = true
-        let realmConfig = app.currentUser?.configuration(partitionValue: state.user?.partition ?? "")
-        guard var config = realmConfig else {
-            state.error = "Cannot get Realm config from current user"
-            state.shouldIndicateActivity = false
-            return
-        }
-        config.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
-        Realm.asyncOpen(configuration: config)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { result in
-                state.shouldIndicateActivity = false
-                if case let .failure(error) = result {
-                    self.state.error = "Failed to open realm: \(error.localizedDescription)"
-                }
-            }, receiveValue: { realm in
-                print("Realm User file location: \(realm.configuration.fileURL!.path)")
-                do {
-                    try realm.write {
-                        state.user?.userPreferences?.displayName = displayName
-                        if photoAdded {
-                            guard let newPhoto = photo else {
-                                print("Missing photo")
-                                state.shouldIndicateActivity = false
-                                return
-                            }
-                            state.user?.userPreferences?.avatarImage = newPhoto
+//        state.shouldIndicateActivity = true
+//        let realmConfig = app.currentUser?.configuration(partitionValue: state.user?.partition ?? "")
+//        guard var config = realmConfig else {
+//            state.error = "Cannot get Realm config from current user"
+//            state.shouldIndicateActivity = false
+//            return
+//        }
+//        config.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
+//        Realm.asyncOpen(configuration: config)
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveCompletion: { result in
+//                state.shouldIndicateActivity = false
+//                if case let .failure(error) = result {
+//                    self.state.error = "Failed to open realm: \(error.localizedDescription)"
+//                }
+//            }, receiveValue: { realm in
+//                print("Realm User file location: \(realm.configuration.fileURL!.path)")
+        if let realm = state.userRealm {
+            do {
+                try realm.write {
+                    state.user?.userPreferences?.displayName = displayName
+                    if photoAdded {
+                        guard let newPhoto = photo else {
+                            print("Missing photo")
+                            state.shouldIndicateActivity = false
+                            return
                         }
-                        state.user?.presenceState = shouldSharePresence ? .onLine : .hidden
+                        state.user?.userPreferences?.avatarImage = newPhoto
                     }
-                } catch {
-                    state.error = "Unable to open Realm write transaction"
+                    state.user?.presenceState = shouldSharePresence ? .onLine : .hidden
                 }
-                state.shouldIndicateActivity = false
-            })
-            .store(in: &self.state.cancellables)
+            } catch {
+                state.error = "Unable to open Realm write transaction"
+            }
+        }
+//                state.shouldIndicateActivity = false
+//            })
+//            .store(in: &self.state.cancellables)
     }
-    
+
     private func showPhotoTaker() {
         PhotoCaptureController.show(source: .camera) { controller, photo in
             self.photo = photo

@@ -10,12 +10,11 @@ import SwiftUI
 struct UserAvatarView: View {
     let photo: Photo?
     let online: Bool
-    var size: Size = .small
     var action: () -> Void = {}
     
-    private var imageSize: CGFloat { size == .small ? 30.0 : 52.0 }
-    private var buttonSize: CGFloat { size == .small ? 36.0 : 62.0 }
-    
+    // TODO: Tidy these up
+    private let imageSize: CGFloat = 30
+    private let buttonSize: CGFloat = 36
     let cornerRadius: CGFloat = 50.0
     
     var body: some View {
@@ -27,7 +26,7 @@ struct UserAvatarView: View {
                     Spacer()
                     VStack {
                         Spacer()
-                        OnOffCircleView(online: online, size: size)
+                        OnOffCircleView(online: online)
                     }
                 }
             }
@@ -49,10 +48,7 @@ struct UserAvatarView: View {
 struct UserAvatarView_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            Group {
-                UserAvatarView(photo: .sample, online: true, size: .large, action: {})
-                UserAvatarView(photo: .sample, online: false, size: .small, action: {})
-            }
+            UserAvatarView(photo: .sample, online: true, action: {})
         )
         .padding()
         .previewLayout(.sizeThatFits)

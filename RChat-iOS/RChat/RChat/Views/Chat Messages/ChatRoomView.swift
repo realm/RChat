@@ -12,7 +12,7 @@ struct ChatRoomView: View {
     @EnvironmentObject var state: AppState
     
     var conversation: Conversation
-    var chatsterRealm: Realm? // Use to get displayName and avatar
+//    var chatsterRealm: Realm? // Use to get displayName and avatar
     
     @State var chatRealm: Realm?
     @State var realmChatsterNotificationToken: NotificationToken?
@@ -80,7 +80,7 @@ struct ChatRoomView: View {
                         scrollToBottom()
                         lastSync = Date()
                     }
-                    if let chatsterRealm = chatsterRealm {
+                    if let chatsterRealm = state.chatsterRealm {
                         realmChatsterNotificationToken = chatsterRealm.observe {_, _ in
                             lastSync = Date()
                         }
@@ -103,7 +103,7 @@ struct ChatRoomView: View {
     }
     
     func findChatster(userName: String?) -> Chatster? {
-        guard let chatsterRealm = chatsterRealm else {
+        guard let chatsterRealm = state.chatsterRealm else {
             print("No Chatster Realm set") 
             return nil
         }

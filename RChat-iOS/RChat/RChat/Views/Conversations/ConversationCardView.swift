@@ -9,8 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct ConversationCardView: View {
+    @EnvironmentObject var state: AppState
 
-    let realm: Realm
+//    let chatsterRealm: Realm
     let conversation: Conversation?
     
     @State var shouldIndicateActivity = false
@@ -18,9 +19,11 @@ struct ConversationCardView: View {
     var chatsters: [Chatster] {
         var chatsterList = [Chatster]()
         if let conversation = conversation {
-            let allChatsters = realm.objects(Chatster.self)
-            for member in conversation.members {
-                chatsterList.append(contentsOf: allChatsters.filter("userName = %@", member.userName))
+            if let chatsterRealm = state.chatsterRealm {
+                let allChatsters = chatsterRealm.objects(Chatster.self)
+                for member in conversation.members {
+                    chatsterList.append(contentsOf: allChatsters.filter("userName = %@", member.userName))
+                }
             }
         }
         return chatsterList
@@ -43,7 +46,7 @@ struct ConversationCardView: View {
 struct ConversationCardView_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            ConversationCardView(realm: .sample, conversation: .sample)
+            ConversationCardView(conversation: .sample)
             .environmentObject(AppState.sample)
         )
         .padding()

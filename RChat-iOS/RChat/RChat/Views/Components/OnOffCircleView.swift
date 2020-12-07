@@ -9,10 +9,10 @@ import SwiftUI
 
 struct OnOffCircleView: View {
     let online: Bool
-    let size: Size
     
-    private var frameSize: CGFloat { size == .small ? 14.0 : 25.0 }
-    private var innerCircleSize: CGFloat { size == .small ? 10.0 : 18.0 }
+    // TODO: Tidy these uo
+    private let frameSize: CGFloat = 14.0
+    private let innerCircleSize: CGFloat = 10
     
     var body: some View {
         ZStack {
@@ -30,15 +30,10 @@ struct OnOffCircleView_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
             Group {
-                OnOffCircleView(online: true, size: .small)
-                OnOffCircleView(online: false, size: .large)
+                OnOffCircleView(online: true)
             }
         )
         .padding()
         .previewLayout(.sizeThatFits)
     }
-}
-
-enum Size {
-    case small, large
 }

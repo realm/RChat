@@ -30,15 +30,16 @@ struct ContentView: View {
                             SetProfileView(isPresented: $showingProfileView)
                         } else {
                             ConversationListView(
-                                chatsterRealm: $chatsterRealm,
-                                userRealm: $userRealm,
+//                                chatsterRealm: $chatsterRealm,
+//                                userRealm: $userRealm,
                                 conversation: $conversation,
                                 showConversation: $showConversation)
                             NavigationLink(
                                 destination: ConversationView(
-                                    conversation: conversation,
-                                    userRealm: userRealm,
-                                    chatsterRealm: chatsterRealm),
+                                    conversation: conversation),
+//                                    userRealm: userRealm,
+//                                    chatsterRealm: chatsterRealm
+//                                ),
                                 isActive: $showConversation) { EmptyView() }
                             .navigationBarTitle("Chats", displayMode: .inline)
                             .navigationBarItems(

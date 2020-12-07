@@ -8,7 +8,7 @@
 import SwiftUI
 import RealmSwift
 
-let app = RealmSwift.App(id: "rchat2-xxxxx") // TODO: Set the Realm application ID
+let app = RealmSwift.App(id: "rchat2-nzuoo") // TODO: Set the Realm application ID
 
 @main
 struct RChatApp: SwiftUI.App {

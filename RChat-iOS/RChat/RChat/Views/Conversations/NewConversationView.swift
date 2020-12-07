@@ -12,7 +12,7 @@ struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     
     @Binding var conversation: Conversation?
-    let userRealm: Realm?
+//    let userRealm: Realm?
     
     @State var name = ""
     @State var members = [String]()
@@ -83,7 +83,7 @@ struct NewConversationView: View {
             state.error = "Current user is not set"
             return
         }
-        guard let realm = userRealm else {
+        guard let realm = state.userRealm else {
             state.error = "User Realm not set"
             return
         }
@@ -110,7 +110,7 @@ struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             AppearancePreviews(
-                NewConversationView(conversation: .constant(.sample), userRealm: .sample)
+                NewConversationView(conversation: .constant(.sample))
             )
         }
     }

@@ -9,16 +9,19 @@ import SwiftUI
 import RealmSwift
 
 struct ConversationView: View {
+    @EnvironmentObject var state: AppState
     @State var conversation: Conversation?
     
-    @State var userRealm: Realm?
-    @State var chatsterRealm: Realm?
+//    @State var userRealm: Realm?
+//    @State var chatsterRealm: Realm?
     var body: some View {
         VStack {
             if let conversation = conversation {
-                ChatRoomView(conversation: conversation, chatsterRealm: chatsterRealm)
+                ChatRoomView(conversation: conversation)
+//                ChatRoomView(conversation: conversation, chatsterRealm: chatsterRealm)
             } else {
-                NewConversationView(conversation: $conversation, userRealm: userRealm)
+//                NewConversationView(conversation: $conversation, userRealm: userRealm)
+                NewConversationView(conversation: $conversation)
             }
         }
             .onAppear { initData() }
