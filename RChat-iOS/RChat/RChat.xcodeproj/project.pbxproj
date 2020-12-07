@@ -54,6 +54,7 @@
 		496F1AC02577E2EE00B946A9 /* AddPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F1ABF2577E2EE00B946A9 /* AddPhotoButton.swift */; };
 		496F1AE02577EC1F00B946A9 /* ThumbNailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F1ADF2577EC1F00B946A9 /* ThumbNailView.swift */; };
 		497EF90D2576719B0045A5EA /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497EF90C2576719B0045A5EA /* Member.swift */; };
+		498344A4257E395900E7BAFF /* ThumbnailWithExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498344A3257E395900E7BAFF /* ThumbnailWithExpand.swift */; };
 		498CD5A425795B24007396DC /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CD5A325795B24007396DC /* ChatRoomView.swift */; };
 		499E1E8A256EB6F50036614F /* Chatster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E89256EB6F50036614F /* Chatster.swift */; };
 		499E1E97256ED6410036614F /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499E1E96256ED6410036614F /* ConversationListView.swift */; };
@@ -63,6 +64,7 @@
 		49CF1CA12579258A00DF251E /* AttachButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF1CA02579258A00DF251E /* AttachButton.swift */; };
 		49CF1CA6257926F000DF251E /* ThumbnailWithDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF1CA5257926F000DF251E /* ThumbnailWithDelete.swift */; };
 		49CF1CAB25792AB600DF251E /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CF1CAA25792AB600DF251E /* DeleteButton.swift */; };
+		49D1C12E257AA182007343ED /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1C12D257AA182007343ED /* ChatBubbleView.swift */; };
 		49D9327725790E8800F9EB45 /* SendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D9327625790E8800F9EB45 /* SendButton.swift */; };
 		49F00E892571129600ADC23F /* LastSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F00E882571129600ADC23F /* LastSync.swift */; };
 		49F00E9D25715C0100ADC23F /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F00E9C25715C0000ADC23F /* NewConversationView.swift */; };
@@ -146,6 +148,7 @@
 		496F1ABF2577E2EE00B946A9 /* AddPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoButton.swift; sourceTree = "<group>"; };
 		496F1ADF2577EC1F00B946A9 /* ThumbNailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbNailView.swift; sourceTree = "<group>"; };
 		497EF90C2576719B0045A5EA /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		498344A3257E395900E7BAFF /* ThumbnailWithExpand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailWithExpand.swift; sourceTree = "<group>"; };
 		498CD5A325795B24007396DC /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		499E1E89256EB6F50036614F /* Chatster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatster.swift; sourceTree = "<group>"; };
 		499E1E96256ED6410036614F /* ConversationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		49CF1CA02579258A00DF251E /* AttachButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachButton.swift; sourceTree = "<group>"; };
 		49CF1CA5257926F000DF251E /* ThumbnailWithDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailWithDelete.swift; sourceTree = "<group>"; };
 		49CF1CAA25792AB600DF251E /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
+		49D1C12D257AA182007343ED /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
 		49D9327625790E8800F9EB45 /* SendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendButton.swift; sourceTree = "<group>"; };
 		49F00E882571129600ADC23F /* LastSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSync.swift; sourceTree = "<group>"; };
 		49F00E9C25715C0000ADC23F /* NewConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationView.swift; sourceTree = "<group>"; };
@@ -351,6 +355,7 @@
 				496F1ABF2577E2EE00B946A9 /* AddPhotoButton.swift */,
 				496F1ADF2577EC1F00B946A9 /* ThumbNailView.swift */,
 				49CF1CA5257926F000DF251E /* ThumbnailWithDelete.swift */,
+				498344A3257E395900E7BAFF /* ThumbnailWithExpand.swift */,
 			);
 			path = Pictures;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 			children = (
 				496F1ABA2577D9C700B946A9 /* ChatInputBox.swift */,
 				498CD5A325795B24007396DC /* ChatRoomView.swift */,
+				49D1C12D257AA182007343ED /* ChatBubbleView.swift */,
 			);
 			path = "Chat Messages";
 			sourceTree = "<group>";
@@ -701,6 +707,7 @@
 				49012AB8256BEF6E00C3614B /* CallToActionButton.swift in Sources */,
 				49012AC2256BEF9200C3614B /* SwiftUIView.swift in Sources */,
 				499E1E97256ED6410036614F /* ConversationListView.swift in Sources */,
+				49D1C12E257AA182007343ED /* ChatBubbleView.swift in Sources */,
 				49012AFC256BF90100C3614B /* Conversation.swift in Sources */,
 				49012A31256BEA4C00C3614B /* ContentView.swift in Sources */,
 				49012B0D256C23F800C3614B /* SignupView.swift in Sources */,
@@ -719,6 +726,7 @@
 				49012ABD256BEF8000C3614B /* LabeledButton.swift in Sources */,
 				49012ACC256BEFFA00C3614B /* AppState.swift in Sources */,
 				49CF1CA12579258A00DF251E /* AttachButton.swift in Sources */,
+				498344A4257E395900E7BAFF /* ThumbnailWithExpand.swift in Sources */,
 				49012AF7256BF59200C3614B /* ChatMessage.swift in Sources */,
 				496F1AE02577EC1F00B946A9 /* ThumbNailView.swift in Sources */,
 				49012AA1256BEEC500C3614B /* LabeledText.swift in Sources */,

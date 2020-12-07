@@ -16,7 +16,7 @@ struct ConversationView: View {
     var body: some View {
         VStack {
             if let conversation = conversation {
-                ChatRoomView(conversation: conversation)
+                ChatRoomView(conversation: conversation, chatsterRealm: chatsterRealm)
             } else {
                 NewConversationView(conversation: $conversation, userRealm: userRealm)
             }

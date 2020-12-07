@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AvatarThumbNailView: View {
     let photo: Photo
-    let imageSize: CGFloat = 102
+    var imageSize: CGFloat = 102
 
     private enum Dimensions {
         static let radius: CGFloat = 4

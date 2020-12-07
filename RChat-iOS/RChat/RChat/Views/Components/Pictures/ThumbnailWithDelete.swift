@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThumbnailWithDelete: View {
     let photo: Photo?
-    let action: () -> Void
+    var action: (() -> Void)?
     
     private enum Dimensions {
         static let frameSize: CGFloat = 100
@@ -24,15 +24,17 @@ struct ThumbnailWithDelete: View {
             ThumbNailView(photo: photo)
             .frame(width: Dimensions.imageSize, height: Dimensions.imageSize, alignment: .center)
                 .clipShape(RoundedRectangle(cornerRadius: Dimensions.radius))
-            VStack {
-                HStack {
+            if let action = action {
+                VStack {
+                    HStack {
+                        Spacer()
+                        DeleteButton(action: action, padding: Dimensions.buttonPadding)
+                            .frame(width: Dimensions.buttonSize, height: Dimensions.buttonSize, alignment: .center)
+                    }
                     Spacer()
-                    DeleteButton(action: action, padding: Dimensions.buttonPadding)
-                        .frame(width: Dimensions.buttonSize, height: Dimensions.buttonSize, alignment: .center)
                 }
-                Spacer()
+                .frame(width: Dimensions.frameSize, height: Dimensions.frameSize)
             }
-            .frame(width: Dimensions.frameSize, height: Dimensions.frameSize)
         }
     }
 }
@@ -40,7 +42,10 @@ struct ThumbnailWithDelete: View {
 struct ThumbnailWithDelete_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            ThumbnailWithDelete(photo: .sample, action: {})
+            Group {
+                ThumbnailWithDelete(photo: .sample, action: {})
+                ThumbnailWithDelete(photo: .sample)
+            }
         )
         .previewLayout(.sizeThatFits)
     }

@@ -152,7 +152,7 @@ extension ChatMessage {
         partition = "conversation=\(conversation.id)"
         self.author = author.userName
         self.text = text
-        self.image = Photo.spud
+        if includePhoto { self.image = Photo.spud }
         self.timestamp = Date.random
         readers.forEach { user in
             self.whoHasRead.append(user.userName)
@@ -170,7 +170,7 @@ extension ChatMessage: Samplable {
     static var sample23: ChatMessage { ChatMessage(conversation: .sample2, author: .sample3, text: "Fancy trying this?", includePhoto: true, readers: [.sample3])}
     static var sample30: ChatMessage { ChatMessage(conversation: .sample3, author: .sample, readers: [.sample2]) }
     static var sample32: ChatMessage { ChatMessage(conversation: .sample3, author: .sample2, readers: [.sample, .sample3]) }
-    static var sample33: ChatMessage { ChatMessage(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's spaces for it all to fit in", includePhoto: true, readers: [.sample3])}
+    static var sample33: ChatMessage { ChatMessage(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's space for it all to fit in", includePhoto: true, readers: [.sample3])}
 }
 
 extension Realm: Samplable {

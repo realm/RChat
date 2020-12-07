@@ -77,7 +77,7 @@ struct ContentView: View {
     
     func addNotification(timeInHours: Int) {
         let center = UNUserNotificationCenter.current()
-        
+
         let addRequest = {
             let content = UNMutableNotificationContent()
             content.title = "Still logged in"
@@ -89,7 +89,7 @@ struct ContentView: View {
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             center.add(request)
         }
-        
+
         center.getNotificationSettings { settings in
             if settings.authorizationStatus == .authorized {
                 addRequest()
@@ -102,7 +102,7 @@ struct ContentView: View {
             }
         }
     }
-    
+
     func clearNotifications() {
         let center = UNUserNotificationCenter.current()
         center.removeAllDeliveredNotifications()

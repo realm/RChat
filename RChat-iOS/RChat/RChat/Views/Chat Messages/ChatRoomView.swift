@@ -27,14 +27,18 @@ struct ChatRoomView: View {
     
     var body: some View {
         VStack {
-            // TODO: Implement a new view to have a lazy grid of Chat messages
             if let chats = chats {
                 ScrollView(.vertical) {
                     ScrollViewReader { (proxy: ScrollViewProxy) in
                         VStack {
                             ForEach(chats.freeze()) { chatMessage in
-                                Text("\(chatMessage.text)")
-                                    .id(chatMessage._id)
+                                ChatBubbleView(chatMessage: chatMessage,
+                                               author: findChatster(userName: chatMessage.author))
+                            }
+                        }
+                        .onAppear {
+                            withAnimation {
+                                proxy.scrollTo(latestChatId, anchor: .bottom)
                             }
                         }
                         .onChange(of: latestChatId) { target in
@@ -58,6 +62,7 @@ struct ChatRoomView: View {
     
     func loadChatRoom() {
         if let user = app.currentUser {
+            scrollToBottom()
             self.state.shouldIndicateActivity = true
             var realmConfig = user.configuration(partitionValue: "conversation=\(conversation.id)")
             realmConfig.objectTypes = [ChatMessage.self, Photo.self]
@@ -72,7 +77,6 @@ struct ChatRoomView: View {
                     chatRealm = realm
                     chats = realm.objects(ChatMessage.self).sorted(byKeyPath: "timestamp")
                     realmChatsNotificationToken = realm.observe {_, _ in
-//                        latestChatId = chats?.last?._id ?? ""
                         scrollToBottom()
                         lastSync = Date()
                     }
@@ -81,6 +85,7 @@ struct ChatRoomView: View {
                             lastSync = Date()
                         }
                     }
+                    scrollToBottom()
                     state.shouldIndicateActivity = false
                 })
                 .store(in: &self.state.cancellables)
@@ -95,6 +100,21 @@ struct ChatRoomView: View {
             token.invalidate()
         }
         chatRealm = nil
+    }
+    
+    func findChatster(userName: String?) -> Chatster? {
+        guard let chatsterRealm = chatsterRealm else {
+            print("No Chatster Realm set") 
+            return nil
+        }
+        guard let userName = userName else {
+            return nil
+        }
+        if userName == state.user?.userName ?? "" {
+            // Only need to use the Chatster object if the author isn't the current user
+            return nil
+        }
+        return chatsterRealm.objects(Chatster.self).filter("userName = %@", userName).first
     }
     
     func sendMessage(text: String, photo: Photo?) {
