@@ -49,9 +49,7 @@
 		4950E100256FAE0600FA7E26 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */; };
 		4950E108256FD61400FA7E26 /* ConversationCardContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */; };
 		4950E10D256FD9F300FA7E26 /* MugShotGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */; };
-		496F1AAD2577A12200B946A9 /* ActiveConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F1AAC2577A12200B946A9 /* ActiveConversationView.swift */; };
 		496F1ABB2577D9C700B946A9 /* ChatInputBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F1ABA2577D9C700B946A9 /* ChatInputBox.swift */; };
-		496F1AC02577E2EE00B946A9 /* AddPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F1ABF2577E2EE00B946A9 /* AddPhotoButton.swift */; };
 		496F1AE02577EC1F00B946A9 /* ThumbNailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496F1ADF2577EC1F00B946A9 /* ThumbNailView.swift */; };
 		497EF90D2576719B0045A5EA /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497EF90C2576719B0045A5EA /* Member.swift */; };
 		498344A4257E395900E7BAFF /* ThumbnailWithExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498344A3257E395900E7BAFF /* ThumbnailWithExpand.swift */; };
@@ -143,9 +141,7 @@
 		4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCardContentsView.swift; sourceTree = "<group>"; };
 		4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MugShotGridView.swift; sourceTree = "<group>"; };
-		496F1AAC2577A12200B946A9 /* ActiveConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveConversationView.swift; sourceTree = "<group>"; };
 		496F1ABA2577D9C700B946A9 /* ChatInputBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputBox.swift; sourceTree = "<group>"; };
-		496F1ABF2577E2EE00B946A9 /* AddPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoButton.swift; sourceTree = "<group>"; };
 		496F1ADF2577EC1F00B946A9 /* ThumbNailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbNailView.swift; sourceTree = "<group>"; };
 		497EF90C2576719B0045A5EA /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		498344A3257E395900E7BAFF /* ThumbnailWithExpand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailWithExpand.swift; sourceTree = "<group>"; };
@@ -352,7 +348,6 @@
 				49012B92256D8DB000C3614B /* ThumbnailPhotoView.swift */,
 				49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */,
 				4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */,
-				496F1ABF2577E2EE00B946A9 /* AddPhotoButton.swift */,
 				496F1ADF2577EC1F00B946A9 /* ThumbNailView.swift */,
 				49CF1CA5257926F000DF251E /* ThumbnailWithDelete.swift */,
 				498344A3257E395900E7BAFF /* ThumbnailWithExpand.swift */,
@@ -378,7 +373,6 @@
 				4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */,
 				49F00EA125715D4700ADC23F /* ConversationView.swift */,
 				49F00E9C25715C0000ADC23F /* NewConversationView.swift */,
-				496F1AAC2577A12200B946A9 /* ActiveConversationView.swift */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -719,7 +713,6 @@
 				49CF1CA6257926F000DF251E /* ThumbnailWithDelete.swift in Sources */,
 				496F1ABB2577D9C700B946A9 /* ChatInputBox.swift in Sources */,
 				4950E108256FD61400FA7E26 /* ConversationCardContentsView.swift in Sources */,
-				496F1AC02577E2EE00B946A9 /* AddPhotoButton.swift in Sources */,
 				49012B12256C240F00C3614B /* LogoutButton.swift in Sources */,
 				49F00E892571129600ADC23F /* LastSync.swift in Sources */,
 				49012B93256D8DB000C3614B /* ThumbnailPhotoView.swift in Sources */,
@@ -740,7 +733,6 @@
 				49012AAB256BEF1700C3614B /* CaptionLabel.swift in Sources */,
 				49012B29256C678F00C3614B /* UserProfileButton.swift in Sources */,
 				49012B40256D154400C3614B /* AvatarThumbNailView.swift in Sources */,
-				496F1AAD2577A12200B946A9 /* ActiveConversationView.swift in Sources */,
 				49012AA6256BEEFA00C3614B /* InputField.swift in Sources */,
 				49012B05256C23CB00C3614B /* LoginView.swift in Sources */,
 				49CF1C992579246600DF251E /* CameraButton.swift in Sources */,

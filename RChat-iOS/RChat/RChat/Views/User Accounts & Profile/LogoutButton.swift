@@ -19,21 +19,6 @@ struct LogoutButton: View {
         Button("Log Out") {
             state.shouldIndicateActivity = true
             if shouldSharePresence {
-//                let realmConfig = app.currentUser?.configuration(partitionValue: state.user?.partition ?? "")
-//                guard var config = realmConfig else {
-//                    state.error = "Cannot get Realm config from current user"
-//                    state.shouldIndicateActivity = false
-//                    return
-//                }
-//                config.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
-//                Realm.asyncOpen(configuration: config)
-//                    .receive(on: DispatchQueue.main)
-//                    .sink(receiveCompletion: { result in
-//                        if case let .failure(error) = result {
-//                            self.state.error = "Failed to open realm: \(error.localizedDescription)"
-//                        }
-//                    }, receiveValue: { realm in
-//                        print("Realm User file location: \(realm.configuration.fileURL!.path)")
                 if let realm = state.userRealm {
                     do {
                         try realm.write {
@@ -44,8 +29,6 @@ struct LogoutButton: View {
                     }
                     logout()
                 }
-//                    })
-//                    .store(in: &self.state.cancellables)
             } else {
                 logout()
             }

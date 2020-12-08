@@ -12,7 +12,6 @@ struct ChatRoomView: View {
     @EnvironmentObject var state: AppState
     
     var conversation: Conversation?
-//    var chatsterRealm: Realm? // Use to get displayName and avatar
     
     @State var chatRealm: Realm?
     @State var realmChatsterNotificationToken: NotificationToken?
@@ -111,7 +110,6 @@ struct ChatRoomView: View {
             return nil
         }
         if userName == state.user?.userName ?? "" {
-            // Only need to use the Chatster object if the author isn't the current user
             return nil
         }
         return chatsterRealm.objects(Chatster.self).filter("userName = %@", userName).first

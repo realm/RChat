@@ -13,15 +13,17 @@ struct UserAvatarView: View {
     var action: () -> Void = {}
     
     // TODO: Tidy these up
-    private let imageSize: CGFloat = 30
-    private let buttonSize: CGFloat = 36
-    let cornerRadius: CGFloat = 50.0
+    private enum Dimensions {
+        static let imageSize: CGFloat = 30
+        static let buttonSize: CGFloat = 36
+        static let cornerRadius: CGFloat = 50.0
+    }
     
     var body: some View {
         Button(action: action) {
             ZStack {
                 image
-                    .cornerRadius(cornerRadius)
+                    .cornerRadius(Dimensions.cornerRadius)
                 HStack {
                     Spacer()
                     VStack {
@@ -31,15 +33,15 @@ struct UserAvatarView: View {
                 }
             }
         }
-        .frame(width: buttonSize, height: buttonSize)
+        .frame(width: Dimensions.buttonSize, height: Dimensions.buttonSize)
     }
     
     var image: some View {
         Group<AnyView> {
             if let image = photo {
-                return AnyView(ThumbnailPhotoView(photo: image, imageSize: imageSize))
+                return AnyView(ThumbnailPhotoView(photo: image, imageSize: Dimensions.imageSize))
             } else {
-                return AnyView(BlankPersonIconView().frame(width: imageSize, height: imageSize))
+                return AnyView(BlankPersonIconView().frame(width: Dimensions.imageSize, height: Dimensions.imageSize))
             }
         }
     }

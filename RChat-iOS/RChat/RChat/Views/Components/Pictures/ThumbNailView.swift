@@ -25,9 +25,6 @@ struct ThumbNailView: View {
                     }
                 }
             }
-//            else {
-//                Thumbnail(imageData: UIImage().jpegData(compressionQuality: 0.8)!)
-//            }
         }
     }
 }

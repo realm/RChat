@@ -11,7 +11,6 @@ import RealmSwift
 struct ConversationCardView: View {
     @EnvironmentObject var state: AppState
 
-//    let chatsterRealm: Realm
     let conversation: Conversation?
     
     @State var shouldIndicateActivity = false

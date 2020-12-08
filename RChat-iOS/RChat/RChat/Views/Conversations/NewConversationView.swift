@@ -12,9 +12,6 @@ struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     @Environment(\.presentationMode) var presentationMode
     
-//    @Binding var conversation: Conversation?
-//    let userRealm: Realm?
-    
     @State var name = ""
     @State var members = [String]()
     @State var newMember = ""
@@ -104,7 +101,6 @@ struct NewConversationView: View {
         }
         state.shouldIndicateActivity = false
         presentationMode.wrappedValue.dismiss()
-//        self.conversation = conversation
     }
 }
 
@@ -112,7 +108,6 @@ struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             AppearancePreviews(
-//                NewConversationView(conversation: .constant(.sample))
                 NewConversationView()
             )
         }

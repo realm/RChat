@@ -27,7 +27,6 @@ struct ButtonTemplate: View {
                 .opacity(active ? 0.8 : 0.2)
                 .padding(padding)
         }
-//        .frame(maxWidth: Dimensions.buttonSize, maxHeight: Dimensions.buttonSize, alignment: .center)
     }
 }
 

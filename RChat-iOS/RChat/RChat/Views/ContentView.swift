@@ -17,7 +17,6 @@ struct ContentView: View {
     
     @State var chatsterRealm: Realm?
     @State var userRealm: Realm?
-//    @State var conversation: Conversation?
     @State var showingProfileView = false
     @State var showConversation = false
 
@@ -30,20 +29,12 @@ struct ContentView: View {
                             SetProfileView(isPresented: $showingProfileView)
                         } else {
                             ConversationListView()
-//                                chatsterRealm: $chatsterRealm,
-//                                userRealm: $userRealm,
-//                                conversation: $conversation,
-//                                showConversation: $showConversation)
                             NavigationLink(
                                 destination: NewConversationView(),
-//                                    userRealm: userRealm,
-//                                    chatsterRealm: chatsterRealm
-//                                ),
                                 isActive: $showConversation) { EmptyView() }
                             .navigationBarTitle("Chats", displayMode: .inline)
                             .navigationBarItems(
                                 leading: state.loggedIn && !state.shouldIndicateActivity ? Button("New Chat") {
-//                                    conversation = nil
                                     showConversation.toggle() } : nil,
                                 trailing: state.loggedIn && !state.shouldIndicateActivity ? UserAvatarView(
                                     photo: state.user?.userPreferences?.avatarImage,
