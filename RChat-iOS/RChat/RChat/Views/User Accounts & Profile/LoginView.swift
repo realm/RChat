@@ -26,6 +26,7 @@ struct LoginView: View {
                        text: self.$username)
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
+                .disableAutocorrection(true)
             InputField(title: "Password",
                        text: self.$password,
                        showingSecureField: true)

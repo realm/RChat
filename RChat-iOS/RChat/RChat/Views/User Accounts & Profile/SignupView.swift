@@ -29,7 +29,7 @@ struct SignupView: View {
                 InputField(title: "Email/Username",
                            text: self.$username)
                     .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
+                    .autocapitalization(.none).disableAutocorrection(true)
                 InputField(title: "Password",
                            text: self.$password,
                            showingSecureField: true)
