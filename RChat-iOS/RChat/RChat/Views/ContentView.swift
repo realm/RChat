@@ -17,7 +17,7 @@ struct ContentView: View {
     
     @State var chatsterRealm: Realm?
     @State var userRealm: Realm?
-    @State var conversation: Conversation?
+//    @State var conversation: Conversation?
     @State var showingProfileView = false
     @State var showConversation = false
 
@@ -29,14 +29,13 @@ struct ContentView: View {
                         if (state.user != nil) && !state.user!.isProfileSet || showingProfileView {
                             SetProfileView(isPresented: $showingProfileView)
                         } else {
-                            ConversationListView(
+                            ConversationListView()
 //                                chatsterRealm: $chatsterRealm,
 //                                userRealm: $userRealm,
-                                conversation: $conversation,
-                                showConversation: $showConversation)
+//                                conversation: $conversation,
+//                                showConversation: $showConversation)
                             NavigationLink(
-                                destination: ConversationView(
-                                    conversation: conversation),
+                                destination: NewConversationView(),
 //                                    userRealm: userRealm,
 //                                    chatsterRealm: chatsterRealm
 //                                ),
@@ -44,11 +43,12 @@ struct ContentView: View {
                             .navigationBarTitle("Chats", displayMode: .inline)
                             .navigationBarItems(
                                 leading: state.loggedIn && !state.shouldIndicateActivity ? Button("New Chat") {
-                                    conversation = nil
+//                                    conversation = nil
                                     showConversation.toggle() } : nil,
                                 trailing: state.loggedIn && !state.shouldIndicateActivity ? UserAvatarView(
                                     photo: state.user?.userPreferences?.avatarImage,
-                                    online: true) { showingProfileView.toggle() } : nil)
+                                    online: true) { showingProfileView.toggle() } : nil
+                            )
                         }
                     } else {
                         LoginView()

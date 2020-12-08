@@ -60,12 +60,13 @@ struct SignupView: View {
         app.emailPasswordAuth.registerUser(email: username, password: password)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: {
+                // ZXZX TODO: See if this needs adding back in
                 // Allow time for the backend trigger to run before letting the new
                 // user log in
-                let secondsToDelay = 5.0
-                DispatchQueue.main.asyncAfter(deadline: .now() + secondsToDelay) {
-                    state.shouldIndicateActivity = false
-                }
+//                let secondsToDelay = 5.0
+//                DispatchQueue.main.asyncAfter(deadline: .now() + secondsToDelay) {
+//                    state.shouldIndicateActivity = false
+//                }
                 switch $0 {
                 case .finished:
                     break
@@ -74,6 +75,8 @@ struct SignupView: View {
                 }
             }, receiveValue: {
                 self.state.error = nil
+                // ZXZX TODO: Remove if add the timeout back in
+                state.shouldIndicateActivity = false
                 self.presentationMode.wrappedValue.dismiss()
             })
             .store(in: &state.cancellables)

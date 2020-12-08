@@ -13,12 +13,14 @@ struct ConversationListView: View {
     
 //    @Binding var chatsterRealm: Realm?
 //    @Binding var userRealm: Realm?
-    @Binding var conversation: Conversation?
-    @Binding var showConversation: Bool
+//    @Binding var conversation: Conversation?
+//    @Binding var showConversation: Bool
     
     @State var realmUserNotificationToken: NotificationToken?
     @State var realmChatsterNotificationToken: NotificationToken?
     @State var lastSync: Date?
+    @State var conversation: Conversation?
+    @State var showConversation = false
     
     private let sortDescriptors = [
         SortDescriptor(keyPath: "unreadCount", ascending: false),
@@ -48,6 +50,10 @@ struct ConversationListView: View {
             if let lastSync = lastSync {
                 LastSync(date: lastSync)
             }
+            NavigationLink(
+//                destination: ConversationView(conversation: $conversation),
+                destination: ChatRoomView(conversation: conversation),
+                isActive: $showConversation) { EmptyView() }
         }
         .onAppear { watchUserRealm() }
         .onDisappear { stopWatching() }
@@ -114,8 +120,8 @@ struct ConversationListViewPreviews: PreviewProvider {
         // TODO: Fix preview
         AppearancePreviews(
             ConversationListView(
-                conversation: .constant(.sample),
-                showConversation: .constant(true),
+//                conversation: .constant(.sample),
+//                showConversation: .constant(true),
                 lastSync: Date())
         )
         .environmentObject(AppState.sample)

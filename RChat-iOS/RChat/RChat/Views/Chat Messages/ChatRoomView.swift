@@ -11,7 +11,7 @@ import SwiftUI
 struct ChatRoomView: View {
     @EnvironmentObject var state: AppState
     
-    var conversation: Conversation
+    var conversation: Conversation?
 //    var chatsterRealm: Realm? // Use to get displayName and avatar
     
     @State var chatRealm: Realm?
@@ -61,7 +61,7 @@ struct ChatRoomView: View {
     }
     
     func loadChatRoom() {
-        if let user = app.currentUser {
+        if let user = app.currentUser, let conversation = conversation {
             scrollToBottom()
             self.state.shouldIndicateActivity = true
             var realmConfig = user.configuration(partitionValue: "conversation=\(conversation.id)")
@@ -118,17 +118,19 @@ struct ChatRoomView: View {
     }
     
     func sendMessage(text: String, photo: Photo?) {
-        let chatMessage = ChatMessage(conversationId: conversation.id, author: state.user?.userName ?? "Unknown", text: text, image: photo)
-        if let chatRealm = chatRealm {
-            do {
-                try chatRealm.write {
-                    chatRealm.add(chatMessage)
+        if let conversation = conversation {
+            let chatMessage = ChatMessage(conversationId: conversation.id, author: state.user?.userName ?? "Unknown", text: text, image: photo)
+            if let chatRealm = chatRealm {
+                do {
+                    try chatRealm.write {
+                        chatRealm.add(chatMessage)
+                    }
+                } catch {
+                    state.error = "Unable to open Realm write transaction"
                 }
-            } catch {
-                state.error = "Unable to open Realm write transaction"
+            } else {
+                state.error = "Cannot save chat message as realm is not set"
             }
-        } else {
-            state.error = "Cannot save chat message as realm is not set"
         }
     }
     

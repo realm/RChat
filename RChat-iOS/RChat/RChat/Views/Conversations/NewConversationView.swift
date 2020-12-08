@@ -10,8 +10,9 @@ import RealmSwift
 
 struct NewConversationView: View {
     @EnvironmentObject var state: AppState
+    @Environment(\.presentationMode) var presentationMode
     
-    @Binding var conversation: Conversation?
+//    @Binding var conversation: Conversation?
 //    let userRealm: Realm?
     
     @State var name = ""
@@ -102,7 +103,8 @@ struct NewConversationView: View {
             return
         }
         state.shouldIndicateActivity = false
-        self.conversation = conversation
+        presentationMode.wrappedValue.dismiss()
+//        self.conversation = conversation
     }
 }
 
@@ -110,7 +112,8 @@ struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             AppearancePreviews(
-                NewConversationView(conversation: .constant(.sample))
+//                NewConversationView(conversation: .constant(.sample))
+                NewConversationView()
             )
         }
     }

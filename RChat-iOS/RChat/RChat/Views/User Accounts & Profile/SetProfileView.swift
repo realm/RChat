@@ -55,8 +55,8 @@ struct SetProfileView: View {
         .padding()
         .navigationBarTitle("Edit Profile", displayMode: .inline)
         .navigationBarItems(
-            leading: Button(action: { isPresented.toggle() }) { BackButton() },
-            trailing: state.loggedIn ? LogoutButton(action: { isPresented.toggle() }) : nil)
+            leading: Button(action: { isPresented = false }) { BackButton() },
+            trailing: state.loggedIn ? LogoutButton(action: { isPresented = false }) : nil)
     }
     
     func initData() {
@@ -83,6 +83,7 @@ struct SetProfileView: View {
 //            }, receiveValue: { realm in
 //                print("Realm User file location: \(realm.configuration.fileURL!.path)")
         if let realm = state.userRealm {
+            state.shouldIndicateActivity = true
             do {
                 try realm.write {
                     state.user?.userPreferences?.displayName = displayName
@@ -100,7 +101,7 @@ struct SetProfileView: View {
                 state.error = "Unable to open Realm write transaction"
             }
         }
-//                state.shouldIndicateActivity = false
+        state.shouldIndicateActivity = false
 //            })
 //            .store(in: &self.state.cancellables)
     }

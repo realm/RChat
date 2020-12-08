@@ -51,7 +51,14 @@ class AppState: ObservableObject {
         _  = app.currentUser?.logOut()
         userRealm = nil
         chatsterRealm = nil
-        
+        initChatsterLoginPublisher()
+        initChatsterRealmPublisher()
+        initLoginPublisher()
+        initUserRealmPublisher()
+        initLogoutPublisher()
+    }
+    
+    func initChatsterLoginPublisher() {
         chatsterLoginPublisher
             .receive(on: DispatchQueue.main)
             .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
@@ -66,7 +73,9 @@ class AppState: ObservableObject {
             }
             .subscribe(chatsterRealmPublisher)
             .store(in: &self.cancellables)
-        
+    }
+    
+    func initChatsterRealmPublisher() {
         chatsterRealmPublisher
             .sink(receiveCompletion: { result in
                 if case let .failure(error) = result {
@@ -78,7 +87,9 @@ class AppState: ObservableObject {
                 self.shouldIndicateActivity = false
             })
             .store(in: &cancellables)
-        
+    }
+    
+    func initLoginPublisher() {
         loginPublisher
             .receive(on: DispatchQueue.main)
             .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
@@ -93,32 +104,38 @@ class AppState: ObservableObject {
             }
             .subscribe(userRealmPublisher)
             .store(in: &self.cancellables)
-
+    }
+    
+    func initUserRealmPublisher() {
         userRealmPublisher
             .sink(receiveCompletion: { result in
                 if case let .failure(error) = result {
                     self.error = "Failed to log in and open user realm: \(error.localizedDescription)"
                 }
             }, receiveValue: { realm in
-//            print("User Realm User file location: \(realm.configuration.fileURL!.path)")
+                //            print("User Realm User file location: \(realm.configuration.fileURL!.path)")
                 self.userRealm = realm
                 self.user = realm.objects(User.self).first
-                    do {
-                        try realm.write {
-                            self.user?.presenceState = self.shouldSharePresence ? .onLine : .hidden
-                        }
-                    } catch {
-                        self.error = "Unable to open Realm write transaction"
+                do {
+                    try realm.write {
+                        self.user?.presenceState = self.shouldSharePresence ? .onLine : .hidden
                     }
+                } catch {
+                    self.error = "Unable to open Realm write transaction"
+                }
                 self.shouldIndicateActivity = false
             })
             .store(in: &cancellables)
-
+    }
+    
+    func initLogoutPublisher() {
         logoutPublisher
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
             }, receiveValue: { _ in
                 self.user = nil
+                self.userRealm = nil
+                self.chatsterRealm = nil
             })
             .store(in: &cancellables)
     }
