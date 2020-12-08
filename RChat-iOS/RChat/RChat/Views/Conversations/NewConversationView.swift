@@ -13,8 +13,9 @@ struct NewConversationView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var name = ""
-    @State var members = [String]()
-    @State var newMember = ""
+    @State var members = [String]() // TODO: [Chatster] so can display more info
+    @State var candidateMember = ""
+    @State var candidateMembers = [String]() // TODO: [Chatster] so can display more info
     
     private var isEmpty: Bool {
         !(name != "" && members.count > 0)
@@ -23,19 +24,33 @@ struct NewConversationView: View {
     var body: some View {
         VStack {
             InputField(title: "Chat Name", text: $name)
-            HStack {
-                InputField(title: "New Member", text: $newMember)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                if newMember == "" {
-                    Button(action: {}) {
-                        Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.gray)
-                    }
-                } else {
-                    Button(action: { addMember(newMember: newMember) }) {
-                        Image(systemName: "plus.circle.fill")
-                        .renderingMode(.original)
+            CaptionLabel(title: "Add Members")
+            SearchBox(searchText: $candidateMember, onCommit: searchUsers)
+//            HStack {
+//                InputField(title: "New Member", text: $newMember)
+//                    .keyboardType(.emailAddress)
+//                    .autocapitalization(.none)
+//                if newMember == "" {
+//                    Button(action: {}) {
+//                        Image(systemName: "plus.circle.fill")
+//                            .foregroundColor(.gray)
+//                    }
+//                } else {
+//                    Button(action: { addMember(newMember: newMember) }) {
+//                        Image(systemName: "plus.circle.fill")
+//                        .renderingMode(.original)
+//                    }
+//                }
+//            }
+            List {
+                ForEach(candidateMembers, id: \.self) { candidateMember in
+                    Button(action: { addMember(candidateMember) }) {
+                        HStack {
+                            Text(candidateMember)
+                            Spacer()
+                            Image(systemName: "plus.circle.fill")
+                            .renderingMode(.original)
+                        }
                     }
                 }
             }
@@ -56,16 +71,42 @@ struct NewConversationView: View {
         .disabled(isEmpty)
         )
         .padding()
+        .onAppear(perform: onAppear)
     }
     
-    func addMember(newMember: String) {
+    func onAppear() {
+        searchUsers()
+    }
+    
+    func searchUsers() {
+        var candidateChatsters: Results<Chatster>
+        if let chatsterRealm = state.chatsterRealm {
+            let allChatsters = chatsterRealm.objects(Chatster.self)
+            if candidateMember == "" {
+                candidateChatsters = allChatsters
+            } else {
+                let predicate = NSPredicate(format: "userName CONTAINS[cd] %@", candidateMember)
+                candidateChatsters = allChatsters.filter(predicate)
+            }
+            candidateMembers = []
+            candidateChatsters.forEach { chatster in
+                if let userName = chatster.userName {
+                    if !members.contains(userName) && userName != state.user?.userName {
+                        candidateMembers.append(userName)
+                    }
+                }
+            }
+        }
+    }
+    
+    func addMember(_ newMember: String) {
         state.error = nil
         if members.contains(newMember) {
             state.error = "\(newMember) is already part of this chat"
         } else {
-            // TODO: Check if the user exists
             members.append(newMember)
-            self.newMember = ""
+            candidateMember = ""
+            searchUsers()
         }
     }
     

@@ -46,6 +46,7 @@
 		49012B93256D8DB000C3614B /* ThumbnailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B92256D8DB000C3614B /* ThumbnailPhotoView.swift */; };
 		49012B98256D8FDD00C3614B /* BlankPersonIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */; };
 		49012BA5256E83EB00C3614B /* OnlineAlertSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */; };
+		4910B02C257FF91F00F274F0 /* SearchBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4910B02B257FF91F00F274F0 /* SearchBox.swift */; };
 		4950E100256FAE0600FA7E26 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */; };
 		4950E108256FD61400FA7E26 /* ConversationCardContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */; };
 		4950E10D256FD9F300FA7E26 /* MugShotGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */; };
@@ -138,6 +139,7 @@
 		49012B92256D8DB000C3614B /* ThumbnailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailPhotoView.swift; sourceTree = "<group>"; };
 		49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankPersonIconView.swift; sourceTree = "<group>"; };
 		49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineAlertSettings.swift; sourceTree = "<group>"; };
+		4910B02B257FF91F00F274F0 /* SearchBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBox.swift; sourceTree = "<group>"; };
 		4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCardContentsView.swift; sourceTree = "<group>"; };
 		4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MugShotGridView.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				49012B61256D2E2B00C3614B /* BackButton.swift */,
 				49012B8D256D8A7700C3614B /* OnOffCircleView.swift */,
 				49F00E882571129600ADC23F /* LastSync.swift */,
+				4910B02B257FF91F00F274F0 /* SearchBox.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				49012AC7256BEFAB00C3614B /* OpaqueProgressView.swift in Sources */,
 				49CF1CA6257926F000DF251E /* ThumbnailWithDelete.swift in Sources */,
 				496F1ABB2577D9C700B946A9 /* ChatInputBox.swift in Sources */,
+				4910B02C257FF91F00F274F0 /* SearchBox.swift in Sources */,
 				4950E108256FD61400FA7E26 /* ConversationCardContentsView.swift in Sources */,
 				49012B12256C240F00C3614B /* LogoutButton.swift in Sources */,
 				49F00E892571129600ADC23F /* LastSync.swift in Sources */,
