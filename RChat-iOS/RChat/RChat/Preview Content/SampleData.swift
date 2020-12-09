@@ -155,9 +155,6 @@ extension ChatMessage {
         self.text = text
         if includePhoto { self.image = Photo.spud }
         self.timestamp = Date.random
-        readers.forEach { user in
-            self.whoHasRead.append(user.userName)
-        }
     }
 }
 
