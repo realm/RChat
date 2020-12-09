@@ -92,6 +92,17 @@ struct ChatRoomView: View {
     }
     
     func closeChatRoom() {
+        if let user = state.user, let realm = state.userRealm, let conversationId = conversation?.id {
+            if let conversation = user.conversations.first(where: { $0.id == conversationId } ) {
+                do {
+                    try realm.write() {
+                        conversation.unreadCount = 0
+                    }
+                } catch {
+                    state.error = "Unable to clear chat unread count"
+                }
+            }
+        }
         if let token = realmChatsterNotificationToken {
             token.invalidate()
         }
