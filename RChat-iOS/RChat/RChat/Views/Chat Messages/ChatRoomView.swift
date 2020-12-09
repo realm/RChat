@@ -93,9 +93,9 @@ struct ChatRoomView: View {
     
     func closeChatRoom() {
         if let user = state.user, let realm = state.userRealm, let conversationId = conversation?.id {
-            if let conversation = user.conversations.first(where: { $0.id == conversationId } ) {
+            if let conversation = user.conversations.first(where: { $0.id == conversationId }) {
                 do {
-                    try realm.write() {
+                    try realm.write {
                         conversation.unreadCount = 0
                     }
                 } catch {

@@ -21,7 +21,7 @@ struct ConversationCardContentsView: View {
     
     var body: some View {
         HStack {
-            MugShotGridView(photos: chatsters.compactMap { $0.avatarImage })
+            MugShotGridView(members: chatsters)
                 .frame(width: Dimensions.mugWidth)
                 .padding(.trailing)
             VStack(alignment: .leading) {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MugShotGridView: View {
-    let photos: [Photo]
+    let members: [Chatster]
     
     let height: CGFloat = 50.0
     
@@ -19,9 +19,10 @@ struct MugShotGridView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: true) {
             LazyHGrid(rows: rows, alignment: .center, spacing: 0) {
-                ForEach(photos) { photo in
-                    // TODO: use real online state
-                    UserAvatarView(photo: photo, online: true)
+                ForEach(members) { member in
+                    UserAvatarView(
+                        photo: member.avatarImage,
+                        online: member.presenceState == .onLine ? true : false)
                 }
             }
             .frame(height: height)
@@ -33,7 +34,7 @@ struct MugShotGridView: View {
 struct MugShotGridView_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            MugShotGridView(photos: [.sample, .sample2, .sample3, .sample, .sample2, .sample3, .sample, .sample2, .sample3, .sample, .sample2, .sample3])
+            MugShotGridView(members: [.sample, .sample2, .sample3, .sample, .sample2, .sample3, .sample, .sample2, .sample3, .sample, .sample2, .sample3])
         )
         .padding()
         .previewLayout(.sizeThatFits)

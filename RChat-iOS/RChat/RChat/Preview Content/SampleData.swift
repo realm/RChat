@@ -24,10 +24,11 @@ extension Date {
 }
 
 extension User {
-    convenience init(username: String, userPreferences: UserPreferences, conversations: [Conversation]) {
+    convenience init(username: String, presence: Presence, userPreferences: UserPreferences, conversations: [Conversation]) {
         self.init()
         partition = "user=\(_id)"
         self.userName = username
+        self.presence = presence.asString
         self.userPreferences = userPreferences
         self.location.append(-0.10689139236939127 + Double.random(in: -10..<10))
         self.location.append(51.506520923981554 + Double.random(in: -10..<10))
@@ -41,13 +42,13 @@ extension User {
 extension User: Samplable {
     static var samples: [User] { [sample, sample2, sample3] }
     static var sample: User {
-        User(username: "rod@contoso.com", userPreferences: .sample, conversations: [.sample, .sample2, .sample3])
+        User(username: "rod@contoso.com", presence: .onLine, userPreferences: .sample, conversations: [.sample, .sample2, .sample3])
     }
     static var sample2: User {
-        User(username: "jane@contoso.com", userPreferences: .sample2, conversations: [.sample, .sample2])
+        User(username: "jane@contoso.com", presence: .offLine, userPreferences: .sample2, conversations: [.sample, .sample2])
     }
     static var sample3: User {
-        User(username: "freddy@contoso.com", userPreferences: .sample3, conversations: [.sample, .sample3])
+        User(username: "freddy@contoso.com", presence: .hidden, userPreferences: .sample3, conversations: [.sample, .sample3])
     }
 }
 
