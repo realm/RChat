@@ -12,7 +12,7 @@ import RealmSwift
 struct SetProfileView: View {
     @EnvironmentObject var state: AppState
     @AppStorage("shouldShareLocation") var shouldShareLocation = false
-    @AppStorage("shouldSharePresence") var shouldSharePresence = false
+    @AppStorage("shouldSharePresence") var shouldSharePresence = true
     
     @Binding var isPresented: Bool
 

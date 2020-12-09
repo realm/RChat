@@ -41,6 +41,8 @@ struct LoginView: View {
             Spacer()
         }
         .padding(.horizontal, Dimensions.padding)
+        .navigationBarTitle("Log In", displayMode: .inline)
+        .navigationBarItems(trailing: EmptyView())
     }
 
     private func login(username: String, password: String) {

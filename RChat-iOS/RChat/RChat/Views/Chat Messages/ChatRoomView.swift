@@ -54,6 +54,7 @@ struct ChatRoomView: View {
                 LastSync(date: lastSync)
             }
         }
+        .navigationBarTitle(conversation?.displayName ?? "Chat", displayMode: .inline)
         .padding(.horizontal, Dimensions.padding)
         .onAppear { loadChatRoom() }
         .onDisappear { closeChatRoom() }

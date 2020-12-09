@@ -48,6 +48,7 @@ struct SignupView: View {
             }
         }
         .padding(.horizontal, Dimensions.padding)
+        .navigationBarTitle("Register", displayMode: .inline)
         .onAppear { state.error = nil }
     }
 
