@@ -32,7 +32,8 @@ struct ConversationListView: View {
                             showConversation.toggle()
                         }) {
                         ConversationCardView(
-                            conversation: conversation)
+                            conversation: conversation,
+                            lastSync: lastSync)
                         }
                     }
                 }
@@ -46,13 +47,18 @@ struct ConversationListView: View {
                 destination: ChatRoomView(conversation: conversation),
                 isActive: $showConversation) { EmptyView() }
         }
-        .onAppear { watchUserRealm() }
+        .onAppear { watchRealms() }
         .onDisappear { stopWatching() }
     }
     
-    func watchUserRealm() {
-        if let realm = state.userRealm {
-            realmUserNotificationToken = realm.observe {_, _ in
+    func watchRealms() {
+        if let userRealm = state.userRealm {
+            realmUserNotificationToken = userRealm.observe {_, _ in
+                lastSync = Date()
+            }
+        }
+        if let chatsterRealm = state.chatsterRealm {
+            realmChatsterNotificationToken = chatsterRealm.observe { _, _ in
                 lastSync = Date()
             }
         }

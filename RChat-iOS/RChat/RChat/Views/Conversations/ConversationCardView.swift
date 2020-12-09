@@ -12,6 +12,7 @@ struct ConversationCardView: View {
     @EnvironmentObject var state: AppState
 
     let conversation: Conversation?
+    var lastSync: Date?
     
     @State var shouldIndicateActivity = false
     
