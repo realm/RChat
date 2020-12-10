@@ -13,23 +13,17 @@ struct LogoutButton: View {
     
     var action: () -> Void = {}
     
-    @AppStorage("shouldSharePresence") var shouldSharePresence = false
-    
     var body: some View {
         Button("Log Out") {
             state.shouldIndicateActivity = true
-            if shouldSharePresence {
-                if let realm = state.userRealm {
-                    do {
-                        try realm.write {
-                            state.user?.presenceState = .offLine
-                        }
-                    } catch {
-                        state.error = "Unable to open Realm write transaction"
+            if let realm = state.userRealm {
+                do {
+                    try realm.write {
+                        state.user?.presenceState = .offLine
                     }
-                    logout()
+                } catch {
+                    state.error = "Unable to open Realm write transaction"
                 }
-            } else {
                 logout()
             }
         }

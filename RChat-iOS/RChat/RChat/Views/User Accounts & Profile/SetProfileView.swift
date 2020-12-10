@@ -12,7 +12,6 @@ import RealmSwift
 struct SetProfileView: View {
     @EnvironmentObject var state: AppState
     @AppStorage("shouldShareLocation") var shouldShareLocation = false
-    @AppStorage("shouldSharePresence") var shouldSharePresence = true
     
     @Binding var isPresented: Bool
 
@@ -45,9 +44,6 @@ struct SetProfileView: View {
                         _ = LocationHelper.currentLocation
                     }
                 }
-                Toggle(isOn: $shouldSharePresence, label: {
-                    Text("Share Presence")
-                })
                 OnlineAlertSettings()
             }
         }
@@ -78,7 +74,7 @@ struct SetProfileView: View {
                         }
                         state.user?.userPreferences?.avatarImage = newPhoto
                     }
-                    state.user?.presenceState = shouldSharePresence ? .onLine : .hidden
+                    state.user?.presenceState = .onLine
                 }
             } catch {
                 state.error = "Unable to open Realm write transaction"

@@ -10,7 +10,6 @@ import SwiftUI
 import Combine
 
 class AppState: ObservableObject {
-    @AppStorage("shouldSharePresence") var shouldSharePresence = false
     
     @Published var error: String?
     @Published var busyCount = 0
@@ -118,7 +117,7 @@ class AppState: ObservableObject {
                 self.user = realm.objects(User.self).first
                 do {
                     try realm.write {
-                        self.user?.presenceState = self.shouldSharePresence ? .onLine : .hidden
+                        self.user?.presenceState = .onLine
                     }
                 } catch {
                     self.error = "Unable to open Realm write transaction"

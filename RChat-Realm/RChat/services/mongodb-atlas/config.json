@@ -11,8 +11,26 @@
                 "type": "string",
                 "required": true,
                 "permissions": {
-                    "read": {},
-                    "write": {}
+                    "read": {
+                        "%%true": {
+                            "%function": {
+                                "arguments": [
+                                    "%%partition"
+                                ],
+                                "name": "canReadPartition"
+                            }
+                        }
+                    },
+                    "write": {
+                        "%%true": {
+                            "%function": {
+                                "arguments": [
+                                    "%%partition"
+                                ],
+                                "name": "canWritePartition"
+                            }
+                        }
+                    }
                 }
             }
         },
