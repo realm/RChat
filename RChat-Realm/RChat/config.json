@@ -1,15 +1,11 @@
 {
     "config_version": 20200603,
-    "name": "RChat",
+    "name": "RChat2",
     "location": "US-VA",
     "deployment_model": "GLOBAL",
     "security": {},
     "custom_user_data_config": {
-        "enabled": false,
-        "mongo_service_name": "mongodb-atlas",
-        "database_name": "RChat",
-        "collection_name": "User",
-        "user_id_field": "_id"
+        "enabled": false
     },
     "sync": {
         "development_mode_enabled": false

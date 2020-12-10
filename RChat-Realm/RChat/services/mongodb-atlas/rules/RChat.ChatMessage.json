@@ -32,6 +32,12 @@
                 ],
                 "title": "Photo"
             },
+            "location": {
+                "bsonType": "array",
+                "items": {
+                    "bsonType": "double"
+                }
+            },
             "partition": {
                 "bsonType": "string"
             },
@@ -40,12 +46,6 @@
             },
             "timestamp": {
                 "bsonType": "date"
-            },
-            "whoHasRead": {
-                "bsonType": "array",
-                "items": {
-                    "bsonType": "string"
-                }
             }
         },
         "required": [

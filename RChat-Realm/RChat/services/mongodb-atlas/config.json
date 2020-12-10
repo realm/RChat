@@ -6,14 +6,13 @@
         "readPreference": "primary",
         "sync": {
             "state": "enabled",
-            "database_name": "RChat",
             "partition": {
                 "key": "partition",
                 "type": "string",
                 "required": true,
                 "permissions": {
-                    "read": true,
-                    "write": true
+                    "read": {},
+                    "write": {}
                 }
             }
         },

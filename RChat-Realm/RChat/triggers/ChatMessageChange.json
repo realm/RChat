@@ -1,21 +1,21 @@
 {
-    "name": "UserCollectionWrite",
+    "name": "ChatMessageChange",
     "type": "DATABASE",
     "config": {
         "operation_types": [
             "INSERT",
+            "UPDATE",
             "DELETE",
-            "REPLACE",
-            "UPDATE"
+            "REPLACE"
         ],
         "database": "RChat",
-        "collection": "User",
+        "collection": "ChatMessage",
         "service_name": "mongodb-atlas",
         "match": {},
         "project": {},
         "full_document": true,
-        "unordered": false
+        "unordered": true
     },
-    "function_name": "userDocWrittenTo",
+    "function_name": "chatMessageChange",
     "disabled": false
 }

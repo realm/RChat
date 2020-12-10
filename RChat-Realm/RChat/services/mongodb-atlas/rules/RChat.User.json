@@ -52,12 +52,6 @@
             "lastSeenAt": {
                 "bsonType": "date"
             },
-            "location": {
-                "bsonType": "array",
-                "items": {
-                    "bsonType": "double"
-                }
-            },
             "partition": {
                 "bsonType": "string"
             },

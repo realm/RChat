@@ -1,0 +1,6 @@
+{
+    "can_evaluate": {},
+    "name": "chatMessageChange",
+    "private": true,
+    "run_as_system": true
+}

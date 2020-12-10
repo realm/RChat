@@ -6,6 +6,8 @@ exports = function(changeEvent) {
   const user = changeEvent.fullDocument;
   let conversationsChanged = false;
   
+  // TODO: If it's an update, then check what's changed and only take the actions needed
+  
   console.log(`Mirroring user for docId=${docId}. operationType = ${changeEvent.operationType}`);
   switch (changeEvent.operationType) {
     case "insert":
