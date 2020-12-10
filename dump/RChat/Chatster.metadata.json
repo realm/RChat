@@ -1,0 +1,1 @@
+{"options":{"recordPreImages":true},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"unique":true,"key":{"userName":{"$numberInt":"1"}},"name":"userName_1"},{"v":{"$numberInt":"2"},"key":{"partition":{"$numberInt":"1"}},"name":"partition_1"}],"uuid":"3a21e183ea0c4941b74815b28619c4f0","collectionName":"Chatster"}
