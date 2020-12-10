@@ -127,9 +127,13 @@ struct ChatRoomView: View {
         return chatsterRealm.objects(Chatster.self).filter("userName = %@", userName).first
     }
     
-    func sendMessage(text: String, photo: Photo?) {
+    func sendMessage(text: String, photo: Photo?, location: [Double]) {
         if let conversation = conversation {
-            let chatMessage = ChatMessage(conversationId: conversation.id, author: state.user?.userName ?? "Unknown", text: text, image: photo)
+            let chatMessage = ChatMessage(conversationId: conversation.id,
+                                          author: state.user?.userName ?? "Unknown",
+                                          text: text,
+                                          image: photo,
+                                          location: location)
             if let chatRealm = chatRealm {
                 do {
                     try chatRealm.write {

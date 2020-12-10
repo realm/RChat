@@ -7,6 +7,11 @@
 
 import CoreLocation
 
+struct MyAnnotationItem: Identifiable {
+    var coordinate: CLLocationCoordinate2D
+    let id = UUID()
+}
+
 class LocationHelper: NSObject, ObservableObject {
     
     static let shared = LocationHelper()

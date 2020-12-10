@@ -12,7 +12,6 @@ class User: Object {
     @objc dynamic var partition = "" // "user=_id"
     @objc dynamic var userName = ""
     @objc dynamic var userPreferences: UserPreferences?
-    let location = List<Double>()
     @objc dynamic var lastSeenAt: Date?
     let conversations = List<Conversation>()
     @objc dynamic var presence = "Off-Line"

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>RChat would like to record your location when you post a chat message. You can turn this off in your profile.</string>
+	<string>Your location will only be shared when you explicitly add it to a chat message</string>
 	<key>NSCameraUsageDescription</key>
 	<string>You have the chance to include photos in your messages</string>
 	<key>NSPhotoLibraryUsageDescription</key>

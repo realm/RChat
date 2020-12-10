@@ -47,6 +47,10 @@
 		49012B98256D8FDD00C3614B /* BlankPersonIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */; };
 		49012BA5256E83EB00C3614B /* OnlineAlertSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */; };
 		4910B02C257FF91F00F274F0 /* SearchBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4910B02B257FF91F00F274F0 /* SearchBox.swift */; };
+		491269AF25822D800083C817 /* MapThumbnailWithExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491269AE25822D800083C817 /* MapThumbnailWithExpand.swift */; };
+		491269B425822FB30083C817 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491269B325822FB30083C817 /* MapView.swift */; };
+		491C1F9425812F77000EF408 /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C1F9325812F77000EF408 /* LocationButton.swift */; };
+		491C1F9A25813E5B000EF408 /* MapThumbnailWithDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C1F9925813E5B000EF408 /* MapThumbnailWithDelete.swift */; };
 		4950E100256FAE0600FA7E26 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */; };
 		4950E108256FD61400FA7E26 /* ConversationCardContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */; };
 		4950E10D256FD9F300FA7E26 /* MugShotGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */; };
@@ -140,6 +144,10 @@
 		49012B97256D8FDD00C3614B /* BlankPersonIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankPersonIconView.swift; sourceTree = "<group>"; };
 		49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineAlertSettings.swift; sourceTree = "<group>"; };
 		4910B02B257FF91F00F274F0 /* SearchBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBox.swift; sourceTree = "<group>"; };
+		491269AE25822D800083C817 /* MapThumbnailWithExpand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapThumbnailWithExpand.swift; sourceTree = "<group>"; };
+		491269B325822FB30083C817 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		491C1F9325812F77000EF408 /* LocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
+		491C1F9925813E5B000EF408 /* MapThumbnailWithDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapThumbnailWithDelete.swift; sourceTree = "<group>"; };
 		4950E0FF256FAE0600FA7E26 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		4950E107256FD61400FA7E26 /* ConversationCardContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCardContentsView.swift; sourceTree = "<group>"; };
 		4950E10C256FD9F300FA7E26 /* MugShotGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MugShotGridView.swift; sourceTree = "<group>"; };
@@ -302,6 +310,7 @@
 		49012A9F256BEEAB00C3614B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				491C1F9825813E41000EF408 /* Maps */,
 				49CF1C972579242700DF251E /* Buttons */,
 				49012B3E256D144F00C3614B /* Pictures */,
 				49012AA0256BEEC500C3614B /* LabeledText.swift */,
@@ -367,6 +376,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		491C1F9825813E41000EF408 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				491C1F9925813E5B000EF408 /* MapThumbnailWithDelete.swift */,
+				491269AE25822D800083C817 /* MapThumbnailWithExpand.swift */,
+				491269B325822FB30083C817 /* MapView.swift */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
 		499E1E94256ED5F30036614F /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +417,7 @@
 				49CF1C982579246600DF251E /* CameraButton.swift */,
 				49CF1CA02579258A00DF251E /* AttachButton.swift */,
 				49CF1CAA25792AB600DF251E /* DeleteButton.swift */,
+				491C1F9325812F77000EF408 /* LocationButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -702,6 +722,7 @@
 				49012B58256D2BF600C3614B /* UIImage+Thumbnail.swift in Sources */,
 				49012B24256C4F4F00C3614B /* SampleData.swift in Sources */,
 				49012AB8256BEF6E00C3614B /* CallToActionButton.swift in Sources */,
+				491C1F9425812F77000EF408 /* LocationButton.swift in Sources */,
 				49012AC2256BEF9200C3614B /* SwiftUIView.swift in Sources */,
 				499E1E97256ED6410036614F /* ConversationListView.swift in Sources */,
 				49D1C12E257AA182007343ED /* ChatBubbleView.swift in Sources */,
@@ -711,6 +732,7 @@
 				499E1EA2256FAACC0036614F /* ConversationCardView.swift in Sources */,
 				49012B75256D658000C3614B /* AvatarButton.swift in Sources */,
 				49012B45256D162D00C3614B /* Photo.swift in Sources */,
+				491C1F9A25813E5B000EF408 /* MapThumbnailWithDelete.swift in Sources */,
 				4950E100256FAE0600FA7E26 /* Thumbnail.swift in Sources */,
 				49012AC7256BEFAB00C3614B /* OpaqueProgressView.swift in Sources */,
 				49CF1CA6257926F000DF251E /* ThumbnailWithDelete.swift in Sources */,
@@ -725,6 +747,7 @@
 				49CF1CA12579258A00DF251E /* AttachButton.swift in Sources */,
 				498344A4257E395900E7BAFF /* ThumbnailWithExpand.swift in Sources */,
 				49012AF7256BF59200C3614B /* ChatMessage.swift in Sources */,
+				491269B425822FB30083C817 /* MapView.swift in Sources */,
 				496F1AE02577EC1F00B946A9 /* ThumbNailView.swift in Sources */,
 				49012AA1256BEEC500C3614B /* LabeledText.swift in Sources */,
 				499E1E8A256EB6F50036614F /* Chatster.swift in Sources */,
@@ -739,6 +762,7 @@
 				49012B40256D154400C3614B /* AvatarThumbNailView.swift in Sources */,
 				49012AA6256BEEFA00C3614B /* InputField.swift in Sources */,
 				49012B05256C23CB00C3614B /* LoginView.swift in Sources */,
+				491269AF25822D800083C817 /* MapThumbnailWithExpand.swift in Sources */,
 				49CF1C992579246600DF251E /* CameraButton.swift in Sources */,
 				49012A2F256BEA4C00C3614B /* RChatApp.swift in Sources */,
 				49CF1CAB25792AB600DF251E /* DeleteButton.swift in Sources */,

@@ -30,8 +30,6 @@ extension User {
         self.userName = username
         self.presence = presence.asString
         self.userPreferences = userPreferences
-        self.location.append(-0.10689139236939127 + Double.random(in: -10..<10))
-        self.location.append(51.506520923981554 + Double.random(in: -10..<10))
         self.lastSeenAt = Date.random
         conversations.forEach { conversation in
             self.conversations.append(conversation)
@@ -148,27 +146,35 @@ extension Photo: Samplable {
 }
 
 extension ChatMessage {
-    convenience init(conversation: Conversation, author: User, text: String = "This is the text for the message", includePhoto: Bool = false, readers: [User]) {
+    convenience init(conversation: Conversation,
+                     author: User,
+                     text: String = "This is the text for the message",
+                     includePhoto: Bool = false,
+                     includeLocation: Bool = false) {
         self.init()
         partition = "conversation=\(conversation.id)"
         self.author = author.userName
         self.text = text
         if includePhoto { self.image = Photo.spud }
         self.timestamp = Date.random
+        if includeLocation {
+            self.location.append(-0.10689139236939127 + Double.random(in: -10..<10))
+            self.location.append(51.506520923981554 + Double.random(in: -10..<10))
+        }
     }
 }
 
 extension ChatMessage: Samplable {
     static var samples: [ChatMessage] { [sample, sample2, sample3, sample20, sample22, sample23, sample30, sample32, sample33] }
-    static var sample: ChatMessage { ChatMessage(conversation: .sample, author: .sample, readers: [.sample2]) }
-    static var sample2: ChatMessage { ChatMessage(conversation: .sample, author: .sample2, readers: [.sample, .sample3]) }
-    static var sample3: ChatMessage { ChatMessage(conversation: .sample, author: .sample3, text: "Thoughts on this spud?", includePhoto: true, readers: [.sample3])}
-    static var sample20: ChatMessage { ChatMessage(conversation: .sample2, author: .sample, readers: [.sample2]) }
-    static var sample22: ChatMessage { ChatMessage(conversation: .sample2, author: .sample2, readers: [.sample, .sample3]) }
-    static var sample23: ChatMessage { ChatMessage(conversation: .sample2, author: .sample3, text: "Fancy trying this?", includePhoto: true, readers: [.sample3])}
-    static var sample30: ChatMessage { ChatMessage(conversation: .sample3, author: .sample, readers: [.sample2]) }
-    static var sample32: ChatMessage { ChatMessage(conversation: .sample3, author: .sample2, readers: [.sample, .sample3]) }
-    static var sample33: ChatMessage { ChatMessage(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's space for it all to fit in", includePhoto: true, readers: [.sample3])}
+    static var sample: ChatMessage { ChatMessage(conversation: .sample, author: .sample) }
+    static var sample2: ChatMessage { ChatMessage(conversation: .sample, author: .sample2, includePhoto: true) }
+    static var sample3: ChatMessage { ChatMessage(conversation: .sample, author: .sample3, text: "Thoughts on this spud?", includePhoto: true, includeLocation: true)}
+    static var sample20: ChatMessage { ChatMessage(conversation: .sample2, author: .sample) }
+    static var sample22: ChatMessage { ChatMessage(conversation: .sample2, author: .sample2, includePhoto: true) }
+    static var sample23: ChatMessage { ChatMessage(conversation: .sample2, author: .sample3, text: "Fancy trying this?", includePhoto: true, includeLocation: true)}
+    static var sample30: ChatMessage { ChatMessage(conversation: .sample3, author: .sample) }
+    static var sample32: ChatMessage { ChatMessage(conversation: .sample3, author: .sample2, includePhoto: true) }
+    static var sample33: ChatMessage { ChatMessage(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's space for it all to fit in", includePhoto: true, includeLocation: true)}
 }
 
 extension Realm: Samplable {

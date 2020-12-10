@@ -7,9 +7,12 @@
 
 import SwiftUI
 import UIKit
+import MapKit
 
 struct ChatInputBox: View {
-    var send: (String, Photo?) -> Void
+    @AppStorage("shouldShareLocation") var shouldShareLocation = false
+    
+    var send: (String, Photo?, [Double]) -> Void
     var focusAction: () -> Void = {}
     
     private enum Dimensions {
@@ -23,6 +26,7 @@ struct ChatInputBox: View {
     
     @State var photo: Photo?
     @State var chatText = ""
+    @State var location =  [Double]()
     
     var isEmpty: Bool { photo == nil && chatText == "" }
     
@@ -31,6 +35,9 @@ struct ChatInputBox: View {
             HStack {
                 if let photo = photo {
                     ThumbnailWithDelete(photo: photo, action: deletePhoto)
+                }
+                if location.count == 2 {
+                    MapThumbnailWithDelete(location: location, action: deleteMap)
                 }
                 TextEditor(text: $chatText)
                     .onTapGesture(perform: focusAction)
@@ -41,6 +48,7 @@ struct ChatInputBox: View {
             }
             HStack {
                 Spacer()
+                LocationButton(action: addLocation, active: shouldShareLocation && location.count == 0)
                 AttachButton(action: addAttachment, active: photo == nil)
                 CameraButton(action: takePhoto, active: photo == nil)
                 SendButton(action: sendChat, active: !isEmpty)
@@ -49,6 +57,11 @@ struct ChatInputBox: View {
         }
         .padding(Dimensions.padding)
         .onAppear(perform: { clearBackground() })
+    }
+    
+    func addLocation() {
+        let location = LocationHelper.currentLocation
+        self.location = [location.longitude, location.latitude]
     }
     
     func takePhoto() {
@@ -69,10 +82,15 @@ struct ChatInputBox: View {
         photo = nil
     }
     
+    func deleteMap() {
+        location = []
+    }
+    
     func sendChat() {
-        send(chatText, photo)
+        send(chatText, photo, location)
         photo = nil
         chatText = ""
+        location = []
     }
     
     func clearBackground() {
@@ -84,11 +102,11 @@ struct ChatInputBox_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
             Group {
-                ChatInputBox { (_, _) in }
-                ChatInputBox(send: { (_, _) in }, photo: .sample)
+                ChatInputBox { (_, _, _) in }
+                ChatInputBox(send: { (_, _, _) in }, photo: .sample, location: [])
+                ChatInputBox(send: { (_, _, _) in }, photo: .sample, location: [-0.10689139236939127, 51.506520923981554])
             }
         )
         .previewLayout(.sizeThatFits)
-        .padding()
     }
 }
