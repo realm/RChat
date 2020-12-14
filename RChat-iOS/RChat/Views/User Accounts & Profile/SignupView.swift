@@ -66,6 +66,7 @@ struct SignupView: View {
                     break
                 case .failure(let error):
                     self.state.error = error.localizedDescription
+                    state.shouldIndicateActivity = false
                 }
             }, receiveValue: {
                 self.state.error = nil

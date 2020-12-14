@@ -17,7 +17,7 @@ struct ButtonTemplate: View {
     private enum Dimensions {
         static let buttonSize: CGFloat = 60
         static let activeOpactity = 0.8
-        static let disabledOpactity = 0.8
+        static let disabledOpactity = 0.2
     }
     
     var body: some View {
