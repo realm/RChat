@@ -1,6 +1,6 @@
 {
     "config_version": 20200603,
-    "name": "RChat2",
+    "name": "RChat",
     "location": "US-VA",
     "deployment_model": "GLOBAL",
     "security": {},
