@@ -26,4 +26,4 @@ cd ../../RChat-iOS
 pod install --repo-update
 open RChat.xcworkspace
 ```
-7. Update `RChatAoo.swift` with your Realm App Id and then build
+7. Update `RChatApp.swift` with your Realm App Id and then build
