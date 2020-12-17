@@ -23,7 +23,6 @@ realm-cli import # Then answer prompts, naming the app RChat
 1. Open the iOS project
 ```
 cd ../../RChat-iOS
-pod install --repo-update
-open RChat.xcworkspace
+open RChat.xcodeproj
 ```
 7. Update `RChatApp.swift` with your Realm App Id and then build
