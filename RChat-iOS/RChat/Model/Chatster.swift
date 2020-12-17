@@ -5,6 +5,7 @@
 //  Created by Andrew Morgan on 25/11/2020.
 //
 
+import Foundation
 import RealmSwift
 
 class Chatster: Object {

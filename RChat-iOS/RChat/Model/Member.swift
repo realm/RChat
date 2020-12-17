@@ -5,6 +5,7 @@
 //  Created by Andrew Morgan on 01/12/2020.
 //
 
+import Foundation
 import RealmSwift
 
 class Member: EmbeddedObject, Identifiable {
