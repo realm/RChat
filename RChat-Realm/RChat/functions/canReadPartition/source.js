@@ -16,7 +16,7 @@ exports = function(partition) {
     console.log(`Partition key = ${partitionKey}; partition value = ${partitionValue}`);
   } else {
     console.log(`Couldn't extract the partition key/value from ${partition}`);
-    return;
+    return false;
   }
   
    switch (partitionKey) {
