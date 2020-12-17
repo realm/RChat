@@ -64,8 +64,7 @@ struct ChatRoomView: View {
         if let user = app.currentUser, let conversation = conversation {
             scrollToBottom()
             self.state.shouldIndicateActivity = true
-            var realmConfig = user.configuration(partitionValue: "conversation=\(conversation.id)")
-            realmConfig.objectTypes = [ChatMessage.self, Photo.self]
+            let realmConfig = user.configuration(partitionValue: "conversation=\(conversation.id)")
             Realm.asyncOpen(configuration: realmConfig)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { result in

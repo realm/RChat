@@ -62,8 +62,7 @@ class AppState: ObservableObject {
             .receive(on: DispatchQueue.main)
             .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
                 self.shouldIndicateActivity = true
-                var realmConfig = user.configuration(partitionValue: "all-users=all-the-users")
-                realmConfig.objectTypes = [Chatster.self, Photo.self]
+                let realmConfig = user.configuration(partitionValue: "all-users=all-the-users")
                 return Realm.asyncOpen(configuration: realmConfig)
             }
             .receive(on: DispatchQueue.main)
@@ -93,8 +92,7 @@ class AppState: ObservableObject {
             .receive(on: DispatchQueue.main)
             .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
                 self.shouldIndicateActivity = true
-                var realmConfig = user.configuration(partitionValue: "user=\(user.id)")
-                realmConfig.objectTypes = [User.self, UserPreferences.self, Conversation.self, Photo.self, Member.self]
+                let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
                 return Realm.asyncOpen(configuration: realmConfig)
             }
             .receive(on: DispatchQueue.main)
