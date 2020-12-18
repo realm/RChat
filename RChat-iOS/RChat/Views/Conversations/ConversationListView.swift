@@ -16,6 +16,7 @@ struct ConversationListView: View {
     @State var lastSync: Date?
     @State private var conversation: Conversation?
     @State var showConversation = false
+    @State var showingAddChat = false
     
     private let animationDuration = 0.5
     private let sortDescriptors = [
@@ -39,6 +40,10 @@ struct ConversationListView: View {
                     }
                 }
                 .animation(.easeIn(duration: animationDuration))
+                Button(action: { showingAddChat.toggle() }) {
+                    Text("New Chat Room")
+                }
+                .disabled(showingAddChat)
             }
             Spacer()
             if let lastSync = lastSync {
@@ -47,6 +52,12 @@ struct ConversationListView: View {
             NavigationLink(
                 destination: ChatRoomView(conversation: conversation),
                 isActive: $showConversation) { EmptyView() }
+        }
+        .sheet(isPresented: $showingAddChat) {
+            // TODO: Not clear why we need to pass in the environmentObject, appears that it may
+            // be a bug – should test again in the future.
+            NewConversationView()
+                .environmentObject(state)
         }
         .onAppear { watchRealms() }
         .onDisappear { stopWatching() }

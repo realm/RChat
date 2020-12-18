@@ -29,13 +29,8 @@ struct ContentView: View {
                             SetProfileView(isPresented: $showingProfileView)
                         } else {
                             ConversationListView()
-                            NavigationLink(
-                                destination: NewConversationView(),
-                                isActive: $showConversation) { EmptyView() }
                             .navigationBarTitle("Chats", displayMode: .inline)
                             .navigationBarItems(
-                                leading: state.loggedIn && !state.shouldIndicateActivity ? Button("New Chat") {
-                                    showConversation.toggle() } : nil,
                                 trailing: state.loggedIn && !state.shouldIndicateActivity ? UserAvatarView(
                                     photo: state.user?.userPreferences?.avatarImage,
                                     online: true) { showingProfileView.toggle() } : nil
@@ -55,6 +50,7 @@ struct ContentView: View {
                 }
             }
         }
+        .currentDeviceNavigationViewStyle(alwaysStacked: !state.loggedIn)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
             if let user = state.user {
                 if user.presenceState == .onLine && shouldRemindOnlineUser {
@@ -106,6 +102,17 @@ struct ContentView: View {
     }
 }
 
+
+extension View {
+    public func currentDeviceNavigationViewStyle(alwaysStacked: Bool) -> AnyView {
+        if UIDevice.current.userInterfaceIdiom == .pad && !alwaysStacked {
+            return AnyView(self.navigationViewStyle(DefaultNavigationViewStyle()))
+        } else {
+            return AnyView(self.navigationViewStyle(StackNavigationViewStyle()))
+        }
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
@@ -113,7 +120,7 @@ struct ContentView_Previews: PreviewProvider {
                 ContentView()
                     .environmentObject(AppState())
                 Landscape(ContentView()
-                            .environmentObject(AppState()))
+                    .environmentObject(AppState()))
             }
         )
     }
