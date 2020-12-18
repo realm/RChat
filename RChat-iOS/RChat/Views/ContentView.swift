@@ -29,13 +29,8 @@ struct ContentView: View {
                             SetProfileView(isPresented: $showingProfileView)
                         } else {
                             ConversationListView()
-//                            NavigationLink(
-//                                destination: NewConversationView(),
-//                                isActive: $showConversation) { EmptyView() }
                             .navigationBarTitle("Chats", displayMode: .inline)
                             .navigationBarItems(
-//                                leading: state.loggedIn && !state.shouldIndicateActivity ? Button("New Chat") {
-//                                    showConversation.toggle() } : nil,
                                 trailing: state.loggedIn && !state.shouldIndicateActivity ? UserAvatarView(
                                     photo: state.user?.userPreferences?.avatarImage,
                                     online: true) { showingProfileView.toggle() } : nil

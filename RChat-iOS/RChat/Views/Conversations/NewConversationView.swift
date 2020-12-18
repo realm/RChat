@@ -12,8 +12,6 @@ struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     @Environment(\.presentationMode) var presentationMode
     
-    var handleNewConversation: (_: Conversation) -> Void = {_ in}
-    
     @State private var name = ""
     @State private var members = [String]()
     @State private var candidateMember = ""
@@ -57,9 +55,6 @@ struct NewConversationView: View {
                     Text("Error: \(error)")
                         .foregroundColor(Color.red)
                 }
-//                if state.shouldIndicateActivity {
-//                    OpaqueProgressView("Adding Team Member")
-//                }
             }
             .padding()
             .navigationBarTitle("New Chat", displayMode: .inline)
@@ -136,18 +131,15 @@ struct NewConversationView: View {
             return
         }
         state.shouldIndicateActivity = false
-        handleNewConversation(conversation)
         presentationMode.wrappedValue.dismiss()
     }
 }
 
 struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
-//        NavigationView {
-            AppearancePreviews(
-                NewConversationView()
-                    .environmentObject(AppState.sample)
-            )
-//        }
+        AppearancePreviews(
+            NewConversationView()
+                .environmentObject(AppState.sample)
+        )
     }
 }

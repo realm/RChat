@@ -49,9 +49,6 @@ struct ConversationListView: View {
             if let lastSync = lastSync {
                 LastSync(date: lastSync)
             }
-//            NavigationLink(
-//                destination: NewConversationView(),
-//                isActive: $showingAddChat) { EmptyView() }
             NavigationLink(
                 destination: ChatRoomView(conversation: conversation),
                 isActive: $showConversation) { EmptyView() }
@@ -59,16 +56,11 @@ struct ConversationListView: View {
         .sheet(isPresented: $showingAddChat) {
             // TODO: Not clear why we need to pass in the environmentObject, appears that it may
             // be a bug – should test again in the future.
-            NewConversationView(handleNewConversation: openConversation)
+            NewConversationView()
                 .environmentObject(state)
         }
         .onAppear { watchRealms() }
         .onDisappear { stopWatching() }
-    }
-    
-    private func openConversation(_ conversation: Conversation) {
-//        self.conversation = conversation
-//        showConversation.toggle()
     }
     
     private func watchRealms() {
