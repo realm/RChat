@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A28D338258B9ABC005D68E3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D337258B9ABC005D68E3 /* Realm */; };
 		0A28D33A258B9ABC005D68E3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D339258B9ABC005D68E3 /* RealmSwift */; };
+		0A4EA3B4258D32960003F0E4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EA3B3258D32960003F0E4 /* CheckBox.swift */; };
 		49012A2F256BEA4C00C3614B /* RChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012A2E256BEA4C00C3614B /* RChatApp.swift */; };
 		49012A31256BEA4C00C3614B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012A30256BEA4C00C3614B /* ContentView.swift */; };
 		49012A33256BEA4E00C3614B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49012A32256BEA4E00C3614B /* Assets.xcassets */; };
@@ -29,7 +30,6 @@
 		49012AF7256BF59200C3614B /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012AF6256BF59200C3614B /* ChatMessage.swift */; };
 		49012AFC256BF90100C3614B /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012AFB256BF90100C3614B /* Conversation.swift */; };
 		49012B05256C23CB00C3614B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B04256C23CB00C3614B /* LoginView.swift */; };
-		49012B0D256C23F800C3614B /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B0C256C23F800C3614B /* SignupView.swift */; };
 		49012B12256C240F00C3614B /* LogoutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B11256C240F00C3614B /* LogoutButton.swift */; };
 		49012B24256C4F4F00C3614B /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B23256C4F4F00C3614B /* SampleData.swift */; };
 		49012B29256C678F00C3614B /* UserProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B28256C678E00C3614B /* UserProfileButton.swift */; };
@@ -92,6 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A4EA3B3258D32960003F0E4 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		49012A2B256BEA4C00C3614B /* RChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49012A2E256BEA4C00C3614B /* RChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RChatApp.swift; sourceTree = "<group>"; };
 		49012A30256BEA4C00C3614B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,7 +119,6 @@
 		49012AF6256BF59200C3614B /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		49012AFB256BF90100C3614B /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		49012B04256C23CB00C3614B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		49012B0C256C23F800C3614B /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		49012B11256C240F00C3614B /* LogoutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButton.swift; sourceTree = "<group>"; };
 		49012B23256C4F4F00C3614B /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		49012B28256C678E00C3614B /* UserProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileButton.swift; sourceTree = "<group>"; };
@@ -304,6 +304,7 @@
 				49012B8D256D8A7700C3614B /* OnOffCircleView.swift */,
 				49F00E882571129600ADC23F /* LastSync.swift */,
 				4910B02B257FF91F00F274F0 /* SearchBox.swift */,
+				0A4EA3B3258D32960003F0E4 /* CheckBox.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -320,7 +321,6 @@
 			isa = PBXGroup;
 			children = (
 				49012B04256C23CB00C3614B /* LoginView.swift */,
-				49012B0C256C23F800C3614B /* SignupView.swift */,
 				49012B11256C240F00C3614B /* LogoutButton.swift */,
 				49012B28256C678E00C3614B /* UserProfileButton.swift */,
 				49012B6F256D527800C3614B /* SetProfileView.swift */,
@@ -658,7 +658,6 @@
 				49D1C12E257AA182007343ED /* ChatBubbleView.swift in Sources */,
 				49012AFC256BF90100C3614B /* Conversation.swift in Sources */,
 				49012A31256BEA4C00C3614B /* ContentView.swift in Sources */,
-				49012B0D256C23F800C3614B /* SignupView.swift in Sources */,
 				499E1EA2256FAACC0036614F /* ConversationCardView.swift in Sources */,
 				49012B75256D658000C3614B /* AvatarButton.swift in Sources */,
 				49012B45256D162D00C3614B /* Photo.swift in Sources */,
@@ -699,6 +698,7 @@
 				49012B98256D8FDD00C3614B /* BlankPersonIconView.swift in Sources */,
 				498CD5A425795B24007396DC /* ChatRoomView.swift in Sources */,
 				49012B8E256D8A7700C3614B /* OnOffCircleView.swift in Sources */,
+				0A4EA3B4258D32960003F0E4 /* CheckBox.swift in Sources */,
 				497EF90D2576719B0045A5EA /* Member.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

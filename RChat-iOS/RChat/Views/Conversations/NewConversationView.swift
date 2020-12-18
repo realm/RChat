@@ -12,6 +12,8 @@ struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     @Environment(\.presentationMode) var presentationMode
     
+    var handleNewConversation: (_: Conversation) -> Void = {_ in}
+    
     @State private var name = ""
     @State private var members = [String]()
     @State private var candidateMember = ""
@@ -22,39 +24,52 @@ struct NewConversationView: View {
     }
     
     var body: some View {
-        VStack {
-            InputField(title: "Chat Name", text: $name)
-            CaptionLabel(title: "Add Members")
-            SearchBox(searchText: $candidateMember, onCommit: searchUsers)
-            List {
-                ForEach(candidateMembers, id: \.self) { candidateMember in
-                    Button(action: { addMember(candidateMember) }) {
-                        HStack {
-                            Text(candidateMember)
-                            Spacer()
-                            Image(systemName: "plus.circle.fill")
-                            .renderingMode(.original)
+        NavigationView {
+            ZStack {
+                VStack {
+                    InputField(title: "Chat Name", text: $name)
+                    CaptionLabel(title: "Add Members")
+                    SearchBox(searchText: $candidateMember, onCommit: searchUsers)
+                    List {
+                        ForEach(candidateMembers, id: \.self) { candidateMember in
+                            Button(action: { addMember(candidateMember) }) {
+                                HStack {
+                                    Text(candidateMember)
+                                    Spacer()
+                                    Image(systemName: "plus.circle.fill")
+                                    .renderingMode(.original)
+                                }
+                            }
                         }
                     }
+                    Divider()
+                    CaptionLabel(title: "Members")
+                    List {
+                        ForEach(members, id: \.self) { member in
+                            Text(member)
+                        }
+                        .onDelete(perform: deleteMember)
+                    }
+                    Spacer()
                 }
-            }
-            Divider()
-            CaptionLabel(title: "Members")
-            List {
-                ForEach(members, id: \.self) { member in
-                    Text(member)
+                Spacer()
+                if let error = state.error {
+                    Text("Error: \(error)")
+                        .foregroundColor(Color.red)
                 }
-                .onDelete(perform: deleteMember)
+//                if state.shouldIndicateActivity {
+//                    OpaqueProgressView("Adding Team Member")
+//                }
             }
-            Spacer()
+            .padding()
+            .navigationBarTitle("New Chat", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: saveConversation) {
+                Text("Save")
+            }
+            .disabled(isEmpty)
+            .padding()
+            )
         }
-        .navigationBarTitle("New Chat", displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: saveConversation) {
-            Text("Save")
-        }
-        .disabled(isEmpty)
-        )
-        .padding()
         .onAppear(perform: searchUsers)
     }
     
@@ -121,17 +136,18 @@ struct NewConversationView: View {
             return
         }
         state.shouldIndicateActivity = false
+        handleNewConversation(conversation)
         presentationMode.wrappedValue.dismiss()
     }
 }
 
 struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+//        NavigationView {
             AppearancePreviews(
                 NewConversationView()
                     .environmentObject(AppState.sample)
             )
-        }
+//        }
     }
 }
