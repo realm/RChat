@@ -61,6 +61,7 @@ struct ChatRoomView: View {
     }
     
     private func loadChatRoom() {
+        clearUnreadCount()
         if let user = app.currentUser, let conversation = conversation {
             scrollToBottom()
             self.state.shouldIndicateActivity = true
@@ -77,6 +78,7 @@ struct ChatRoomView: View {
                     chats = realm.objects(ChatMessage.self).sorted(byKeyPath: "timestamp")
                     realmChatsNotificationToken = realm.observe {_, _ in
                         scrollToBottom()
+                        clearUnreadCount()
                         lastSync = Date()
                     }
                     if let chatsterRealm = state.chatsterRealm {
@@ -92,6 +94,17 @@ struct ChatRoomView: View {
     }
     
     private func closeChatRoom() {
+        clearUnreadCount()
+        if let token = realmChatsterNotificationToken {
+            token.invalidate()
+        }
+        if let token = realmChatsNotificationToken {
+            token.invalidate()
+        }
+        chatRealm = nil
+    }
+    
+    private func clearUnreadCount() {
         if let user = state.user, let realm = state.userRealm, let conversationId = conversation?.id {
             if let conversation = user.conversations.first(where: { $0.id == conversationId }) {
                 do {
@@ -103,13 +116,6 @@ struct ChatRoomView: View {
                 }
             }
         }
-        if let token = realmChatsterNotificationToken {
-            token.invalidate()
-        }
-        if let token = realmChatsNotificationToken {
-            token.invalidate()
-        }
-        chatRealm = nil
     }
     
     private func findChatster(userName: String?) -> Chatster? {
