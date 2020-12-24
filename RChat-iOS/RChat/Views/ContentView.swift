@@ -102,7 +102,6 @@ struct ContentView: View {
     }
 }
 
-
 extension View {
     public func currentDeviceNavigationViewStyle(alwaysStacked: Bool) -> AnyView {
         if UIDevice.current.userInterfaceIdiom == .pad && !alwaysStacked {
