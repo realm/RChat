@@ -92,6 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A3520E125949D00006DCC46 /* RChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RChat.entitlements; sourceTree = "<group>"; };
 		0A4EA3B3258D32960003F0E4 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		49012A2B256BEA4C00C3614B /* RChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49012A2E256BEA4C00C3614B /* RChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RChatApp.swift; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 		49012A2D256BEA4C00C3614B /* RChat */ = {
 			isa = PBXGroup;
 			children = (
+				0A3520E125949D00006DCC46 /* RChat.entitlements */,
 				49012A2E256BEA4C00C3614B /* RChatApp.swift */,
 				49012ACB256BEFFA00C3614B /* AppState.swift */,
 				49012A77256BEDB300C3614B /* Views */,
@@ -793,6 +795,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -847,6 +850,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -856,6 +860,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RChat/RChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"RChat/Preview Content\"";
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
@@ -868,6 +873,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.clusterdb.RChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -878,6 +884,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RChat/RChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"RChat/Preview Content\"";
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
@@ -890,6 +897,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.clusterdb.RChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
