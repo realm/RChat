@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A28D338258B9ABC005D68E3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D337258B9ABC005D68E3 /* Realm */; };
-		0A28D33A258B9ABC005D68E3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D339258B9ABC005D68E3 /* RealmSwift */; };
+		0A28D338258B9ABC005D68E3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D337258B9ABC005D68E3 /* SwiftPackageProductDependency */; };
+		0A28D33A258B9ABC005D68E3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D339258B9ABC005D68E3 /* SwiftPackageProductDependency */; };
 		0A4EA3B4258D32960003F0E4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EA3B3258D32960003F0E4 /* CheckBox.swift */; };
 		49012A2F256BEA4C00C3614B /* RChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012A2E256BEA4C00C3614B /* RChatApp.swift */; };
 		49012A31256BEA4C00C3614B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012A30256BEA4C00C3614B /* ContentView.swift */; };
@@ -72,6 +72,9 @@
 		49D9327725790E8800F9EB45 /* SendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D9327625790E8800F9EB45 /* SendButton.swift */; };
 		49F00E892571129600ADC23F /* LastSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F00E882571129600ADC23F /* LastSync.swift */; };
 		49F00E9D25715C0100ADC23F /* NewConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F00E9C25715C0000ADC23F /* NewConversationView.swift */; };
+		83F9D8DA31261A7CDBB94531 /* Pods_RChat_RChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD53676A72DF2CD401CD75D /* Pods_RChat_RChatUITests.framework */; };
+		92BD2C716037A7A7BB7BFBBE /* Pods_RChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE213021B51502B7E3034646 /* Pods_RChatTests.framework */; };
+		A6FB61FBC5EE532053E277EE /* Pods_RChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5CE6DF0F87219D351038663 /* Pods_RChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +97,8 @@
 /* Begin PBXFileReference section */
 		0A3520E125949D00006DCC46 /* RChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RChat.entitlements; sourceTree = "<group>"; };
 		0A4EA3B3258D32960003F0E4 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		0DD53676A72DF2CD401CD75D /* Pods_RChat_RChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RChat_RChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2451F5AC84E861FA73C39EC5 /* Pods-RChat-RChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.debug.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		49012A2B256BEA4C00C3614B /* RChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49012A2E256BEA4C00C3614B /* RChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RChatApp.swift; sourceTree = "<group>"; };
 		49012A30256BEA4C00C3614B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +167,13 @@
 		49D9327625790E8800F9EB45 /* SendButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendButton.swift; sourceTree = "<group>"; };
 		49F00E882571129600ADC23F /* LastSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSync.swift; sourceTree = "<group>"; };
 		49F00E9C25715C0000ADC23F /* NewConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationView.swift; sourceTree = "<group>"; };
+		5E78ED1CC954CFD46D13E9F5 /* Pods-RChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat.release.xcconfig"; path = "Target Support Files/Pods-RChat/Pods-RChat.release.xcconfig"; sourceTree = "<group>"; };
+		AE213021B51502B7E3034646 /* Pods_RChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2DC5DB8801B6BF4523BF1E5 /* Pods-RChat-RChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.release.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B5CE6DF0F87219D351038663 /* Pods_RChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B74A48341B544418AB460D54 /* Pods-RChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat.debug.xcconfig"; path = "Target Support Files/Pods-RChat/Pods-RChat.debug.xcconfig"; sourceTree = "<group>"; };
+		B80644C515AC7521F0B96D78 /* Pods-RChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChatTests.debug.xcconfig"; path = "Target Support Files/Pods-RChatTests/Pods-RChatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F37F39A10D8FA82D2B903537 /* Pods-RChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChatTests.release.xcconfig"; path = "Target Support Files/Pods-RChatTests/Pods-RChatTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,8 +181,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A28D33A258B9ABC005D68E3 /* RealmSwift in Frameworks */,
-				0A28D338258B9ABC005D68E3 /* Realm in Frameworks */,
+				0A28D33A258B9ABC005D68E3 /* BuildFile in Frameworks */,
+				0A28D338258B9ABC005D68E3 /* BuildFile in Frameworks */,
+				A6FB61FBC5EE532053E277EE /* Pods_RChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92BD2C716037A7A7BB7BFBBE /* Pods_RChatTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F9D8DA31261A7CDBB94531 /* Pods_RChat_RChatUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,8 +209,25 @@
 		264D2AB5E601147EC977512D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B5CE6DF0F87219D351038663 /* Pods_RChat.framework */,
+				0DD53676A72DF2CD401CD75D /* Pods_RChat_RChatUITests.framework */,
+				AE213021B51502B7E3034646 /* Pods_RChatTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2EA8084B283B0F0CF4FF7637 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B74A48341B544418AB460D54 /* Pods-RChat.debug.xcconfig */,
+				5E78ED1CC954CFD46D13E9F5 /* Pods-RChat.release.xcconfig */,
+				2451F5AC84E861FA73C39EC5 /* Pods-RChat-RChatUITests.debug.xcconfig */,
+				B2DC5DB8801B6BF4523BF1E5 /* Pods-RChat-RChatUITests.release.xcconfig */,
+				B80644C515AC7521F0B96D78 /* Pods-RChatTests.debug.xcconfig */,
+				F37F39A10D8FA82D2B903537 /* Pods-RChatTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		49012A22256BEA4C00C3614B = {
@@ -207,6 +239,7 @@
 				49012A4A256BEA4E00C3614B /* RChatUITests */,
 				49012A2C256BEA4C00C3614B /* Products */,
 				264D2AB5E601147EC977512D /* Frameworks */,
+				2EA8084B283B0F0CF4FF7637 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -410,6 +443,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49012A50256BEA4E00C3614B /* Build configuration list for PBXNativeTarget "RChat" */;
 			buildPhases = (
+				A8FBB7C3BAD3E9D9C78D7F8C /* [CP] Check Pods Manifest.lock */,
 				49012A27256BEA4C00C3614B /* Sources */,
 				49012A28256BEA4C00C3614B /* Frameworks */,
 				49012A29256BEA4C00C3614B /* Resources */,
@@ -421,8 +455,8 @@
 			);
 			name = RChat;
 			packageProductDependencies = (
-				0A28D337258B9ABC005D68E3 /* Realm */,
-				0A28D339258B9ABC005D68E3 /* RealmSwift */,
+				0A28D337258B9ABC005D68E3 /* SwiftPackageProductDependency */,
+				0A28D339258B9ABC005D68E3 /* SwiftPackageProductDependency */,
 			);
 			productName = RChat;
 			productReference = 49012A2B256BEA4C00C3614B /* RChat.app */;
@@ -436,7 +470,6 @@
 				49012A38256BEA4E00C3614B /* Sources */,
 				49012A39256BEA4E00C3614B /* Frameworks */,
 				49012A3A256BEA4E00C3614B /* Resources */,
-				FC9BFE4AA84EF65147EFEEA4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -456,7 +489,6 @@
 				49012A43256BEA4E00C3614B /* Sources */,
 				49012A44256BEA4E00C3614B /* Frameworks */,
 				49012A45256BEA4E00C3614B /* Resources */,
-				25182BBA6759B62B82C5FA24 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -500,7 +532,7 @@
 			);
 			mainGroup = 49012A22256BEA4C00C3614B;
 			packageReferences = (
-				0A28D336258B9ABC005D68E3 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				0A28D336258B9ABC005D68E3 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 49012A2C256BEA4C00C3614B /* Products */;
 			projectDirPath = "";
@@ -541,23 +573,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		25182BBA6759B62B82C5FA24 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3557AD65CFE8E254F9ED2396 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -598,21 +613,26 @@
 			shellScript = "if which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n  \"${PODS_ROOT}/SwiftLint/swiftlint\" --path RChat --config \"${SRCROOT}/swiftlint/swiftlint_config.yaml\" \nelse\n  echo \"warning: SwiftLint not installed, run pod install\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FC9BFE4AA84EF65147EFEEA4 /* [CP] Embed Pods Frameworks */ = {
+		A8FBB7C3BAD3E9D9C78D7F8C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RChatTests/Pods-RChatTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RChatTests/Pods-RChatTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RChat-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RChatTests/Pods-RChatTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FE1166EC93D2793C0B158D00 /* [CP] Check Pods Manifest.lock */ = {
@@ -857,6 +877,7 @@
 		};
 		49012A51256BEA4E00C3614B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B74A48341B544418AB460D54 /* Pods-RChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -881,6 +902,7 @@
 		};
 		49012A52256BEA4E00C3614B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E78ED1CC954CFD46D13E9F5 /* Pods-RChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -905,6 +927,7 @@
 		};
 		49012A54256BEA4E00C3614B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B80644C515AC7521F0B96D78 /* Pods-RChatTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -927,6 +950,7 @@
 		};
 		49012A55256BEA4E00C3614B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F37F39A10D8FA82D2B903537 /* Pods-RChatTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -949,6 +973,7 @@
 		};
 		49012A57256BEA4E00C3614B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2451F5AC84E861FA73C39EC5 /* Pods-RChat-RChatUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
@@ -969,6 +994,7 @@
 		};
 		49012A58256BEA4E00C3614B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2DC5DB8801B6BF4523BF1E5 /* Pods-RChat-RChatUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1029,7 +1055,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0A28D336258B9ABC005D68E3 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		0A28D336258B9ABC005D68E3 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
@@ -1040,14 +1066,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0A28D337258B9ABC005D68E3 /* Realm */ = {
+		0A28D337258B9ABC005D68E3 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A28D336258B9ABC005D68E3 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 0A28D336258B9ABC005D68E3 /* RemoteSwiftPackageReference */;
 			productName = Realm;
 		};
-		0A28D339258B9ABC005D68E3 /* RealmSwift */ = {
+		0A28D339258B9ABC005D68E3 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A28D336258B9ABC005D68E3 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 0A28D336258B9ABC005D68E3 /* RemoteSwiftPackageReference */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
