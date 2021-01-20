@@ -1,4 +1,4 @@
-# RChat – A Chat app built with SwiftUI and Realm
+# ![RChat app icon](assets/RChatIcon80.png) RChat – A Chat app built with SwiftUI and Realm
 
 RChat is a chat application. Members of a chat room share messages, photos, location, and presence information with each other. The initial version is an iOS (Swift & SwiftUI) app, but we will use the same data model and backend Realm application to build an Android version in the future.
 
