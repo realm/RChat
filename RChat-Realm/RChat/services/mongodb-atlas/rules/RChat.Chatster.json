@@ -58,7 +58,8 @@
         "required": [
             "_id",
             "partition",
-            "presence"
+            "presence",
+            "userName"
         ],
         "title": "Chatster"
     }

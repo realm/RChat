@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct InputField: View {
-    @EnvironmentObject var state: AppState
     
     let title: String
     @Binding private(set) var text: String

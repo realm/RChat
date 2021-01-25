@@ -14,11 +14,8 @@ struct ContentView: View {
 
     @AppStorage("shouldRemindOnlineUser") var shouldRemindOnlineUser = false
     @AppStorage("onlineUserReminderHours") var onlineUserReminderHours = 8.0
-    
-    @State private var chatsterRealm: Realm?
-    @State private var userRealm: Realm?
+
     @State private var showingProfileView = false
-    @State private var showConversation = false
 
     var body: some View {
         NavigationView {

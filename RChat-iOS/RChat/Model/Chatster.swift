@@ -11,7 +11,7 @@ import RealmSwift
 class Chatster: Object {
     @objc dynamic var _id = UUID().uuidString // This will match the _id of the associated User
     @objc dynamic var partition = "all-users=all-the-users"
-    @objc dynamic var userName: String?
+    @objc dynamic var userName = ""
     @objc dynamic var displayName: String?
     @objc dynamic var avatarImage: Photo?
     @objc dynamic var lastSeenAt: Date?

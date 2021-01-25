@@ -35,7 +35,7 @@ struct ChatBubbleView: View {
                                 Text(name)
                                 .font(.caption)
                             } else {
-                                Text(author.userName ?? "Anon")
+                                Text(author.userName)
                                     .font(.caption)
                             }
                             Spacer()
