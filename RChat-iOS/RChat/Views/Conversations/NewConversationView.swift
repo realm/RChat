@@ -80,10 +80,8 @@ struct NewConversationView: View {
             }
             candidateMembers = []
             candidateChatsters.forEach { chatster in
-                if let userName = chatster.userName {
-                    if !members.contains(userName) && userName != state.user?.userName {
-                        candidateMembers.append(userName)
-                    }
+                if !members.contains(chatster.userName) && chatster.userName != state.user?.userName {
+                    candidateMembers.append(chatster.userName)
                 }
             }
         }
