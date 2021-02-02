@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-class Chatster: Object {
-    @objc dynamic var _id = UUID().uuidString // This will match the _id of the associated User
-    @objc dynamic var partition = "all-users=all-the-users"
-    @objc dynamic var userName = ""
-    @objc dynamic var displayName: String?
-    @objc dynamic var avatarImage: Photo?
-    @objc dynamic var lastSeenAt: Date?
-    @objc dynamic var presence = "Off-Line"
+@objcMembers class Chatster: Object, ObjectKeyIdentifiable {
+    dynamic var _id = UUID().uuidString // This will match the _id of the associated User
+    dynamic var partition = "all-users=all-the-users"
+    dynamic var userName = ""
+    dynamic var displayName: String?
+    dynamic var avatarImage: Photo?
+    dynamic var lastSeenAt: Date?
+    dynamic var presence = "Off-Line"
     
     var presenceState: Presence {
         get { return Presence(rawValue: presence) ?? .hidden }
@@ -25,8 +25,4 @@ class Chatster: Object {
     override static func primaryKey() -> String? {
         return "_id"
     }
-}
-
-extension Chatster: Identifiable {
-    var id: String { _id }
 }

@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-class ChatMessage: Object {
-    @objc dynamic var _id = UUID().uuidString
-    @objc dynamic var partition = "" // "conversation=<conversation-id>"
-    @objc dynamic var author: String? // username
-    @objc dynamic var text = ""
-    @objc dynamic var image: Photo?
+@objcMembers class ChatMessage: Object, ObjectKeyIdentifiable {
+    dynamic var _id = UUID().uuidString
+    dynamic var partition = "" // "conversation=<conversation-id>"
+    dynamic var author: String? // username
+    dynamic var text = ""
+    dynamic var image: Photo?
     let location = List<Double>()
-    @objc dynamic var timestamp = Date()
+    dynamic var timestamp = Date()
 
     override static func primaryKey() -> String? {
         return "_id"
@@ -31,8 +31,4 @@ class ChatMessage: Object {
             self.location.append(coord)
         }
     }
-}
-
-extension ChatMessage: Identifiable {
-    var id: String { _id }
 }

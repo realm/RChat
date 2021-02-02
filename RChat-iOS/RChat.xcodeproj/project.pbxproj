@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A28D338258B9ABC005D68E3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D337258B9ABC005D68E3 /* SwiftPackageProductDependency */; };
-		0A28D33A258B9ABC005D68E3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D339258B9ABC005D68E3 /* SwiftPackageProductDependency */; };
+		0A28D338258B9ABC005D68E3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D337258B9ABC005D68E3 /* Realm */; };
+		0A28D33A258B9ABC005D68E3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D339258B9ABC005D68E3 /* RealmSwift */; };
 		0A4EA3B4258D32960003F0E4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EA3B3258D32960003F0E4 /* CheckBox.swift */; };
+		0A87398825C9BECD0038F2FE /* ChatRoomBubblesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87398725C9BECD0038F2FE /* ChatRoomBubblesView.swift */; };
 		49012A2F256BEA4C00C3614B /* RChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012A2E256BEA4C00C3614B /* RChatApp.swift */; };
 		49012A31256BEA4C00C3614B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012A30256BEA4C00C3614B /* ContentView.swift */; };
 		49012A33256BEA4E00C3614B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49012A32256BEA4E00C3614B /* Assets.xcassets */; };
@@ -97,6 +98,7 @@
 /* Begin PBXFileReference section */
 		0A3520E125949D00006DCC46 /* RChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RChat.entitlements; sourceTree = "<group>"; };
 		0A4EA3B3258D32960003F0E4 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		0A87398725C9BECD0038F2FE /* ChatRoomBubblesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomBubblesView.swift; sourceTree = "<group>"; };
 		0DD53676A72DF2CD401CD75D /* Pods_RChat_RChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RChat_RChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2451F5AC84E861FA73C39EC5 /* Pods-RChat-RChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RChat-RChatUITests.debug.xcconfig"; path = "Target Support Files/Pods-RChat-RChatUITests/Pods-RChat-RChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		49012A2B256BEA4C00C3614B /* RChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,8 +183,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A28D33A258B9ABC005D68E3 /* BuildFile in Frameworks */,
-				0A28D338258B9ABC005D68E3 /* BuildFile in Frameworks */,
+				0A28D33A258B9ABC005D68E3 /* RealmSwift in Frameworks */,
+				0A28D338258B9ABC005D68E3 /* Realm in Frameworks */,
 				A6FB61FBC5EE532053E277EE /* Pods_RChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,7 +228,6 @@
 				B80644C515AC7521F0B96D78 /* Pods-RChatTests.debug.xcconfig */,
 				F37F39A10D8FA82D2B903537 /* Pods-RChatTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -416,9 +417,10 @@
 		499E1E95256ED60F0036614F /* Chat Messages */ = {
 			isa = PBXGroup;
 			children = (
-				496F1ABA2577D9C700B946A9 /* ChatInputBox.swift */,
 				498CD5A325795B24007396DC /* ChatRoomView.swift */,
+				0A87398725C9BECD0038F2FE /* ChatRoomBubblesView.swift */,
 				49D1C12D257AA182007343ED /* ChatBubbleView.swift */,
+				496F1ABA2577D9C700B946A9 /* ChatInputBox.swift */,
 			);
 			path = "Chat Messages";
 			sourceTree = "<group>";
@@ -455,8 +457,8 @@
 			);
 			name = RChat;
 			packageProductDependencies = (
-				0A28D337258B9ABC005D68E3 /* SwiftPackageProductDependency */,
-				0A28D339258B9ABC005D68E3 /* SwiftPackageProductDependency */,
+				0A28D337258B9ABC005D68E3 /* Realm */,
+				0A28D339258B9ABC005D68E3 /* RealmSwift */,
 			);
 			productName = RChat;
 			productReference = 49012A2B256BEA4C00C3614B /* RChat.app */;
@@ -532,7 +534,7 @@
 			);
 			mainGroup = 49012A22256BEA4C00C3614B;
 			packageReferences = (
-				0A28D336258B9ABC005D68E3 /* RemoteSwiftPackageReference */,
+				0A28D336258B9ABC005D68E3 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 49012A2C256BEA4C00C3614B /* Products */;
 			projectDirPath = "";
@@ -707,6 +709,7 @@
 				49F00E9D25715C0100ADC23F /* NewConversationView.swift in Sources */,
 				49012AED256BF2DF00C3614B /* User.swift in Sources */,
 				49012B89256D89F100C3614B /* UserAvatarView.swift in Sources */,
+				0A87398825C9BECD0038F2FE /* ChatRoomBubblesView.swift in Sources */,
 				49012AF2256BF44700C3614B /* UserPreferences.swift in Sources */,
 				49012AAB256BEF1700C3614B /* CaptionLabel.swift in Sources */,
 				49012B29256C678F00C3614B /* UserProfileButton.swift in Sources */,
@@ -1055,25 +1058,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0A28D336258B9ABC005D68E3 /* RemoteSwiftPackageReference */ = {
+		0A28D336258B9ABC005D68E3 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.5.0;
+				branch = "jf/swiftui-realm-state";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0A28D337258B9ABC005D68E3 /* SwiftPackageProductDependency */ = {
+		0A28D337258B9ABC005D68E3 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A28D336258B9ABC005D68E3 /* RemoteSwiftPackageReference */;
+			package = 0A28D336258B9ABC005D68E3 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = Realm;
 		};
-		0A28D339258B9ABC005D68E3 /* SwiftPackageProductDependency */ = {
+		0A28D339258B9ABC005D68E3 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0A28D336258B9ABC005D68E3 /* RemoteSwiftPackageReference */;
+			package = 0A28D336258B9ABC005D68E3 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

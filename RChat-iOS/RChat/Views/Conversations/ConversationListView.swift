@@ -26,6 +26,7 @@ struct ConversationListView: View {
     
     var body: some View {
         VStack {
+            // TODO: Do we still need to use Freeze?
             if let conversations = state.user?.conversations.freeze().sorted(by: sortDescriptors) {
                 List {
                     ForEach(conversations) { conversation in
