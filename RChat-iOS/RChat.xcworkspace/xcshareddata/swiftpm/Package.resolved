@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
           "branch": "jf/swiftui-realm-state",
-          "revision": "15a032e5d94ec480d3b834dfa6176fa5841050dd",
+          "revision": "3652d16bc9e81099276d86b1d7d6b7d68000a185",
           "version": null
         }
       },

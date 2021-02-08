@@ -10,15 +10,14 @@ import RealmSwift
 
 struct ChatRoomBubblesView: View {
     @EnvironmentObject var state: AppState
+    @FetchRealmResults(ChatMessage.self) var chats
+    @Environment(\.realm) var chatRealm
     
     var conversation: Conversation?
-    @ObservedRealmObject var chats: RealmSwift.List<ChatMessage>
-    let chatRealm: Realm
     
-//    @State private var realmChatsterNotificationToken: NotificationToken?
+    @State private var realmChatsterNotificationToken: NotificationToken?
     @State private var realmChatsNotificationToken: NotificationToken?
     @State private var lastSync: Date?
-//    @State private var chats: Results<ChatMessage>?
     @State private var latestChatId = ""
     
     private enum Dimensions {
@@ -27,28 +26,26 @@ struct ChatRoomBubblesView: View {
     
     var body: some View {
         VStack {
-//            if let chats = chats {
-                ScrollView(.vertical) {
-                    ScrollViewReader { (proxy: ScrollViewProxy) in
-                        VStack {
-                            ForEach(chats.freeze()) { chatMessage in
-                                ChatBubbleView(chatMessage: chatMessage,
-                                               author: findChatster(userName: chatMessage.author))
-                            }
+            ScrollView(.vertical) {
+                ScrollViewReader { (proxy: ScrollViewProxy) in
+                    List {
+                        ForEach(chats) { chatMessage in
+                            ChatBubbleView(chatMessage: chatMessage,
+                                           author: findChatster(userName: chatMessage.author))
                         }
-                        .onAppear {
-                            withAnimation {
-                                proxy.scrollTo(latestChatId, anchor: .bottom)
-                            }
+                    }
+                    .onAppear {
+                        withAnimation {
+                            proxy.scrollTo(latestChatId, anchor: .bottom)
                         }
-                        .onChange(of: latestChatId) { target in
-                            withAnimation {
-                                proxy.scrollTo(target, anchor: .bottom)
-                            }
+                    }
+                    .onChange(of: latestChatId) { target in
+                        withAnimation {
+                            proxy.scrollTo(target, anchor: .bottom)
                         }
                     }
                 }
-//            }
+            }
             Spacer()
             ChatInputBox(send: sendMessage, focusAction: scrollToBottom)
             if let lastSync = lastSync {
@@ -73,9 +70,9 @@ struct ChatRoomBubblesView: View {
     
     private func closeChatRoom() {
         clearUnreadCount()
-//        if let token = realmChatsterNotificationToken {
-//            token.invalidate()
-//        }
+        if let token = realmChatsterNotificationToken {
+            token.invalidate()
+        }
         if let token = realmChatsNotificationToken {
             token.invalidate()
         }
@@ -116,17 +113,14 @@ struct ChatRoomBubblesView: View {
                                           text: text,
                                           image: photo,
                                           location: location)
-//            if let chatRealm = chatRealm {
-                do {
-                    try chatRealm.write {
-                        chatRealm.add(chatMessage)
-                    }
-                } catch {
-                    state.error = "Unable to open Realm write transaction"
+            do {
+                // TODO: Is there a simple way to avoid the transactio?
+                try chatRealm.write {
+                    chatRealm.add(chatMessage)
                 }
-//            } else {
-//                state.error = "Cannot save chat message as realm is not set"
-//            }
+            } catch {
+                state.error = "Unable to open Realm write transaction"
+            }
         }
     }
     

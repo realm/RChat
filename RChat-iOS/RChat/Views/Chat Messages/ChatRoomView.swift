@@ -14,10 +14,6 @@ struct ChatRoomView: View {
     var conversation: Conversation?
     
     @State private var chatRealm: Realm?
-//    @State private var realmChatsterNotificationToken: NotificationToken?
-//    @State private var realmChatsNotificationToken: NotificationToken?
-//    @State private var lastSync: Date?
-    @StateRealmObject private var chats: Results<ChatMessage>?
     @State private var latestChatId = ""
     
     private enum Dimensions {
@@ -26,87 +22,60 @@ struct ChatRoomView: View {
     
     var body: some View {
         VStack {
-            if let chats = chats, let conversation = conversation, let chatRealm = chatRealm {
+            if let conversation = conversation {
                 ChatRoomBubblesView(
-                    conversation: conversation,
-                    chats: chats,
-                    chatRealm: chatRealm)
-//                ScrollView(.vertical) {
-//                    ScrollViewReader { (proxy: ScrollViewProxy) in
-//                        VStack {
-//                            ForEach(chats.freeze()) { chatMessage in
-//                                ChatBubbleView(chatMessage: chatMessage,
-//                                               author: findChatster(userName: chatMessage.author))
-//                            }
-//                        }
-//                        .onAppear {
-//                            withAnimation {
-//                                proxy.scrollTo(latestChatId, anchor: .bottom)
-//                            }
-//                        }
-//                        .onChange(of: latestChatId) { target in
-//                            withAnimation {
-//                                proxy.scrollTo(target, anchor: .bottom)
-//                            }
-//                        }
-//                    }
-//                }
+                    conversation: conversation)
+                    .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "conversation=\(conversation.id)"))
             }
             Spacer()
-//            ChatInputBox(send: sendMessage, focusAction: scrollToBottom)
-//            if let lastSync = lastSync {
-//                LastSync(date: lastSync)
-//            }
         }
         .navigationBarTitle(conversation?.displayName ?? "Chat", displayMode: .inline)
         .padding(.horizontal, Dimensions.padding)
-        .onAppear { loadChatRoom() }
-        .onDisappear { closeChatRoom() }
+//        .onAppear { loadChatRoom() }
+//        .onDisappear { closeChatRoom() }
     }
     
-    private func loadChatRoom() {
-//        clearUnreadCount()
-        if let user = app.currentUser, let conversation = conversation {
-//            scrollToBottom()
-            self.state.shouldIndicateActivity = true
-            let realmConfig = user.configuration(partitionValue: "conversation=\(conversation.id)")
-            Realm.asyncOpen(configuration: realmConfig)
-                .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { result in
-                    if case let .failure(error) = result {
-                        self.state.error = "Failed to open ChatMessage realm: \(error.localizedDescription)"
-                        state.shouldIndicateActivity = false
-                    }
-                }, receiveValue: { realm in
-                    chatRealm = realm
-                    chats = realm.objects(ChatMessage.self).sorted(byKeyPath: "timestamp")
-//                    realmChatsNotificationToken = realm.observe {_, _ in
-//                        scrollToBottom()
-//                        clearUnreadCount()
-//                        lastSync = Date()
+//    private func loadChatRoom() {
+//        if let user = app.currentUser, let conversation = conversation {
+//            self.state.shouldIndicateActivity = true
+//            let realmConfig = user.configuration(partitionValue: "conversation=\(conversation.id)")
+//            Realm.asyncOpen(configuration: realmConfig)
+//                .receive(on: DispatchQueue.main)
+//                .sink(receiveCompletion: { result in
+//                    if case let .failure(error) = result {
+//                        self.state.error = "Failed to open ChatMessage realm: \(error.localizedDescription)"
+//                        state.shouldIndicateActivity = false
 //                    }
-//                    if let chatsterRealm = state.chatsterRealm {
-//                        realmChatsterNotificationToken = chatsterRealm.observe {_, _ in
-//                            lastSync = Date()
-//                        }
-//                    }
-//                    scrollToBottom()
-                    state.shouldIndicateActivity = false
-                })
-                .store(in: &self.state.cancellables)
-        }
-    }
+//                }, receiveValue: { realm in
+//                    chatRealm = realm
+////                    chats = realm.objects(ChatMessage.self).sorted(byKeyPath: "timestamp")
+////                    realmChatsNotificationToken = realm.observe {_, _ in
+////                        scrollToBottom()
+////                        clearUnreadCount()
+////                        lastSync = Date()
+////                    }
+////                    if let chatsterRealm = state.chatsterRealm {
+////                        realmChatsterNotificationToken = chatsterRealm.observe {_, _ in
+////                            lastSync = Date()
+////                        }
+////                    }
+////                    scrollToBottom()
+//                    state.shouldIndicateActivity = false
+//                })
+//                .store(in: &self.state.cancellables)
+//        }
+//    }
     
-    private func closeChatRoom() {
-//        clearUnreadCount()
-//        if let token = realmChatsterNotificationToken {
-//            token.invalidate()
-//        }
-//        if let token = realmChatsNotificationToken {
-//            token.invalidate()
-//        }
-        chatRealm = nil
-    }
+//    private func closeChatRoom() {
+////        clearUnreadCount()
+////        if let token = realmChatsterNotificationToken {
+////            token.invalidate()
+////        }
+////        if let token = realmChatsNotificationToken {
+////            token.invalidate()
+////        }
+//        chatRealm = nil
+//    }
     
 //    private func clearUnreadCount() {
 //        if let user = state.user, let realm = state.userRealm, let conversationId = conversation?.id {
