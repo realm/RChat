@@ -29,7 +29,8 @@ struct ChatRoomBubblesView: View {
                     VStack {
                         ForEach(chats) { chatMessage in
                             ChatBubbleView(chatMessage: chatMessage,
-                                           author: findChatster(userName: chatMessage.author))
+                                           authorName: chatMessage.author != state.user?.userName ? chatMessage.author : nil)
+//                                           author: findChatster(userName: chatMessage.author))
                         }
                     }
                     .onAppear {
@@ -83,19 +84,19 @@ struct ChatRoomBubblesView: View {
         }
     }
     
-    private func findChatster(userName: String?) -> Chatster? {
-        guard let chatsterRealm = state.chatsterRealm else {
-            print("No Chatster Realm set")
-            return nil
-        }
-        guard let userName = userName else {
-            return nil
-        }
-        if userName == state.user?.userName ?? "" {
-            return nil
-        }
-        return chatsterRealm.objects(Chatster.self).filter("userName = %@", userName).first
-    }
+//    private func findChatster(userName: String?) -> Chatster? {
+//        guard let chatsterRealm = state.chatsterRealm else {
+//            print("No Chatster Realm set")
+//            return nil
+//        }
+//        guard let userName = userName else {
+//            return nil
+//        }
+//        if userName == state.user?.userName ?? "" {
+//            return nil
+//        }
+//        return chatsterRealm.objects(Chatster.self).filter("userName = %@", userName).first
+//    }
     
     private func sendMessage(text: String, photo: Photo?, location: [Double]) {
         if let conversation = conversation {
