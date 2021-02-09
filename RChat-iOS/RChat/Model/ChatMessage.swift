@@ -32,3 +32,7 @@ import RealmSwift
         }
     }
 }
+
+extension ChatMessage: Identifiable {
+    var id: String { _id }
+}

@@ -10,8 +10,8 @@ import RealmSwift
 
 struct ChatRoomBubblesView: View {
     @EnvironmentObject var state: AppState
-    @FetchRealmResults(ChatMessage.self) var chats
-    @Environment(\.realm) var chatRealm
+    @FetchRealmResults(ChatMessage.self, sortDescriptor: SortDescriptor(keyPath: "timestamp", ascending: true)) var chats
+//    @Environment(\.realm) var chatRealm
     
     var conversation: Conversation?
     
@@ -28,14 +28,14 @@ struct ChatRoomBubblesView: View {
         VStack {
             ScrollView(.vertical) {
                 ScrollViewReader { (proxy: ScrollViewProxy) in
-                    List {
+                    VStack {
                         ForEach(chats) { chatMessage in
                             ChatBubbleView(chatMessage: chatMessage,
                                            author: findChatster(userName: chatMessage.author))
                         }
                     }
                     .onAppear {
-                        withAnimation {
+                        withAnimation(.linear(duration: 0.2)) {
                             proxy.scrollTo(latestChatId, anchor: .bottom)
                         }
                     }
@@ -61,7 +61,8 @@ struct ChatRoomBubblesView: View {
     private func loadChatRoom() {
         clearUnreadCount()
         scrollToBottom()
-        realmChatsNotificationToken = chatRealm.observe {_, _ in
+        realmChatsNotificationToken = chats.thaw()?.observe { _ in
+//        realmChatsNotificationToken = chatRealm.observe { _, _ in
             scrollToBottom()
             clearUnreadCount()
             lastSync = Date()
@@ -113,14 +114,7 @@ struct ChatRoomBubblesView: View {
                                           text: text,
                                           image: photo,
                                           location: location)
-            do {
-                // TODO: Is there a simple way to avoid the transactio?
-                try chatRealm.write {
-                    chatRealm.add(chatMessage)
-                }
-            } catch {
-                state.error = "Unable to open Realm write transaction"
-            }
+            $chats.append(chatMessage)
         }
     }
     

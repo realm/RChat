@@ -81,7 +81,7 @@ class AppState: ObservableObject {
                     self.error = "Failed to log in and open chatster realm: \(error.localizedDescription)"
                 }
             }, receiveValue: { realm in
-//                print("Chatster Realm User file location: \(realm.configuration.fileURL!.path)")
+                print("Chatster Realm User file location: \(realm.configuration.fileURL!.path)")
                 self.chatsterRealm = realm
                 self.shouldIndicateActivity = false
             })
@@ -111,7 +111,7 @@ class AppState: ObservableObject {
                     self.error = "Failed to log in and open user realm: \(error.localizedDescription)"
                 }
             }, receiveValue: { realm in
-//                print("User Realm User file location: \(realm.configuration.fileURL!.path)")
+                print("User Realm User file location: \(realm.configuration.fileURL!.path)")
                 self.userRealm = realm
                 self.user = realm.objects(User.self).first
                 do {
