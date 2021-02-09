@@ -40,7 +40,6 @@ class AppState: ObservableObject {
     
     var userRealm: Realm?
     var chatsterRealm: Realm?
-//    @StateRealmObject var user: User?
     var user: User?
 
     var loggedIn: Bool {

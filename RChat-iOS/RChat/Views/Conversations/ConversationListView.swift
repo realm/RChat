@@ -13,6 +13,8 @@ struct ConversationListView: View {
     
     @State private var realmUserNotificationToken: NotificationToken?
     @State private var realmChatsterNotificationToken: NotificationToken?
+    
+    // TODO: Remove if possible
     @State var lastSync: Date?
     @State private var conversation: Conversation?
     @State var showConversation = false
