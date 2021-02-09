@@ -15,9 +15,7 @@ struct ChatRoomBubblesView: View {
     
     var conversation: Conversation?
     
-    @State private var realmChatsterNotificationToken: NotificationToken?
     @State private var realmChatsNotificationToken: NotificationToken?
-    @State private var lastSync: Date?
     @State private var latestChatId = ""
     
     private enum Dimensions {
@@ -35,6 +33,7 @@ struct ChatRoomBubblesView: View {
                         }
                     }
                     .onAppear {
+                        scrollToBottom()
                         withAnimation(.linear(duration: 0.2)) {
                             proxy.scrollTo(latestChatId, anchor: .bottom)
                         }
@@ -48,9 +47,6 @@ struct ChatRoomBubblesView: View {
             }
             Spacer()
             ChatInputBox(send: sendMessage, focusAction: scrollToBottom)
-            if let lastSync = lastSync {
-                LastSync(date: lastSync)
-            }
         }
         .navigationBarTitle(conversation?.displayName ?? "Chat", displayMode: .inline)
         .padding(.horizontal, Dimensions.padding)
@@ -62,18 +58,12 @@ struct ChatRoomBubblesView: View {
         clearUnreadCount()
         scrollToBottom()
         realmChatsNotificationToken = chats.thaw()?.observe { _ in
-//        realmChatsNotificationToken = chatRealm.observe { _, _ in
             scrollToBottom()
-            clearUnreadCount()
-            lastSync = Date()
         }
     }
     
     private func closeChatRoom() {
         clearUnreadCount()
-        if let token = realmChatsterNotificationToken {
-            token.invalidate()
-        }
         if let token = realmChatsNotificationToken {
             token.invalidate()
         }
