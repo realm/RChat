@@ -9,8 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct ConversationCardContentsView: View {
+    @FetchRealmResults(Chatster.self) var chatsters
+    
     let conversation: Conversation
-    let chatsters: [Chatster]
     
     private struct Dimensions {
         static let mugWidth: CGFloat = 110
@@ -21,7 +22,7 @@ struct ConversationCardContentsView: View {
     
     var body: some View {
         HStack {
-            MugShotGridView(members: chatsters)
+            MugShotGridView(members: Array(chatsters))
                 .frame(width: Dimensions.mugWidth)
                 .padding(.trailing)
             VStack(alignment: .leading) {
@@ -40,13 +41,13 @@ struct ConversationCardContentsView: View {
     }
 }
 
-struct ConversationCardContentsView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppearancePreviews(
-            ForEach(Conversation.samples) { conversation in
-                ConversationCardContentsView(conversation: conversation, chatsters: [.sample, .sample2, .sample3, .sample, .sample2, .sample3])
-            }
-        )
-        .previewLayout(.sizeThatFits)
-    }
-}
+//struct ConversationCardContentsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AppearancePreviews(
+//            ForEach(Conversation.samples) { conversation in
+//                ConversationCardContentsView(conversation: conversation, chatsters: [.sample, .sample2, .sample3, .sample, .sample2, .sample3])
+//            }
+//        )
+//        .previewLayout(.sizeThatFits)
+//    }
+//}

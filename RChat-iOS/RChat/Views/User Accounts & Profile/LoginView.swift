@@ -96,7 +96,6 @@ struct LoginView: View {
                 }
             }, receiveValue: {
                 self.state.error = nil
-                state.chatsterLoginPublisher.send($0)
                 state.loginPublisher.send($0)
             })
             .store(in: &state.cancellables)

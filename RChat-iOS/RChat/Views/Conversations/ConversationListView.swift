@@ -12,7 +12,6 @@ struct ConversationListView: View {
     @EnvironmentObject var state: AppState
     
     @State private var realmUserNotificationToken: NotificationToken?
-    @State private var realmChatsterNotificationToken: NotificationToken?
     
     // TODO: Remove if possible
     @State var lastSync: Date?
@@ -61,7 +60,7 @@ struct ConversationListView: View {
             // be a bug – should test again in the future.
             NewConversationView()
                 .environmentObject(state)
-        }
+                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))        }
         .onAppear { watchRealms() }
         .onDisappear { stopWatching() }
     }
@@ -72,19 +71,11 @@ struct ConversationListView: View {
                 lastSync = Date()
             }
         }
-        if let chatsterRealm = state.chatsterRealm {
-            realmChatsterNotificationToken = chatsterRealm.observe { _, _ in
-                lastSync = Date()
-            }
-        }
     }
     
     private func stopWatching() {
         if let userToken = realmUserNotificationToken {
             userToken.invalidate()
-        }
-        if let chatsterToken = realmChatsterNotificationToken {
-            chatsterToken.invalidate()
         }
     }
 }

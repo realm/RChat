@@ -12,25 +12,17 @@ struct ConversationCardView: View {
     @EnvironmentObject var state: AppState
 
     let conversation: Conversation
+    
+    // TODO: Remove if possible
     var lastSync: Date?
     
     @State private var shouldIndicateActivity = false
     
-    var chatsters: [Chatster] {
-        var chatsterList = [Chatster]()
-        if let chatsterRealm = state.chatsterRealm {
-            let allChatsters = chatsterRealm.objects(Chatster.self)
-            for member in conversation.members {
-                chatsterList.append(contentsOf: allChatsters.filter("userName = %@", member.userName))
-            }
-        }
-        return chatsterList
-    }
-    
     var body: some View {
         ZStack {
             VStack {
-                ConversationCardContentsView(conversation: conversation, chatsters: chatsters)
+                ConversationCardContentsView(conversation: conversation)
+                    .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
             }
             if shouldIndicateActivity {
                 OpaqueProgressView("Fetching Conversation")

@@ -12,6 +12,8 @@ struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     @Environment(\.presentationMode) var presentationMode
     
+    @FetchRealmResults(Chatster.self) var chatsters
+    
     @State private var name = ""
     @State private var members = [String]()
     @State private var candidateMember = ""
@@ -70,19 +72,16 @@ struct NewConversationView: View {
     
     private func searchUsers() {
         var candidateChatsters: Results<Chatster>
-        if let chatsterRealm = state.chatsterRealm {
-            let allChatsters = chatsterRealm.objects(Chatster.self)
-            if candidateMember == "" {
-                candidateChatsters = allChatsters
-            } else {
-                let predicate = NSPredicate(format: "userName CONTAINS[cd] %@", candidateMember)
-                candidateChatsters = allChatsters.filter(predicate)
-            }
-            candidateMembers = []
-            candidateChatsters.forEach { chatster in
-                if !members.contains(chatster.userName) && chatster.userName != state.user?.userName {
-                    candidateMembers.append(chatster.userName)
-                }
+        if candidateMember == "" {
+            candidateChatsters = chatsters
+        } else {
+            let predicate = NSPredicate(format: "userName CONTAINS[cd] %@", candidateMember)
+            candidateChatsters = chatsters.filter(predicate)
+        }
+        candidateMembers = []
+        candidateChatsters.forEach { chatster in
+            if !members.contains(chatster.userName) && chatster.userName != state.user?.userName {
+                candidateMembers.append(chatster.userName)
             }
         }
     }
