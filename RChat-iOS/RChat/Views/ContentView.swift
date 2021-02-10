@@ -24,8 +24,10 @@ struct ContentView: View {
                     if state.loggedIn {
                         if (state.user != nil) && !state.user!.isProfileSet || showingProfileView {
                             SetProfileView(isPresented: $showingProfileView)
+                                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(state.user?._id ?? "")"))
                         } else {
                             ConversationListView()
+                                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(state.user?._id ?? "")"))
                             .navigationBarTitle("Chats", displayMode: .inline)
                             .navigationBarItems(
                                 trailing: state.loggedIn && !state.shouldIndicateActivity ? UserAvatarView(

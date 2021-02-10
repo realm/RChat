@@ -60,11 +60,13 @@ struct NewConversationView: View {
             }
             .padding()
             .navigationBarTitle("New Chat", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: saveConversation) {
-                Text("Save")
-            }
-            .disabled(isEmpty)
-            .padding()
+            .navigationBarItems(trailing:
+                                    SaveConversationButton(name: name, members: members, presentationMode: presentationMode)
+                                    .environment(
+                                        \.realmConfiguration,
+                                        app.currentUser!.configuration(partitionValue: "user=\(state.user?._id ?? "")"))
+                                    .disabled(isEmpty)
+                                    .padding()
             )
         }
         .onAppear(perform: searchUsers)
@@ -99,36 +101,6 @@ struct NewConversationView: View {
     
     private func deleteMember(at offsets: IndexSet) {
         members.remove(atOffsets: offsets)
-    }
-    
-    private func saveConversation() {
-        state.error = nil
-        let conversation = Conversation()
-        conversation.displayName = name
-        guard let userName = state.user?.userName else {
-            state.error = "Current user is not set"
-            return
-        }
-        guard let realm = state.userRealm else {
-            state.error = "User Realm not set"
-            return
-        }
-        conversation.members.append(Member(userName: userName, state: .active))
-        members.forEach { username in
-            conversation.members.append(Member(username))
-        }
-        state.shouldIndicateActivity = true
-        do {
-            try realm.write {
-                state.user?.conversations.append(conversation)
-            }
-        } catch {
-            state.error = "Unable to open Realm write transaction"
-            state.shouldIndicateActivity = false
-            return
-        }
-        state.shouldIndicateActivity = false
-        presentationMode.wrappedValue.dismiss()
     }
 }
 

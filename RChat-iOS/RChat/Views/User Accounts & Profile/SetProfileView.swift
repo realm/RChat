@@ -11,6 +11,7 @@ import RealmSwift
 
 struct SetProfileView: View {
     @EnvironmentObject var state: AppState
+    @Environment(\.realm) var userRealm
     @AppStorage("shouldShareLocation") var shouldShareLocation = false
     
     @Binding var isPresented: Bool
@@ -61,24 +62,22 @@ struct SetProfileView: View {
     }
     
     private func saveProfile() {
-        if let realm = state.userRealm {
-            state.shouldIndicateActivity = true
-            do {
-                try realm.write {
-                    state.user?.userPreferences?.displayName = displayName
-                    if photoAdded {
-                        guard let newPhoto = photo else {
-                            print("Missing photo")
-                            state.shouldIndicateActivity = false
-                            return
-                        }
-                        state.user?.userPreferences?.avatarImage = newPhoto
+        state.shouldIndicateActivity = true
+        do {
+            try userRealm.write {
+                state.user?.userPreferences?.displayName = displayName
+                if photoAdded {
+                    guard let newPhoto = photo else {
+                        print("Missing photo")
+                        state.shouldIndicateActivity = false
+                        return
                     }
-                    state.user?.presenceState = .onLine
+                    state.user?.userPreferences?.avatarImage = newPhoto
                 }
-            } catch {
-                state.error = "Unable to open Realm write transaction"
+                state.user?.presenceState = .onLine
             }
+        } catch {
+            state.error = "Unable to open Realm write transaction"
         }
         state.shouldIndicateActivity = false
     }

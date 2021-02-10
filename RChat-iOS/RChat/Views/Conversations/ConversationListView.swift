@@ -10,11 +10,10 @@ import RealmSwift
 
 struct ConversationListView: View {
     @EnvironmentObject var state: AppState
+    @FetchRealmResults(User.self) var users
     
     @State private var realmUserNotificationToken: NotificationToken?
     
-    // TODO: Remove if possible
-    @State var lastSync: Date?
     @State private var conversation: Conversation?
     @State var showConversation = false
     @State var showingAddChat = false
@@ -27,8 +26,7 @@ struct ConversationListView: View {
     
     var body: some View {
         VStack {
-            // TODO: Do we still need to use Freeze?
-            if let conversations = state.user?.conversations.freeze().sorted(by: sortDescriptors) {
+            if let conversations = users[0].conversations.sorted(by: sortDescriptors) {
                 List {
                     ForEach(conversations) { conversation in
                         Button(action: {
@@ -36,8 +34,7 @@ struct ConversationListView: View {
                             showConversation.toggle()
                         }) {
                         ConversationCardView(
-                            conversation: conversation,
-                            lastSync: lastSync)
+                            conversation: conversation)
                         }
                     }
                 }
@@ -48,12 +45,12 @@ struct ConversationListView: View {
                 .disabled(showingAddChat)
             }
             Spacer()
-            if let lastSync = lastSync {
-                LastSync(date: lastSync)
+            if let user = state.user {
+                NavigationLink(
+                        destination: ChatRoomView(conversation: conversation)
+                            .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)")),
+                        isActive: $showConversation) { EmptyView() }
             }
-            NavigationLink(
-                destination: ChatRoomView(conversation: conversation),
-                isActive: $showConversation) { EmptyView() }
         }
         .sheet(isPresented: $showingAddChat) {
             // TODO: Not clear why we need to pass in the environmentObject, appears that it may
@@ -61,31 +58,15 @@ struct ConversationListView: View {
             NewConversationView()
                 .environmentObject(state)
                 .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))        }
-        .onAppear { watchRealms() }
-        .onDisappear { stopWatching() }
     }
-    
-    private func watchRealms() {
-        if let userRealm = state.userRealm {
-            realmUserNotificationToken = userRealm.observe {_, _ in
-                lastSync = Date()
-            }
-        }
-    }
-    
-    private func stopWatching() {
-        if let userToken = realmUserNotificationToken {
-            userToken.invalidate()
-        }
-    }
+
 }
 
 struct ConversationListViewPreviews: PreviewProvider {
     static var previews: some View {
         // TODO: Fix preview
         AppearancePreviews(
-            ConversationListView(
-                lastSync: Date())
+            ConversationListView()
         )
         .environmentObject(AppState.sample)
     }

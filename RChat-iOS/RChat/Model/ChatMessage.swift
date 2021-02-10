@@ -21,9 +21,8 @@ import RealmSwift
         return "_id"
     }
     
-    convenience init(conversationId: String, author: String, text: String, image: Photo?, location: [Double] = []) {
+    convenience init(author: String, text: String, image: Photo?, location: [Double] = []) {
         self.init()
-        self.partition = "conversation=\(conversationId)"
         self.author = author
         self.text = text
         self.image = image ?? nil
@@ -31,6 +30,12 @@ import RealmSwift
             self.location.append(coord)
         }
     }
+    
+    var conversationId: String {
+        get { partition.components(separatedBy: "=")[1] }
+        set(conversationId) { partition = "conversation=\(conversationId)"}
+    }
+    
 }
 
 extension ChatMessage: Identifiable {

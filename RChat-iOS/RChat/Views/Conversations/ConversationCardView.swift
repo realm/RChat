@@ -13,9 +13,6 @@ struct ConversationCardView: View {
 
     let conversation: Conversation
     
-    // TODO: Remove if possible
-    var lastSync: Date?
-    
     @State private var shouldIndicateActivity = false
     
     var body: some View {

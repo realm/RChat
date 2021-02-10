@@ -35,17 +35,15 @@ class AppState: ObservableObject {
             }
         }
     }
-    
-    var userRealm: Realm?
+
     var user: User?
 
     var loggedIn: Bool {
-        app.currentUser != nil && app.currentUser?.state == .loggedIn && userRealm != nil
+        app.currentUser != nil && user != nil && app.currentUser?.state == .loggedIn
     }
 
     init() {
         _  = app.currentUser?.logOut()
-        userRealm = nil
         initLoginPublisher()
         initUserRealmPublisher()
         initLogoutPublisher()
@@ -75,7 +73,6 @@ class AppState: ObservableObject {
                 }
             }, receiveValue: { realm in
                 print("User Realm User file location: \(realm.configuration.fileURL!.path)")
-                self.userRealm = realm
                 self.user = realm.objects(User.self).first
                 do {
                     try realm.write {
@@ -95,7 +92,6 @@ class AppState: ObservableObject {
             .sink(receiveCompletion: { _ in
             }, receiveValue: { _ in
                 self.user = nil
-                self.userRealm = nil
             })
             .store(in: &cancellables)
     }

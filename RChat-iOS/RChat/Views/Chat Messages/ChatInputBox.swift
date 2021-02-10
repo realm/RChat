@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct ChatInputBox: View {
+    @EnvironmentObject var state: AppState
     @AppStorage("shouldShareLocation") var shouldShareLocation = false
+    @FetchRealmResults(User.self) var users
     
-    let send: (String, Photo?, [Double]) -> Void
+    let send: (_: ChatMessage) -> Void
     var focusAction: () -> Void = {}
     
     private enum Dimensions {
@@ -85,7 +88,7 @@ struct ChatInputBox: View {
     }
     
     private func sendChat() {
-        send(chatText, photo, location)
+        sendMessage(text: chatText, photo: photo, location: location)
         photo = nil
         chatText = ""
         location = []
@@ -94,17 +97,26 @@ struct ChatInputBox: View {
     private func clearBackground() {
         UITextView.appearance().backgroundColor = .clear
     }
-}
-
-struct ChatInputBox_Previews: PreviewProvider {
-    static var previews: some View {
-        AppearancePreviews(
-            Group {
-                ChatInputBox { (_, _, _) in }
-                ChatInputBox(send: { (_, _, _) in }, photo: .sample, location: [])
-                ChatInputBox(send: { (_, _, _) in }, photo: .sample, location: [-0.10689139236939127, 51.506520923981554])
-            }
-        )
-        .previewLayout(.sizeThatFits)
+    
+    private func sendMessage(text: String, photo: Photo?, location: [Double]) {
+            let chatMessage = ChatMessage(
+                author: state.user?.userName ?? "Unknown",
+                text: text,
+                image: photo,
+                location: location)
+            send(chatMessage)
     }
 }
+
+//struct ChatInputBox_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AppearancePreviews(
+//            Group {
+//                ChatInputBox { (_, _, _) in }
+//                ChatInputBox(send: { (_, _, _) in }, photo: .sample, location: [])
+//                ChatInputBox(send: { (_, _, _) in }, photo: .sample, location: [-0.10689139236939127, 51.506520923981554])
+//            }
+//        )
+//        .previewLayout(.sizeThatFits)
+//    }
+//}
