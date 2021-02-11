@@ -42,8 +42,12 @@ struct AuthorView: View {
     }
 }
 
-//struct AuthorView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AuthorView()
-//    }
-//}
+struct AuthorView_Previews: PreviewProvider {
+    static var previews: some View {
+        Realm.bootstrap()
+        
+        return AppearancePreviews(AuthorView(userName: "rod@contoso.com"))
+            .previewLayout(.sizeThatFits)
+            .padding()
+    }
+}

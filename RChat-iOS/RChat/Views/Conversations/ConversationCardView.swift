@@ -9,20 +9,17 @@ import SwiftUI
 import RealmSwift
 
 struct ConversationCardView: View {
-    @EnvironmentObject var state: AppState
 
     let conversation: Conversation
-    
-    @State private var shouldIndicateActivity = false
+    var isPreview = false
     
     var body: some View {
-        ZStack {
-            VStack {
+        VStack {
+            if isPreview {
+                ConversationCardContentsView(conversation: conversation)
+            } else {
                 ConversationCardContentsView(conversation: conversation)
                     .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
-            }
-            if shouldIndicateActivity {
-                OpaqueProgressView("Fetching Conversation")
             }
         }
     }
@@ -30,9 +27,10 @@ struct ConversationCardView: View {
 
 struct ConversationCardView_Previews: PreviewProvider {
     static var previews: some View {
-        AppearancePreviews(
-            ConversationCardView(conversation: .sample)
-            .environmentObject(AppState.sample)
+        Realm.bootstrap()
+        
+        return AppearancePreviews(
+            ConversationCardView(conversation: .sample, isPreview: true)
         )
         .padding()
         .previewLayout(.sizeThatFits)

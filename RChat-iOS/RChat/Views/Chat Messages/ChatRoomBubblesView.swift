@@ -13,7 +13,7 @@ struct ChatRoomBubblesView: View {
     @FetchRealmResults(ChatMessage.self, sortDescriptor: SortDescriptor(keyPath: "timestamp", ascending: true)) var chats
     
     var conversation: Conversation?
-    let clearUnreadCount: () -> Void
+    var isPreview = false
     
     @State private var realmChatsNotificationToken: NotificationToken?
     @State private var latestChatId = ""
@@ -29,7 +29,8 @@ struct ChatRoomBubblesView: View {
                     VStack {
                         ForEach(chats) { chatMessage in
                             ChatBubbleView(chatMessage: chatMessage,
-                                           authorName: chatMessage.author != state.user?.userName ? chatMessage.author : nil)
+                                           authorName: chatMessage.author != state.user?.userName ? chatMessage.author : nil,
+                                           isPreview: isPreview)
                         }
                     }
                     .onAppear {
@@ -47,8 +48,12 @@ struct ChatRoomBubblesView: View {
             }
             Spacer()
             if let user = state.user {
-                ChatInputBox(send: sendMessage, focusAction: scrollToBottom)
-                    .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)"))
+                if isPreview {
+                    ChatInputBox(send: sendMessage, focusAction: scrollToBottom)
+                } else {
+                    ChatInputBox(send: sendMessage, focusAction: scrollToBottom)
+                        .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)"))
+                }
             }
         }
         .navigationBarTitle(conversation?.displayName ?? "Chat", displayMode: .inline)
@@ -58,7 +63,6 @@ struct ChatRoomBubblesView: View {
     }
     
     private func loadChatRoom() {
-        clearUnreadCount()
         scrollToBottom()
         realmChatsNotificationToken = chats.thaw()?.observe { _ in
             scrollToBottom()
@@ -66,7 +70,6 @@ struct ChatRoomBubblesView: View {
     }
     
     private func closeChatRoom() {
-        clearUnreadCount()
         if let token = realmChatsNotificationToken {
             token.invalidate()
         }
@@ -86,8 +89,11 @@ struct ChatRoomBubblesView: View {
     }
 }
 
-//struct ChatRoomBubblesView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChatRoomBubblesView()
-//    }
-//}
+struct ChatRoomBubblesView_Previews: PreviewProvider {
+    static var previews: some View {
+        Realm.bootstrap()
+        
+        return AppearancePreviews(ChatRoomBubblesView(isPreview: true))
+            .environmentObject(AppState.sample)
+    }
+}

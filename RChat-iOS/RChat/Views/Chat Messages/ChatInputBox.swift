@@ -11,9 +11,8 @@ import RealmSwift
 struct ChatInputBox: View {
     @EnvironmentObject var state: AppState
     @AppStorage("shouldShareLocation") var shouldShareLocation = false
-    @FetchRealmResults(User.self) var users
     
-    let send: (_: ChatMessage) -> Void
+    var send: (_: ChatMessage) -> Void = { _ in }
     var focusAction: () -> Void = {}
     
     private enum Dimensions {
@@ -108,15 +107,16 @@ struct ChatInputBox: View {
     }
 }
 
-//struct ChatInputBox_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppearancePreviews(
-//            Group {
-//                ChatInputBox { (_, _, _) in }
-//                ChatInputBox(send: { (_, _, _) in }, photo: .sample, location: [])
-//                ChatInputBox(send: { (_, _, _) in }, photo: .sample, location: [-0.10689139236939127, 51.506520923981554])
-//            }
-//        )
-//        .previewLayout(.sizeThatFits)
-//    }
-//}
+struct ChatInputBox_Previews: PreviewProvider {
+    static var previews: some View {
+        AppearancePreviews(
+            Group {
+                ChatInputBox()
+                ChatInputBox(photo: .sample, location: [])
+                ChatInputBox(photo: .sample, location: [-0.10689139236939127, 51.506520923981554])
+            }
+        )
+        .previewLayout(.sizeThatFits)
+        .padding()
+    }
+}

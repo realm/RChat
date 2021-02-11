@@ -10,22 +10,28 @@ import SwiftUI
 
 struct ChatRoomView: View {
     @EnvironmentObject var state: AppState
-    @FetchRealmResults(User.self) var users
     @Environment(\.realm) var userRealm
     var conversation: Conversation?
+    var isPreview = false
     
     let padding: CGFloat = 8
     
     var body: some View {
         VStack {
             if let conversation = conversation {
-                ChatRoomBubblesView(conversation: conversation, clearUnreadCount: clearUnreadCount)
-                    .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "conversation=\(conversation.id)"))
+                if isPreview {
+                    ChatRoomBubblesView(conversation: conversation, isPreview: isPreview)
+                } else {
+                    ChatRoomBubblesView(conversation: conversation)
+                        .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "conversation=\(conversation.id)"))
+                }
             }
             Spacer()
         }
         .navigationBarTitle(conversation?.displayName ?? "Chat", displayMode: .inline)
         .padding(.horizontal, padding)
+        .onAppear(perform: clearUnreadCount)
+        .onDisappear(perform: clearUnreadCount)
     }
     
     private func clearUnreadCount() {
@@ -46,12 +52,15 @@ struct ChatRoomView: View {
 
 struct ChatRoom_Previews: PreviewProvider {
     static var previews: some View {
-        AppearancePreviews(
+        Realm.bootstrap()
+        
+        return AppearancePreviews(
             Group {
                 NavigationView {
-                    ChatRoomView(conversation: .sample)
+                    ChatRoomView(conversation: .sample, isPreview: true)
                 }
             }
         )
+        .environmentObject(AppState.sample)
     }
 }

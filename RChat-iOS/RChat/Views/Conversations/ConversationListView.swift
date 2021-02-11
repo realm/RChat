@@ -12,6 +12,8 @@ struct ConversationListView: View {
     @EnvironmentObject var state: AppState
     @FetchRealmResults(User.self) var users
     
+    var isPreview = false
+    
     @State private var realmUserNotificationToken: NotificationToken?
     
     @State private var conversation: Conversation?
@@ -32,10 +34,7 @@ struct ConversationListView: View {
                         Button(action: {
                             self.conversation = conversation
                             showConversation.toggle()
-                        }) {
-                        ConversationCardView(
-                            conversation: conversation)
-                        }
+                        }) { ConversationCardView(conversation: conversation, isPreview: isPreview) }
                     }
                 }
                 .animation(.easeIn(duration: animationDuration))
@@ -45,11 +44,17 @@ struct ConversationListView: View {
                 .disabled(showingAddChat)
             }
             Spacer()
-            if let user = state.user {
+            if isPreview {
                 NavigationLink(
+                    destination: ChatRoomView(conversation: conversation),
+                    isActive: $showConversation) { EmptyView() }
+            } else {
+                if let user = state.user {
+                    NavigationLink(
                         destination: ChatRoomView(conversation: conversation)
                             .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)")),
                         isActive: $showConversation) { EmptyView() }
+                }
             }
         }
         .sheet(isPresented: $showingAddChat) {
@@ -57,17 +62,18 @@ struct ConversationListView: View {
             // be a bug – should test again in the future.
             NewConversationView()
                 .environmentObject(state)
-                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))        }
+                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
+        }
     }
 
 }
 
 struct ConversationListViewPreviews: PreviewProvider {
+    
     static var previews: some View {
-        // TODO: Fix preview
-        AppearancePreviews(
-            ConversationListView()
-        )
-        .environmentObject(AppState.sample)
+        Realm.bootstrap()
+        
+        return ConversationListView(isPreview: true)
+            .environmentObject(AppState.sample)
     }
 }

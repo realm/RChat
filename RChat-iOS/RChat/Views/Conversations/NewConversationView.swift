@@ -11,8 +11,9 @@ import RealmSwift
 struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     @Environment(\.presentationMode) var presentationMode
-    
     @FetchRealmResults(Chatster.self) var chatsters
+    
+    var isPreview = false
     
     @State private var name = ""
     @State private var members = [String]()
@@ -60,13 +61,18 @@ struct NewConversationView: View {
             }
             .padding()
             .navigationBarTitle("New Chat", displayMode: .inline)
-            .navigationBarItems(trailing:
-                                    SaveConversationButton(name: name, members: members, presentationMode: presentationMode)
-                                    .environment(
-                                        \.realmConfiguration,
-                                        app.currentUser!.configuration(partitionValue: "user=\(state.user?._id ?? "")"))
-                                    .disabled(isEmpty)
-                                    .padding()
+            .navigationBarItems(trailing: VStack {
+                if isPreview {
+                    SaveConversationButton(name: name, members: members, done: { presentationMode.wrappedValue.dismiss() })
+                } else {
+                    SaveConversationButton(name: name, members: members, done: { presentationMode.wrappedValue.dismiss() })
+                    .environment(
+                        \.realmConfiguration,
+                        app.currentUser!.configuration(partitionValue: "user=\(state.user?._id ?? "")"))
+                }
+            }
+            .disabled(isEmpty)
+            .padding()
             )
         }
         .onAppear(perform: searchUsers)
@@ -106,8 +112,10 @@ struct NewConversationView: View {
 
 struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
-        AppearancePreviews(
-            NewConversationView()
+        Realm.bootstrap()
+        
+        return AppearancePreviews(
+            NewConversationView(isPreview: true)
                 .environmentObject(AppState.sample)
         )
     }

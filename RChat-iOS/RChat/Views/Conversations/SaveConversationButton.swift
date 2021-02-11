@@ -14,7 +14,7 @@ struct SaveConversationButton: View {
     
     let name: String
     let members: [String]
-    @Binding var presentationMode: PresentationMode
+    var done: () -> Void = { }
     
     var body: some View {
         Button(action: saveConversation) {
@@ -43,12 +43,18 @@ struct SaveConversationButton: View {
             return
         }
         state.shouldIndicateActivity = false
-        presentationMode.dismiss()
+        done()
     }
 }
 
-//struct SaveConversationButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SaveConversationButton()
-//    }
-//}
+struct SaveConversationButton_Previews: PreviewProvider {
+    static var previews: some View {
+        return AppearancePreviews(
+            SaveConversationButton(
+                name: "Example Conversation",
+                members: ["rod@contoso.com", "jane@contoso.com", "freddy@contoso.com"])
+        )
+        .previewLayout(.sizeThatFits)
+        .padding()
+    }
+}

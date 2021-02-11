@@ -41,6 +41,5 @@ struct ThumbnailWithExpand_Previews: PreviewProvider {
                 ThumbnailWithExpand(photo: .sample)
             }
         )
-        .previewLayout(.sizeThatFits)
     }
 }

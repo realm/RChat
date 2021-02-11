@@ -41,13 +41,15 @@ struct ConversationCardContentsView: View {
     }
 }
 
-//struct ConversationCardContentsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AppearancePreviews(
-//            ForEach(Conversation.samples) { conversation in
-//                ConversationCardContentsView(conversation: conversation, chatsters: [.sample, .sample2, .sample3, .sample, .sample2, .sample3])
-//            }
-//        )
-//        .previewLayout(.sizeThatFits)
-//    }
-//}
+struct ConversationCardContentsView_Previews: PreviewProvider {
+    static var previews: some View {
+        Realm.bootstrap()
+
+        return AppearancePreviews(
+            ForEach(Conversation.samples) { conversation in
+                ConversationCardContentsView(conversation: conversation)
+            }
+        )
+        .previewLayout(.sizeThatFits)
+    }
+}
