@@ -24,15 +24,27 @@ struct NewConversationView: View {
         !(name != "" && members.count > 0)
     }
     
+    private var memberList: [String] {
+        candidateMember == "" ? chatsters.compactMap { state.user?.userName != $0.userName ? $0.userName : nil } : candidateMembers
+    }
+    
     var body: some View {
-        NavigationView {
+        let searchBinding = Binding<String>(
+            get: { candidateMember },
+            set: {
+                candidateMember = $0
+                searchUsers()
+            }
+        )
+        
+        return NavigationView {
             ZStack {
                 VStack {
                     InputField(title: "Chat Name", text: $name)
                     CaptionLabel(title: "Add Members")
-                    SearchBox(searchText: $candidateMember, onCommit: searchUsers)
+                    SearchBox(searchText: searchBinding)
                     List {
-                        ForEach(candidateMembers, id: \.self) { candidateMember in
+                        ForEach(memberList, id: \.self) { candidateMember in
                             Button(action: { addMember(candidateMember) }) {
                                 HStack {
                                     Text(candidateMember)
