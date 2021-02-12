@@ -20,9 +20,17 @@ struct ConversationCardContentsView: View {
         static let padding: CGFloat = 5
     }
     
+    var chatMembers: [Chatster] {
+        var chatsterList = [Chatster]()
+        for member in conversation.members {
+            chatsterList.append(contentsOf: chatsters.filter("userName = %@", member.userName))
+        }
+        return chatsterList
+    }
+    
     var body: some View {
         HStack {
-            MugShotGridView(members: Array(chatsters))
+            MugShotGridView(members: chatMembers)
                 .frame(width: Dimensions.mugWidth)
                 .padding(.trailing)
             VStack(alignment: .leading) {
