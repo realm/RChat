@@ -25,7 +25,12 @@ struct NewConversationView: View {
     }
     
     private var memberList: [String] {
-        candidateMember == "" ? chatsters.compactMap { state.user?.userName != $0.userName ? $0.userName : nil } : candidateMembers
+        candidateMember == ""
+            ? chatsters.compactMap {
+                state.user?.userName != $0.userName && !members.contains($0.userName)
+                    ? $0.userName
+                    : nil }
+            : candidateMembers
     }
     
     var body: some View {
