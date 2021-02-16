@@ -10,22 +10,21 @@ import SwiftUI
 
 struct LogoutButton: View {
     @EnvironmentObject var state: AppState
+    @Environment(\.realm) var userRealm
     
     var action: () -> Void = {}
     
     var body: some View {
         Button("Log Out") {
             state.shouldIndicateActivity = true
-            if let realm = state.userRealm {
-                do {
-                    try realm.write {
-                        state.user?.presenceState = .offLine
-                    }
-                } catch {
-                    state.error = "Unable to open Realm write transaction"
+            do {
+                try userRealm.write {
+                    state.user?.presenceState = .offLine
                 }
-                logout()
+            } catch {
+                state.error = "Unable to open Realm write transaction"
             }
+            logout()
         }
         .disabled(state.shouldIndicateActivity)
     }

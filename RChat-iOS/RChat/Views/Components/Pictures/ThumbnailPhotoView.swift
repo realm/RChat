@@ -23,6 +23,8 @@ struct ThumbnailPhotoView: View {
 
 struct ThumbnailPhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        ThumbnailPhotoView(photo: .sample)
+        AppearancePreviews(ThumbnailPhotoView(photo: .sample))
+            .previewLayout(.sizeThatFits)
+            .padding()
     }
 }

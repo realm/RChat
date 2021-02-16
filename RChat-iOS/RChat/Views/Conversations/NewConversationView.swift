@@ -11,6 +11,9 @@ import RealmSwift
 struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     @Environment(\.presentationMode) var presentationMode
+    @ObservedResults(Chatster.self) var chatsters
+    
+    var isPreview = false
     
     @State private var name = ""
     @State private var members = [String]()
@@ -21,15 +24,32 @@ struct NewConversationView: View {
         !(name != "" && members.count > 0)
     }
     
+    private var memberList: [String] {
+        candidateMember == ""
+            ? chatsters.compactMap {
+                state.user?.userName != $0.userName && !members.contains($0.userName)
+                    ? $0.userName
+                    : nil }
+            : candidateMembers
+    }
+    
     var body: some View {
-        NavigationView {
+        let searchBinding = Binding<String>(
+            get: { candidateMember },
+            set: {
+                candidateMember = $0
+                searchUsers()
+            }
+        )
+        
+        return NavigationView {
             ZStack {
                 VStack {
                     InputField(title: "Chat Name", text: $name)
                     CaptionLabel(title: "Add Members")
-                    SearchBox(searchText: $candidateMember, onCommit: searchUsers)
+                    SearchBox(searchText: searchBinding)
                     List {
-                        ForEach(candidateMembers, id: \.self) { candidateMember in
+                        ForEach(memberList, id: \.self) { candidateMember in
                             Button(action: { addMember(candidateMember) }) {
                                 HStack {
                                     Text(candidateMember)
@@ -58,8 +78,15 @@ struct NewConversationView: View {
             }
             .padding()
             .navigationBarTitle("New Chat", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: saveConversation) {
-                Text("Save")
+            .navigationBarItems(trailing: VStack {
+                if isPreview {
+                    SaveConversationButton(name: name, members: members, done: { presentationMode.wrappedValue.dismiss() })
+                } else {
+                    SaveConversationButton(name: name, members: members, done: { presentationMode.wrappedValue.dismiss() })
+                    .environment(
+                        \.realmConfiguration,
+                        app.currentUser!.configuration(partitionValue: "user=\(state.user?._id ?? "")"))
+                }
             }
             .disabled(isEmpty)
             .padding()
@@ -70,19 +97,16 @@ struct NewConversationView: View {
     
     private func searchUsers() {
         var candidateChatsters: Results<Chatster>
-        if let chatsterRealm = state.chatsterRealm {
-            let allChatsters = chatsterRealm.objects(Chatster.self)
-            if candidateMember == "" {
-                candidateChatsters = allChatsters
-            } else {
-                let predicate = NSPredicate(format: "userName CONTAINS[cd] %@", candidateMember)
-                candidateChatsters = allChatsters.filter(predicate)
-            }
-            candidateMembers = []
-            candidateChatsters.forEach { chatster in
-                if !members.contains(chatster.userName) && chatster.userName != state.user?.userName {
-                    candidateMembers.append(chatster.userName)
-                }
+        if candidateMember == "" {
+            candidateChatsters = chatsters
+        } else {
+            let predicate = NSPredicate(format: "userName CONTAINS[cd] %@", candidateMember)
+            candidateChatsters = chatsters.filter(predicate)
+        }
+        candidateMembers = []
+        candidateChatsters.forEach { chatster in
+            if !members.contains(chatster.userName) && chatster.userName != state.user?.userName {
+                candidateMembers.append(chatster.userName)
             }
         }
     }
@@ -101,42 +125,14 @@ struct NewConversationView: View {
     private func deleteMember(at offsets: IndexSet) {
         members.remove(atOffsets: offsets)
     }
-    
-    private func saveConversation() {
-        state.error = nil
-        let conversation = Conversation()
-        conversation.displayName = name
-        guard let userName = state.user?.userName else {
-            state.error = "Current user is not set"
-            return
-        }
-        guard let realm = state.userRealm else {
-            state.error = "User Realm not set"
-            return
-        }
-        conversation.members.append(Member(userName: userName, state: .active))
-        members.forEach { username in
-            conversation.members.append(Member(username))
-        }
-        state.shouldIndicateActivity = true
-        do {
-            try realm.write {
-                state.user?.conversations.append(conversation)
-            }
-        } catch {
-            state.error = "Unable to open Realm write transaction"
-            state.shouldIndicateActivity = false
-            return
-        }
-        state.shouldIndicateActivity = false
-        presentationMode.wrappedValue.dismiss()
-    }
 }
 
 struct NewConversationView_Previews: PreviewProvider {
     static var previews: some View {
-        AppearancePreviews(
-            NewConversationView()
+        Realm.bootstrap()
+        
+        return AppearancePreviews(
+            NewConversationView(isPreview: true)
                 .environmentObject(AppState.sample)
         )
     }

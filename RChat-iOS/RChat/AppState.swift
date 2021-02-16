@@ -15,9 +15,7 @@ class AppState: ObservableObject {
     @Published var busyCount = 0
     
     var loginPublisher = PassthroughSubject<RealmSwift.User, Error>()
-    var chatsterLoginPublisher = PassthroughSubject<RealmSwift.User, Error>()
     var logoutPublisher = PassthroughSubject<Void, Error>()
-    let chatsterRealmPublisher = PassthroughSubject<Realm, Error>()
     let userRealmPublisher = PassthroughSubject<Realm, Error>()
     var cancellables = Set<AnyCancellable>()
 
@@ -37,54 +35,18 @@ class AppState: ObservableObject {
             }
         }
     }
-    
-    var userRealm: Realm?
-    var chatsterRealm: Realm?
+
     var user: User?
 
     var loggedIn: Bool {
-        app.currentUser != nil && app.currentUser?.state == .loggedIn && userRealm != nil && chatsterRealm != nil
+        app.currentUser != nil && user != nil && app.currentUser?.state == .loggedIn
     }
 
     init() {
         _  = app.currentUser?.logOut()
-        userRealm = nil
-        chatsterRealm = nil
-        initChatsterLoginPublisher()
-        initChatsterRealmPublisher()
         initLoginPublisher()
         initUserRealmPublisher()
         initLogoutPublisher()
-    }
-    
-    func initChatsterLoginPublisher() {
-        chatsterLoginPublisher
-            .receive(on: DispatchQueue.main)
-            .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
-                self.shouldIndicateActivity = true
-                let realmConfig = user.configuration(partitionValue: "all-users=all-the-users")
-                return Realm.asyncOpen(configuration: realmConfig)
-            }
-            .receive(on: DispatchQueue.main)
-            .map {
-                return $0
-            }
-            .subscribe(chatsterRealmPublisher)
-            .store(in: &self.cancellables)
-    }
-    
-    func initChatsterRealmPublisher() {
-        chatsterRealmPublisher
-            .sink(receiveCompletion: { result in
-                if case let .failure(error) = result {
-                    self.error = "Failed to log in and open chatster realm: \(error.localizedDescription)"
-                }
-            }, receiveValue: { realm in
-//                print("Chatster Realm User file location: \(realm.configuration.fileURL!.path)")
-                self.chatsterRealm = realm
-                self.shouldIndicateActivity = false
-            })
-            .store(in: &cancellables)
     }
     
     func initLoginPublisher() {
@@ -110,8 +72,7 @@ class AppState: ObservableObject {
                     self.error = "Failed to log in and open user realm: \(error.localizedDescription)"
                 }
             }, receiveValue: { realm in
-//                print("User Realm User file location: \(realm.configuration.fileURL!.path)")
-                self.userRealm = realm
+                print("User Realm User file location: \(realm.configuration.fileURL!.path)")
                 self.user = realm.objects(User.self).first
                 do {
                     try realm.write {
@@ -131,8 +92,6 @@ class AppState: ObservableObject {
             .sink(receiveCompletion: { _ in
             }, receiveValue: { _ in
                 self.user = nil
-                self.userRealm = nil
-                self.chatsterRealm = nil
             })
             .store(in: &cancellables)
     }

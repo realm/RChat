@@ -10,7 +10,6 @@ import SwiftUI
 struct SearchBox: View {
     var placeholder: String = "Search"
     @Binding var searchText: String
-    let onCommit: () -> Void
 
     private enum Dimensions {
         static let inset: CGFloat = 7.0
@@ -29,8 +28,7 @@ struct SearchBox: View {
                 Image(systemName: "magnifyingglass")
                     .frame(width: Dimensions.glassSize, height: Dimensions.glassSize)
                 TextField(placeholder,
-                          text: $searchText,
-                          onCommit: onCommit
+                          text: $searchText
                 )
                 .disableAutocorrection(true)
                 .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
@@ -53,8 +51,7 @@ struct SearchBox_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
             SearchBox(
-                searchText: .constant(""),
-                onCommit: {}
+                searchText: .constant("")
             )
         )
         .padding()

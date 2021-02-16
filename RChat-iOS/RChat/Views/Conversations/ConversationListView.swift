@@ -10,10 +10,12 @@ import RealmSwift
 
 struct ConversationListView: View {
     @EnvironmentObject var state: AppState
+    @ObservedResults(User.self) var users
+    
+    var isPreview = false
     
     @State private var realmUserNotificationToken: NotificationToken?
-    @State private var realmChatsterNotificationToken: NotificationToken?
-    @State var lastSync: Date?
+    
     @State private var conversation: Conversation?
     @State var showConversation = false
     @State var showingAddChat = false
@@ -26,17 +28,13 @@ struct ConversationListView: View {
     
     var body: some View {
         VStack {
-            if let conversations = state.user?.conversations.freeze().sorted(by: sortDescriptors) {
+            if let conversations = users[0].conversations.sorted(by: sortDescriptors) {
                 List {
                     ForEach(conversations) { conversation in
                         Button(action: {
                             self.conversation = conversation
                             showConversation.toggle()
-                        }) {
-                        ConversationCardView(
-                            conversation: conversation,
-                            lastSync: lastSync)
-                        }
+                        }) { ConversationCardView(conversation: conversation, isPreview: isPreview) }
                     }
                 }
                 .animation(.easeIn(duration: animationDuration))
@@ -46,53 +44,36 @@ struct ConversationListView: View {
                 .disabled(showingAddChat)
             }
             Spacer()
-            if let lastSync = lastSync {
-                LastSync(date: lastSync)
+            if isPreview {
+                NavigationLink(
+                    destination: ChatRoomView(conversation: conversation),
+                    isActive: $showConversation) { EmptyView() }
+            } else {
+                if let user = state.user {
+                    NavigationLink(
+                        destination: ChatRoomView(conversation: conversation)
+                            .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)")),
+                        isActive: $showConversation) { EmptyView() }
+                }
             }
-            NavigationLink(
-                destination: ChatRoomView(conversation: conversation),
-                isActive: $showConversation) { EmptyView() }
         }
         .sheet(isPresented: $showingAddChat) {
             // TODO: Not clear why we need to pass in the environmentObject, appears that it may
             // be a bug – should test again in the future.
             NewConversationView()
                 .environmentObject(state)
-        }
-        .onAppear { watchRealms() }
-        .onDisappear { stopWatching() }
-    }
-    
-    private func watchRealms() {
-        if let userRealm = state.userRealm {
-            realmUserNotificationToken = userRealm.observe {_, _ in
-                lastSync = Date()
-            }
-        }
-        if let chatsterRealm = state.chatsterRealm {
-            realmChatsterNotificationToken = chatsterRealm.observe { _, _ in
-                lastSync = Date()
-            }
+                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
         }
     }
-    
-    private func stopWatching() {
-        if let userToken = realmUserNotificationToken {
-            userToken.invalidate()
-        }
-        if let chatsterToken = realmChatsterNotificationToken {
-            chatsterToken.invalidate()
-        }
-    }
+
 }
 
 struct ConversationListViewPreviews: PreviewProvider {
+    
     static var previews: some View {
-        // TODO: Fix preview
-        AppearancePreviews(
-            ConversationListView(
-                lastSync: Date())
-        )
-        .environmentObject(AppState.sample)
+        Realm.bootstrap()
+        
+        return ConversationListView(isPreview: true)
+            .environmentObject(AppState.sample)
     }
 }

@@ -35,6 +35,16 @@ extension User {
             self.conversations.append(conversation)
         }
     }
+    
+    convenience init(_ user: User) {
+        self.init()
+        partition = user.partition
+        userName = user.userName
+        userPreferences = UserPreferences(user.userPreferences)
+        lastSeenAt = user.lastSeenAt
+        conversations.append(objectsIn: user.conversations.map { Conversation($0) })
+        presence = user.presence
+    }
 }
 
 extension User: Samplable {
@@ -56,6 +66,14 @@ extension UserPreferences {
         self.displayName = displayName
         self.avatarImage = photo
     }
+    
+    convenience init(_ userPreferences: UserPreferences?) {
+        self.init()
+        if let userPreferences = userPreferences {
+            displayName = userPreferences.displayName
+            avatarImage = Photo(userPreferences.avatarImage)
+        }
+    }
 }
 
 extension UserPreferences: Samplable {
@@ -66,26 +84,56 @@ extension UserPreferences: Samplable {
 }
 
 extension Conversation {
-    convenience init(displayName: String, unreadCount: Int, members: [String]) {
+    convenience init(displayName: String, unreadCount: Int, members: [Member]) {
         self.init()
         self.displayName = displayName
         self.unreadCount = unreadCount
-        members.forEach { username in
-            self.members.append(Member(username))
-        }
+        self.members.append(objectsIn: members.map { Member($0) })
+        
+//        forEach { username in
+//            self.members.append(Member(username))
+//        }
+    }
+    
+    convenience init(_ conversation: Conversation) {
+        self.init()
+        displayName = conversation.displayName
+        unreadCount = conversation.unreadCount
+        members.append(objectsIn: conversation.members.map { Member($0) })
     }
 }
 
 extension Conversation: Samplable {
     static var samples: [Conversation] { [sample, sample2, sample3] }
     static var sample: Conversation {
-        Conversation(displayName: "Sample chat", unreadCount: 2, members: ["rod@contoso.com", "jane@contoso.com", "freddy@contoso.com"])
+        Conversation(displayName: "Sample chat", unreadCount: 2, members: Member.samples)
     }
     static var sample2: Conversation {
-        Conversation(displayName: "Fishy chat", unreadCount: 0, members: ["rod@contoso.com", "jane@contoso.com"])
+        Conversation(displayName: "Fishy chat", unreadCount: 0, members: Member.samples)
     }
     static var sample3: Conversation {
-        Conversation(displayName: "Third chat", unreadCount: 1, members: ["rod@contoso.com", "freddy@contoso.com"])
+        Conversation(displayName: "Third chat", unreadCount: 1, members: Member.samples)
+    }
+}
+
+extension Member {
+    convenience init(_ member: Member) {
+        self.init()
+        userName = member.userName
+        membershipStatus = member.membershipStatus
+    }
+}
+
+extension Member: Samplable {
+    static var samples: [Member] { [sample, sample2, sample3] }
+    static var sample: Member {
+        Member(userName: "rod@contoso.com", state: .active)
+    }
+    static var sample2: Member {
+        Member(userName: "jane@contoso.com", state: .active)
+    }
+    static var sample3: Member {
+        Member(userName: "freddy@contoso.com", state: .pending)
     }
 }
 
@@ -95,17 +143,27 @@ extension Chatster {
         self._id = user._id
         self.userName = user.userName
         self.displayName = user.userPreferences!.displayName
-        self.avatarImage = Photo(photo: user.userPreferences!.avatarImage!)
+        self.avatarImage = Photo(user.userPreferences?.avatarImage)
         lastSeenAt = Date.random
         self.presence = user.presence
+    }
+    
+    convenience init(_ chatster: Chatster) {
+        self.init()
+        partition = chatster.partition
+        userName = chatster.userName
+        displayName = chatster.displayName
+        avatarImage = Photo(chatster.avatarImage)
+        lastSeenAt = chatster.lastSeenAt
+        presence = chatster.presence
     }
 }
 
 extension Chatster: Samplable {
     static var samples: [Chatster] { [sample, sample2, sample3] }
-    static var sample: Chatster { Chatster(user: .sample) }
-    static var sample2: Chatster { Chatster(user: .sample2) }
-    static var sample3: Chatster { Chatster(user: .sample3) }
+    static var sample: Chatster { Chatster(user: User(.sample)) }
+    static var sample2: Chatster { Chatster(user: User(.sample2)) }
+    static var sample3: Chatster { Chatster(user: User(.sample3)) }
 }
 
 extension AppState {
@@ -129,11 +187,13 @@ extension Photo {
         self.picture = (UIImage(named: photoName) ?? UIImage()).jpegData(compressionQuality: 0.8)
         self.date = Date.random
     }
-    convenience init(photo: Photo) {
+    convenience init(_ photo: Photo?) {
         self.init()
-        self.thumbNail = photo.thumbNail
-        self.picture = photo.picture
-        self.date = photo.date
+        if let photo = photo {
+            self.thumbNail = photo.thumbNail
+            self.picture = photo.picture
+            self.date = photo.date
+        }
     }
 }
 
@@ -161,6 +221,16 @@ extension ChatMessage {
             self.location.append(-0.10689139236939127 + Double.random(in: -10..<10))
             self.location.append(51.506520923981554 + Double.random(in: -10..<10))
         }
+    }
+    
+    convenience init(_ chatMessage: ChatMessage) {
+        self.init()
+        partition = chatMessage.partition
+        author = chatMessage.author
+        text = chatMessage.text
+        image = Photo(chatMessage.image)
+        location.append(objectsIn: chatMessage.location)
+        timestamp = chatMessage.timestamp
     }
 }
 
@@ -194,5 +264,19 @@ extension Realm: Samplable {
             }
         }
         return realm
+    }
+    
+    static func bootstrap() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+                realm.add(Chatster.samples)
+                realm.add(User(User.sample))
+                realm.add(ChatMessage.samples)
+            }
+        } catch {
+            print("Failed to bootstrap the default realm")
+        }
     }
 }

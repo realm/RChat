@@ -8,11 +8,9 @@
 import Foundation
 import RealmSwift
 
-class Member: EmbeddedObject, Identifiable {
-    @objc dynamic var userName = ""
-    @objc dynamic var membershipStatus: String = "User added, but invite pending"
-    
-    var id: String { userName }
+@objcMembers class Member: EmbeddedObject, ObjectKeyIdentifiable {
+    dynamic var userName = ""
+    dynamic var membershipStatus: String = "User added, but invite pending"
     
     convenience init(_ userName: String) {
         self.init()

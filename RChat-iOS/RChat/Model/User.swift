@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-class User: Object {
-    @objc dynamic var _id = UUID().uuidString
-    @objc dynamic var partition = "" // "user=_id"
-    @objc dynamic var userName = ""
-    @objc dynamic var userPreferences: UserPreferences?
-    @objc dynamic var lastSeenAt: Date?
-    let conversations = List<Conversation>()
-    @objc dynamic var presence = "Off-Line"
+@objcMembers class User: Object, ObjectKeyIdentifiable {
+    dynamic var _id = UUID().uuidString
+    dynamic var partition = "" // "user=_id"
+    dynamic var userName = ""
+    dynamic var userPreferences: UserPreferences?
+    dynamic var lastSeenAt: Date?
+    var conversations = List<Conversation>()
+    dynamic var presence = "Off-Line"
 
     var isProfileSet: Bool { !(userPreferences?.isEmpty ?? true) }
     var presenceState: Presence {
@@ -26,10 +26,6 @@ class User: Object {
     override static func primaryKey() -> String? {
         return "_id"
     }
-}
-
-extension User: Identifiable {
-    var id: String { _id }
 }
 
 enum Presence: String {
