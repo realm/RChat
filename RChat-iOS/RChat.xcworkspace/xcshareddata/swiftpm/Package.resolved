@@ -5,9 +5,9 @@
         "package": "Realm",
         "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
-          "branch": "jf/swiftui-realm-state",
-          "revision": "9013859ffe3d041734ba4cff50f19260d3045f72",
-          "version": null
+          "branch": null,
+          "revision": "44b9632b22240f0baa4b50964c5722e27094aea0",
+          "version": "10.6.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
           "branch": null,
-          "revision": "b93ab22d2ff79b105f2a83450e5630d830166cfc",
-          "version": "10.4.0"
+          "revision": "6431a4bc6530ec16731ef1c66b379cbef6da01f0",
+          "version": "10.5.0"
         }
       }
     ]

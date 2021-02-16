@@ -1066,8 +1066,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
-				branch = "jf/swiftui-realm-state";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

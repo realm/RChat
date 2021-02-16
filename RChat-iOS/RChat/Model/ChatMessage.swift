@@ -35,7 +35,6 @@ import RealmSwift
         get { partition.components(separatedBy: "=")[1] }
         set(conversationId) { partition = "conversation=\(conversationId)"}
     }
-    
 }
 
 extension ChatMessage: Identifiable {

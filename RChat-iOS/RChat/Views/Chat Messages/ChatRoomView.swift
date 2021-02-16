@@ -40,7 +40,6 @@ struct ChatRoomView: View {
                 do {
                     try userRealm.write {
                         conversation.unreadCount = 0
-                        print("Reset unreadCount")
                     }
                 } catch {
                     print("Unable to clear chat unread count")
