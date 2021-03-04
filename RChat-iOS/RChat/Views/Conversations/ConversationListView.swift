@@ -14,8 +14,6 @@ struct ConversationListView: View {
     
     var isPreview = false
     
-    @State private var realmUserNotificationToken: NotificationToken?
-    
     @State private var conversation: Conversation?
     @State var showConversation = false
     @State var showingAddChat = false
@@ -58,8 +56,6 @@ struct ConversationListView: View {
             }
         }
         .sheet(isPresented: $showingAddChat) {
-            // TODO: Not clear why we need to pass in the environmentObject, appears that it may
-            // be a bug – should test again in the future.
             NewConversationView()
                 .environmentObject(state)
                 .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
