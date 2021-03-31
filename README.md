@@ -2,7 +2,7 @@
 
 RChat is a chat application. Members of a chat room share messages, photos, location, and presence information with each other. The initial version is an iOS (Swift & SwiftUI) app, but we will use the same data model and backend Realm application to build an Android version in the future.
 
-Read about the [Realm data architecture here](https://developer.mongodb.com/how-to/realm-swiftui-ios-chat-app) and [how the app was built here](https://developer.mongodb.com/how-to/building-a-mobile-chat-app-using-realm/).
+Read about the [Realm data architecture here](https://developer.mongodb.com/how-to/realm-swiftui-ios-chat-app) and [how the app was built here](https://developer.mongodb.com/how-to/building-a-mobile-chat-app-using-realm-new-way/).
 
 ![Screenshot of a chatroom with messages](assets/ChatRoom.png)
 
