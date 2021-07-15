@@ -8,9 +8,9 @@
 import RealmSwift
 import SwiftUI
 
-@objcMembers class Photo: EmbeddedObject, ObjectKeyIdentifiable {
-    dynamic var _id = UUID().uuidString
-    dynamic var thumbNail: Data?
-    dynamic var picture: Data?
-    dynamic var date = Date()
+class Photo: EmbeddedObject, ObjectKeyIdentifiable {
+    @Persisted var _id = UUID().uuidString
+    @Persisted var thumbNail: Data?
+    @Persisted var picture: Data?
+    @Persisted var date = Date()
 }

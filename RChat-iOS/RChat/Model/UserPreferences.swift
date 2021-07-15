@@ -7,9 +7,9 @@
 
 import RealmSwift
 
-@objcMembers class UserPreferences: EmbeddedObject, ObjectKeyIdentifiable {
-    dynamic var displayName: String?
-    dynamic var avatarImage: Photo?
+class UserPreferences: EmbeddedObject, ObjectKeyIdentifiable {
+    @Persisted var displayName: String?
+    @Persisted var avatarImage: Photo?
 
     var isEmpty: Bool { displayName == nil || displayName == "" }
 }

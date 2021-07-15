@@ -8,9 +8,9 @@
 import Foundation
 import RealmSwift
 
-@objcMembers class Conversation: EmbeddedObject, ObjectKeyIdentifiable {
-    dynamic var id = UUID().uuidString
-    dynamic var displayName = ""
-    dynamic var unreadCount = 0
-    var members = List<Member>()
+class Conversation: EmbeddedObject, ObjectKeyIdentifiable {
+    @Persisted var id = UUID().uuidString
+    @Persisted var displayName = ""
+    @Persisted var unreadCount = 0
+    @Persisted var members = List<Member>()
 }
