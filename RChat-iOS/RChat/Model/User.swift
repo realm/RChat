@@ -8,23 +8,19 @@
 import Foundation
 import RealmSwift
 
-@objcMembers class User: Object, ObjectKeyIdentifiable {
-    dynamic var _id = UUID().uuidString
-    dynamic var partition = "" // "user=_id"
-    dynamic var userName = ""
-    dynamic var userPreferences: UserPreferences?
-    dynamic var lastSeenAt: Date?
-    var conversations = List<Conversation>()
-    dynamic var presence = "Off-Line"
+class User: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true) var _id = UUID().uuidString
+    @Persisted var partition = "" // "user=_id"
+    @Persisted var userName = ""
+    @Persisted var userPreferences: UserPreferences?
+    @Persisted var lastSeenAt: Date?
+    @Persisted var conversations = List<Conversation>()
+    @Persisted var presence = "Off-Line"
 
     var isProfileSet: Bool { !(userPreferences?.isEmpty ?? true) }
     var presenceState: Presence {
         get { return Presence(rawValue: presence) ?? .hidden }
         set { presence = newValue.asString }
-    }
-
-    override static func primaryKey() -> String? {
-        return "_id"
     }
 }
 

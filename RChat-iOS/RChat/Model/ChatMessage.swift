@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-@objcMembers class ChatMessage: Object, ObjectKeyIdentifiable {
-    dynamic var _id = UUID().uuidString
-    dynamic var partition = "" // "conversation=<conversation-id>"
-    dynamic var author: String? // username
-    dynamic var text = ""
-    dynamic var image: Photo?
-    let location = List<Double>()
-    dynamic var timestamp = Date()
+class ChatMessage: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true) var _id = UUID().uuidString
+    @Persisted var partition = "" // "conversation=<conversation-id>"
+    @Persisted var author: String? // username
+    @Persisted var text = ""
+    @Persisted var image: Photo?
+    @Persisted var location = List<Double>()
+    @Persisted var timestamp = Date()
 
     override static func primaryKey() -> String? {
         return "_id"
