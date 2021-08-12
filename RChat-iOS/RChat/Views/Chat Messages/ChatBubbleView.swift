@@ -69,14 +69,12 @@ struct ChatBubbleView_Previews: PreviewProvider {
     static var previews: some View {
         Realm.bootstrap()
         
-        return AppearancePreviews(
-            Group {
-                ChatBubbleView(chatMessage: .sample, authorName: "jane@contoso.com", isPreview: true)
-                ChatBubbleView(chatMessage: .sample2, authorName: "freddy@contoso.com", isPreview: true)
-                ChatBubbleView(chatMessage: .sample3, authorName: nil, isPreview: true)
-                ChatBubbleView(chatMessage: .sample33, authorName: "jane@contoso.com", isPreview: true)
-            }
-        )
+        return Group {
+            ChatBubbleView(chatMessage: .sample, authorName: "jane@contoso.com", isPreview: true)
+            ChatBubbleView(chatMessage: .sample2, authorName: "freddy@contoso.com", isPreview: true)
+            ChatBubbleView(chatMessage: .sample3, authorName: nil, isPreview: true)
+            ChatBubbleView(chatMessage: .sample33, authorName: "jane@contoso.com", isPreview: true)
+        }
         .padding()
         .previewLayout(.sizeThatFits)
     }
