@@ -10,7 +10,7 @@ import RealmSwift
 
 struct ConversationListView: View {
     @EnvironmentObject var state: AppState
-    @ObservedResults(User.self) var users
+    @ObservedResults(User.self, configuration: Realm.Configuration(schemaVersion: schemaVersion)) var users
     
     var isPreview = false
     

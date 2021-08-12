@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A12174D26C544D80001CD6D /* PriorityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A12174C26C544D80001CD6D /* PriorityButton.swift */; };
 		0A28D338258B9ABC005D68E3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D337258B9ABC005D68E3 /* Realm */; };
 		0A28D33A258B9ABC005D68E3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D339258B9ABC005D68E3 /* RealmSwift */; };
 		0A4EA3B4258D32960003F0E4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EA3B3258D32960003F0E4 /* CheckBox.swift */; };
@@ -97,6 +98,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A12174C26C544D80001CD6D /* PriorityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityButton.swift; sourceTree = "<group>"; };
 		0A3520E125949D00006DCC46 /* RChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RChat.entitlements; sourceTree = "<group>"; };
 		0A4EA3B3258D32960003F0E4 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		0A87398725C9BECD0038F2FE /* ChatRoomBubblesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomBubblesView.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 				49CF1CA02579258A00DF251E /* AttachButton.swift */,
 				49CF1CAA25792AB600DF251E /* DeleteButton.swift */,
 				491C1F9325812F77000EF408 /* LocationButton.swift */,
+				0A12174C26C544D80001CD6D /* PriorityButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				49012A31256BEA4C00C3614B /* ContentView.swift in Sources */,
 				499E1EA2256FAACC0036614F /* ConversationCardView.swift in Sources */,
 				49012B75256D658000C3614B /* AvatarButton.swift in Sources */,
+				0A12174D26C544D80001CD6D /* PriorityButton.swift in Sources */,
 				49012B45256D162D00C3614B /* Photo.swift in Sources */,
 				491C1F9A25813E5B000EF408 /* MapThumbnailWithDelete.swift in Sources */,
 				4950E100256FAE0600FA7E26 /* Thumbnail.swift in Sources */,
@@ -798,7 +802,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -941,7 +945,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				INFOPLIST_FILE = RChatTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -964,7 +968,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				INFOPLIST_FILE = RChatTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

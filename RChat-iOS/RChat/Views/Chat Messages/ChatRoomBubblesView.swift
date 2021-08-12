@@ -10,7 +10,9 @@ import RealmSwift
 
 struct ChatRoomBubblesView: View {
     @EnvironmentObject var state: AppState
-    @ObservedResults(ChatMessage.self, sortDescriptor: SortDescriptor(keyPath: "timestamp", ascending: true)) var chats
+    @ObservedResults(ChatMessage.self,
+                     configuration: Realm.Configuration(schemaVersion: schemaVersion),
+                     sortDescriptor: SortDescriptor(keyPath: "timestamp", ascending: true)) var chats
     
     var conversation: Conversation?
     var isPreview = false

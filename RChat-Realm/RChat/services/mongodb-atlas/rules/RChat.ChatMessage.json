@@ -56,13 +56,17 @@
             },
             "timestamp": {
                 "bsonType": "date"
+            },
+            "isHighPriority": {
+              "bsonType": "bool"
             }
         },
         "required": [
             "_id",
             "partition",
             "text",
-            "timestamp"
+            "timestamp",
+            "isHighPriority"
         ],
         "title": "ChatMessage"
     }

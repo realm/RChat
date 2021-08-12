@@ -27,6 +27,10 @@ struct ChatBubbleView: View {
             if isMyMessage { Spacer().frame(width: Dimensions.horizontalOffset) }
             VStack {
                 HStack {
+                    if chatMessage.isHighPriority {
+                        Image(systemName: "thermometer.sun.fill")
+                            .renderingMode(.original)
+                    }
                     if let authorName = authorName {
                         if isPreview {
                             AuthorView(userName: authorName)
@@ -52,6 +56,7 @@ struct ChatBubbleView: View {
                     }
                     if chatMessage.text != "" {
                         Text(chatMessage.text)
+                        .fontWeight(chatMessage.isHighPriority ? .bold : .regular)
                         .padding(Dimensions.padding)
                     }
                     Spacer()
@@ -69,14 +74,14 @@ struct ChatBubbleView_Previews: PreviewProvider {
     static var previews: some View {
         Realm.bootstrap()
         
-        return AppearancePreviews(
-            Group {
+//        return AppearancePreviews(
+            return Group {
                 ChatBubbleView(chatMessage: .sample, authorName: "jane@contoso.com", isPreview: true)
                 ChatBubbleView(chatMessage: .sample2, authorName: "freddy@contoso.com", isPreview: true)
                 ChatBubbleView(chatMessage: .sample3, authorName: nil, isPreview: true)
                 ChatBubbleView(chatMessage: .sample33, authorName: "jane@contoso.com", isPreview: true)
             }
-        )
+//        )
         .padding()
         .previewLayout(.sizeThatFits)
     }

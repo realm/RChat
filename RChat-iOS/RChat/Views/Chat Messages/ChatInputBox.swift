@@ -27,6 +27,7 @@ struct ChatInputBox: View {
     @State var photo: Photo?
     @State var chatText = ""
     @State var location =  [Double]()
+    @State var isHighPriority = false
     
     private var isEmpty: Bool { photo == nil && location == [] && chatText == "" }
     
@@ -48,6 +49,7 @@ struct ChatInputBox: View {
             }
             HStack {
                 Spacer()
+                PriorityButton(isHighPriority: $isHighPriority)
                 LocationButton(action: addLocation, active: shouldShareLocation && location.count == 0)
                 AttachButton(action: addAttachment, active: photo == nil)
                 CameraButton(action: takePhoto, active: photo == nil)
@@ -87,22 +89,24 @@ struct ChatInputBox: View {
     }
     
     private func sendChat() {
-        sendMessage(text: chatText, photo: photo, location: location)
+        sendMessage(text: chatText, photo: photo, location: location, isHighPriority: isHighPriority)
         photo = nil
         chatText = ""
         location = []
+        isHighPriority = false
     }
     
     private func clearBackground() {
         UITextView.appearance().backgroundColor = .clear
     }
     
-    private func sendMessage(text: String, photo: Photo?, location: [Double]) {
+    private func sendMessage(text: String, photo: Photo?, location: [Double], isHighPriority: Bool) {
             let chatMessage = ChatMessage(
                 author: state.user?.userName ?? "Unknown",
                 text: text,
                 image: photo,
-                location: location)
+                location: location,
+                isHighPriority: isHighPriority)
             send(chatMessage)
     }
 }

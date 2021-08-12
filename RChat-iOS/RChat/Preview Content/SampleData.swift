@@ -210,7 +210,8 @@ extension ChatMessage {
                      author: User,
                      text: String = "This is the text for the message",
                      includePhoto: Bool = false,
-                     includeLocation: Bool = false) {
+                     includeLocation: Bool = false,
+                     isHighPriority: Bool = false) {
         self.init()
         partition = "conversation=\(conversation.id)"
         self.author = author.userName
@@ -221,6 +222,7 @@ extension ChatMessage {
             self.location.append(-0.10689139236939127 + Double.random(in: -10..<10))
             self.location.append(51.506520923981554 + Double.random(in: -10..<10))
         }
+        self.isHighPriority = isHighPriority
     }
     
     convenience init(_ chatMessage: ChatMessage) {
@@ -231,19 +233,20 @@ extension ChatMessage {
         image = Photo(chatMessage.image)
         location.append(objectsIn: chatMessage.location)
         timestamp = chatMessage.timestamp
+        isHighPriority = chatMessage.isHighPriority
     }
 }
 
 extension ChatMessage: Samplable {
     static var samples: [ChatMessage] { [sample, sample2, sample3, sample20, sample22, sample23, sample30, sample32, sample33] }
     static var sample: ChatMessage { ChatMessage(conversation: .sample, author: .sample) }
-    static var sample2: ChatMessage { ChatMessage(conversation: .sample, author: .sample2, includePhoto: true) }
+    static var sample2: ChatMessage { ChatMessage(conversation: .sample, author: .sample2, includePhoto: true, isHighPriority: true) }
     static var sample3: ChatMessage { ChatMessage(conversation: .sample, author: .sample3, text: "Thoughts on this spud?", includePhoto: true, includeLocation: true)}
     static var sample20: ChatMessage { ChatMessage(conversation: .sample2, author: .sample) }
-    static var sample22: ChatMessage { ChatMessage(conversation: .sample2, author: .sample2, includePhoto: true) }
+    static var sample22: ChatMessage { ChatMessage(conversation: .sample2, author: .sample2, includePhoto: true, isHighPriority: true) }
     static var sample23: ChatMessage { ChatMessage(conversation: .sample2, author: .sample3, text: "Fancy trying this?", includePhoto: true, includeLocation: true)}
     static var sample30: ChatMessage { ChatMessage(conversation: .sample3, author: .sample) }
-    static var sample32: ChatMessage { ChatMessage(conversation: .sample3, author: .sample2, includePhoto: true) }
+    static var sample32: ChatMessage { ChatMessage(conversation: .sample3, author: .sample2, includePhoto: true, isHighPriority: true) }
     static var sample33: ChatMessage { ChatMessage(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's space for it all to fit in", includePhoto: true, includeLocation: true)}
 }
 

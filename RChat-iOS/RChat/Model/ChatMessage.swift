@@ -16,12 +16,13 @@ class ChatMessage: Object, ObjectKeyIdentifiable {
     @Persisted var image: Photo?
     @Persisted var location = List<Double>()
     @Persisted var timestamp = Date()
+    @Persisted var isHighPriority = false
 
     override static func primaryKey() -> String? {
         return "_id"
     }
     
-    convenience init(author: String, text: String, image: Photo?, location: [Double] = []) {
+    convenience init(author: String, text: String, image: Photo?, location: [Double] = [], isHighPriority: Bool) {
         self.init()
         self.author = author
         self.text = text
@@ -29,6 +30,7 @@ class ChatMessage: Object, ObjectKeyIdentifiable {
         location.forEach { coord in
             self.location.append(coord)
         }
+        self.isHighPriority = isHighPriority
     }
     
     var conversationId: String {

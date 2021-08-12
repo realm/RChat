@@ -23,6 +23,7 @@ struct ButtonTemplate: View {
     var body: some View {
         Button(action: { if active { action() } }) {
             Image(systemName: active ? activeImage : inactiveImage)
+//                .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .foregroundColor(.primary)
@@ -39,7 +40,7 @@ struct ButtonTemplate_Previews: PreviewProvider {
                 ButtonTemplate(action: {})
                 ButtonTemplate(action: {}, active: false)
                 ButtonTemplate(action: {}, active: false, activeImage: "camera.fill", inactiveImage: "camera")
-                ButtonTemplate(action: {}, active: true, activeImage: "camera.fill", inactiveImage: "camera")
+                ButtonTemplate(action: {}, active: true, activeImage: "thermometer.sun.fill", inactiveImage: "camera")
             }
         )
         .previewLayout(.sizeThatFits)
