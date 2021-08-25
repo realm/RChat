@@ -1,0 +1,59 @@
+{
+    "bsonType": "object",
+    "properties": {
+        "_id": {
+            "bsonType": "string"
+        },
+        "author": {
+            "bsonType": "string"
+        },
+        "image": {
+            "bsonType": "object",
+            "properties": {
+                "_id": {
+                    "bsonType": "string"
+                },
+                "date": {
+                    "bsonType": "date"
+                },
+                "picture": {
+                    "bsonType": "binData"
+                },
+                "thumbNail": {
+                    "bsonType": "binData"
+                }
+            },
+            "required": [
+                "_id",
+                "date"
+            ],
+            "title": "Photo"
+        },
+        "isHighPriority": {
+            "bsonType": "bool"
+        },
+        "location": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "double"
+            }
+        },
+        "partition": {
+            "bsonType": "string"
+        },
+        "text": {
+            "bsonType": "string"
+        },
+        "timestamp": {
+            "bsonType": "date"
+        }
+    },
+    "required": [
+        "_id",
+        "partition",
+        "text",
+        "timestamp",
+        "isHighPriority"
+    ],
+    "title": "ChatMessage"
+}

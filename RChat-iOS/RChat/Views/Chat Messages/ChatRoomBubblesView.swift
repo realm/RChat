@@ -10,7 +10,7 @@ import RealmSwift
 
 struct ChatRoomBubblesView: View {
     @EnvironmentObject var state: AppState
-    @ObservedResults(ChatMessage.self,
+    @ObservedResults(ChatMessageV2.self,
                      configuration: Realm.Configuration(schemaVersion: schemaVersion),
                      sortDescriptor: SortDescriptor(keyPath: "timestamp", ascending: true)) var chats
     
@@ -77,7 +77,7 @@ struct ChatRoomBubblesView: View {
         }
     }
     
-    private func sendMessage(chatMessage: ChatMessage) {
+    private func sendMessage(chatMessage: ChatMessageV2) {
         guard let conversataionString = conversation else {
             print("comversation not set")
             return

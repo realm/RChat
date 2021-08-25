@@ -1,6 +1,6 @@
 {
-    "id": "611a919471f2daf096517dfb",
-    "name": "ChatMessageChange",
+    "id": "611bb80b2f4e936c56a2f5f6",
+    "name": "ChatMessageV2Change",
     "type": "DATABASE",
     "config": {
         "operation_types": [
@@ -10,14 +10,14 @@
             "REPLACE"
         ],
         "database": "RChat",
-        "collection": "ChatMessage",
+        "collection": "ChatMessageV2",
         "service_name": "mongodb-atlas",
         "match": {},
         "project": {},
-        "full_document": true,
+        "full_document": false,
         "full_document_before_change": false,
-        "unordered": true
+        "unordered": false
     },
-    "function_name": "chatMessageChange",
+    "function_name": "copyToChatMessage",
     "disabled": false
 }

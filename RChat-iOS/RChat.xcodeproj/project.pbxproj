@@ -31,7 +31,7 @@
 		49012AE5256BF25C00C3614B /* swiftlint_config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 49012AE4256BF25C00C3614B /* swiftlint_config.yaml */; };
 		49012AED256BF2DF00C3614B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012AEC256BF2DF00C3614B /* User.swift */; };
 		49012AF2256BF44700C3614B /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012AF1256BF44700C3614B /* UserPreferences.swift */; };
-		49012AF7256BF59200C3614B /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012AF6256BF59200C3614B /* ChatMessage.swift */; };
+		49012AF7256BF59200C3614B /* ChatMessageV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012AF6256BF59200C3614B /* ChatMessageV2.swift */; };
 		49012AFC256BF90100C3614B /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012AFB256BF90100C3614B /* Conversation.swift */; };
 		49012B05256C23CB00C3614B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B04256C23CB00C3614B /* LoginView.swift */; };
 		49012B12256C240F00C3614B /* LogoutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B11256C240F00C3614B /* LogoutButton.swift */; };
@@ -129,7 +129,7 @@
 		49012AE4256BF25C00C3614B /* swiftlint_config.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint_config.yaml; sourceTree = "<group>"; };
 		49012AEC256BF2DF00C3614B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		49012AF1256BF44700C3614B /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
-		49012AF6256BF59200C3614B /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		49012AF6256BF59200C3614B /* ChatMessageV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageV2.swift; sourceTree = "<group>"; };
 		49012AFB256BF90100C3614B /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		49012B04256C23CB00C3614B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		49012B11256C240F00C3614B /* LogoutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutButton.swift; sourceTree = "<group>"; };
@@ -308,7 +308,7 @@
 				49012AEC256BF2DF00C3614B /* User.swift */,
 				49012AF1256BF44700C3614B /* UserPreferences.swift */,
 				499E1E89256EB6F50036614F /* Chatster.swift */,
-				49012AF6256BF59200C3614B /* ChatMessage.swift */,
+				49012AF6256BF59200C3614B /* ChatMessageV2.swift */,
 				49012AFB256BF90100C3614B /* Conversation.swift */,
 				497EF90C2576719B0045A5EA /* Member.swift */,
 				49012B44256D162D00C3614B /* Photo.swift */,
@@ -705,7 +705,7 @@
 				49012ACC256BEFFA00C3614B /* AppState.swift in Sources */,
 				49CF1CA12579258A00DF251E /* AttachButton.swift in Sources */,
 				498344A4257E395900E7BAFF /* ThumbnailWithExpand.swift in Sources */,
-				49012AF7256BF59200C3614B /* ChatMessage.swift in Sources */,
+				49012AF7256BF59200C3614B /* ChatMessageV2.swift in Sources */,
 				491269B425822FB30083C817 /* MapView.swift in Sources */,
 				496F1AE02577EC1F00B946A9 /* ThumbNailView.swift in Sources */,
 				49012AA1256BEEC500C3614B /* LabeledText.swift in Sources */,

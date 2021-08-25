@@ -1,11 +1,11 @@
 {
-    "id": "611a919471f2daf096517dfb",
-    "name": "ChatMessageChange",
+    "id": "611bdf829e580fcf607d1051",
+    "name": "ChatMessageProp",
     "type": "DATABASE",
     "config": {
         "operation_types": [
-            "INSERT",
             "UPDATE",
+            "INSERT",
             "DELETE",
             "REPLACE"
         ],
@@ -16,8 +16,8 @@
         "project": {},
         "full_document": true,
         "full_document_before_change": false,
-        "unordered": true
+        "unordered": false
     },
-    "function_name": "chatMessageChange",
+    "function_name": "copyToChatMessageV2",
     "disabled": false
 }

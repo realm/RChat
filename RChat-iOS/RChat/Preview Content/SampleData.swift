@@ -205,7 +205,7 @@ extension Photo: Samplable {
     static var spud: Photo { Photo(photoName: "spud\(Int.random(in: 1...8))") }
 }
 
-extension ChatMessage {
+extension ChatMessageV2 {
     convenience init(conversation: Conversation,
                      author: User,
                      text: String = "This is the text for the message",
@@ -225,7 +225,7 @@ extension ChatMessage {
         self.isHighPriority = isHighPriority
     }
     
-    convenience init(_ chatMessage: ChatMessage) {
+    convenience init(_ chatMessage: ChatMessageV2) {
         self.init()
         partition = chatMessage.partition
         author = chatMessage.author
@@ -237,17 +237,17 @@ extension ChatMessage {
     }
 }
 
-extension ChatMessage: Samplable {
-    static var samples: [ChatMessage] { [sample, sample2, sample3, sample20, sample22, sample23, sample30, sample32, sample33] }
-    static var sample: ChatMessage { ChatMessage(conversation: .sample, author: .sample) }
-    static var sample2: ChatMessage { ChatMessage(conversation: .sample, author: .sample2, includePhoto: true, isHighPriority: true) }
-    static var sample3: ChatMessage { ChatMessage(conversation: .sample, author: .sample3, text: "Thoughts on this spud?", includePhoto: true, includeLocation: true)}
-    static var sample20: ChatMessage { ChatMessage(conversation: .sample2, author: .sample) }
-    static var sample22: ChatMessage { ChatMessage(conversation: .sample2, author: .sample2, includePhoto: true, isHighPriority: true) }
-    static var sample23: ChatMessage { ChatMessage(conversation: .sample2, author: .sample3, text: "Fancy trying this?", includePhoto: true, includeLocation: true)}
-    static var sample30: ChatMessage { ChatMessage(conversation: .sample3, author: .sample) }
-    static var sample32: ChatMessage { ChatMessage(conversation: .sample3, author: .sample2, includePhoto: true, isHighPriority: true) }
-    static var sample33: ChatMessage { ChatMessage(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's space for it all to fit in", includePhoto: true, includeLocation: true)}
+extension ChatMessageV2: Samplable {
+    static var samples: [ChatMessageV2] { [sample, sample2, sample3, sample20, sample22, sample23, sample30, sample32, sample33] }
+    static var sample: ChatMessageV2 { ChatMessageV2(conversation: .sample, author: .sample) }
+    static var sample2: ChatMessageV2 { ChatMessageV2(conversation: .sample, author: .sample2, includePhoto: true, isHighPriority: true) }
+    static var sample3: ChatMessageV2 { ChatMessageV2(conversation: .sample, author: .sample3, text: "Thoughts on this spud?", includePhoto: true, includeLocation: true)}
+    static var sample20: ChatMessageV2 { ChatMessageV2(conversation: .sample2, author: .sample) }
+    static var sample22: ChatMessageV2 { ChatMessageV2(conversation: .sample2, author: .sample2, includePhoto: true, isHighPriority: true) }
+    static var sample23: ChatMessageV2 { ChatMessageV2(conversation: .sample2, author: .sample3, text: "Fancy trying this?", includePhoto: true, includeLocation: true)}
+    static var sample30: ChatMessageV2 { ChatMessageV2(conversation: .sample3, author: .sample) }
+    static var sample32: ChatMessageV2 { ChatMessageV2(conversation: .sample3, author: .sample2, includePhoto: true, isHighPriority: true) }
+    static var sample33: ChatMessageV2 { ChatMessageV2(conversation: .sample3, author: .sample3, text: "Is this a bit controversial? If nothing else, this is a very long, tedious post - I just hope that there's space for it all to fit in", includePhoto: true, includeLocation: true)}
 }
 
 extension Realm: Samplable {
@@ -262,7 +262,7 @@ extension Realm: Samplable {
             Chatster.samples.forEach { chatster in
                 realm.add(chatster)
             }
-            ChatMessage.samples.forEach { message in
+            ChatMessageV2.samples.forEach { message in
                 realm.add(message)
             }
         }
@@ -276,7 +276,7 @@ extension Realm: Samplable {
                 realm.deleteAll()
                 realm.add(Chatster.samples)
                 realm.add(User(User.sample))
-                realm.add(ChatMessage.samples)
+                realm.add(ChatMessageV2.samples)
             }
         } catch {
             print("Failed to bootstrap the default realm")

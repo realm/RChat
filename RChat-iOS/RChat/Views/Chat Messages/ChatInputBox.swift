@@ -12,7 +12,7 @@ struct ChatInputBox: View {
     @EnvironmentObject var state: AppState
     @AppStorage("shouldShareLocation") var shouldShareLocation = false
     
-    var send: (_: ChatMessage) -> Void = { _ in }
+    var send: (_: ChatMessageV2) -> Void = { _ in }
     var focusAction: () -> Void = {}
     
     private enum Dimensions {
@@ -101,7 +101,7 @@ struct ChatInputBox: View {
     }
     
     private func sendMessage(text: String, photo: Photo?, location: [Double], isHighPriority: Bool) {
-            let chatMessage = ChatMessage(
+            let chatMessage = ChatMessageV2(
                 author: state.user?.userName ?? "Unknown",
                 text: text,
                 image: photo,

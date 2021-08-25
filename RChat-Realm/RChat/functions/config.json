@@ -1,0 +1,42 @@
+[
+    {
+        "name": "chatMessageChange",
+        "private": true,
+        "run_as_system": true,
+        "can_evaluate": {}
+    },
+    {
+        "name": "createNewUserDocument",
+        "private": true
+    },
+    {
+        "name": "resetFunc",
+        "private": false,
+        "can_evaluate": {}
+    },
+    {
+        "name": "userDocWrittenTo",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "canReadPartition",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "canWritePartition",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "copyToChatMessageV2",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "copyToChatMessage",
+        "private": true,
+        "run_as_system": true
+    }
+]

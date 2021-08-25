@@ -1,4 +1,5 @@
 {
+    "id": "611a919471f2daf096517dfc",
     "name": "UserCollectionWrite",
     "type": "DATABASE",
     "config": {
@@ -14,6 +15,7 @@
         "match": {},
         "project": {},
         "full_document": true,
+        "full_document_before_change": false,
         "unordered": false
     },
     "function_name": "userDocWrittenTo",

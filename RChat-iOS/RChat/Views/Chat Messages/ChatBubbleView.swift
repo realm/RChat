@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct ChatBubbleView: View {
-    let chatMessage: ChatMessage
+    let chatMessage: ChatMessageV2
     let authorName: String?
     var isPreview = false
     

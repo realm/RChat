@@ -1,0 +1,14 @@
+{
+    "collection": "Chatster",
+    "database": "RChat",
+    "roles": [
+        {
+            "name": "anyone",
+            "apply_when": {},
+            "insert": false,
+            "delete": false,
+            "search": false,
+            "additional_fields": {}
+        }
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "bsonType": "object",
+    "properties": {
+        "_id": {
+            "bsonType": "string"
+        },
+        "avatarImage": {
+            "bsonType": "object",
+            "properties": {
+                "_id": {
+                    "bsonType": "string"
+                },
+                "date": {
+                    "bsonType": "date"
+                },
+                "picture": {
+                    "bsonType": "binData"
+                },
+                "thumbNail": {
+                    "bsonType": "binData"
+                }
+            },
+            "required": [
+                "_id",
+                "date"
+            ],
+            "title": "Photo"
+        },
+        "displayName": {
+            "bsonType": "string"
+        },
+        "lastSeenAt": {
+            "bsonType": "date"
+        },
+        "partition": {
+            "bsonType": "string"
+        },
+        "presence": {
+            "bsonType": "string"
+        },
+        "userName": {
+            "bsonType": "string"
+        }
+    },
+    "required": [
+        "_id",
+        "partition",
+        "presence",
+        "userName"
+    ],
+    "title": "Chatster"
+}
