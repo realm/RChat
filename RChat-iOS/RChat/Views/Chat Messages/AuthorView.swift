@@ -9,8 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct AuthorView: View {
-    @ObservedResults(Chatster.self,
-                     configuration: Realm.Configuration(schemaVersion: schemaVersion)) var chatsters
+    @ObservedResults(Chatster.self) var chatsters
     let userName: String
     
     var chatster: Chatster? {

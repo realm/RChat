@@ -11,7 +11,7 @@ import RealmSwift
 struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     @Environment(\.presentationMode) var presentationMode
-    @ObservedResults(Chatster.self, configuration: Realm.Configuration(schemaVersion: schemaVersion)) var chatsters
+    @ObservedResults(Chatster.self) var chatsters
     
     var isPreview = false
     

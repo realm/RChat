@@ -9,7 +9,6 @@ import SwiftUI
 import RealmSwift
 
 let app = RealmSwift.App(id: "rchat-xxxxx") // TODO: Set the Realm application ID
-let schemaVersion: UInt64 = 1
 
 @main
 struct RChatApp: SwiftUI.App {

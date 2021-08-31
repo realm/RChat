@@ -9,8 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct ConversationCardContentsView: View {
-    @ObservedResults(Chatster.self,
-                     configuration: Realm.Configuration(schemaVersion: schemaVersion)) var chatsters
+    @ObservedResults(Chatster.self) var chatsters
     
     let conversation: Conversation
     
