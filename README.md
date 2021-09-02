@@ -1,5 +1,9 @@
 # ![RChat app icon](assets/RChatIcon80.png) RChat – A Chat app built with SwiftUI and Realm
 
+> The `new-schema` branch contains all of the iOS and backend Realm app code needed to add a new feature to tag chat message as high priority. This includes schema and code changes. You can find all of the steps to safely make such a schema change in a production app in [Migrating Your iOS App's Synced Realm Schema in Production](https://www.mongodb.com/developer/how-to/realm-sync-migration/).
+
+> This `V2-schema` branch contains all of the iOS and backend Realm app code needed to make the `ChatMessage.author` field non-optional. You can find all of the steps to safely make such a schema change in a production app in [Migrating Your iOS App's Synced Realm Schema in Production](https://www.mongodb.com/developer/how-to/realm-sync-migration/).
+
 RChat is a chat application. Members of a chat room share messages, photos, location, and presence information with each other. The initial version is an iOS (Swift & SwiftUI) app, but we will use the same data model and backend Realm application to build an Android version in the future.
 
 Read about the [Realm data architecture here](https://developer.mongodb.com/how-to/realm-swiftui-ios-chat-app) and [how the app was built here](https://developer.mongodb.com/how-to/building-a-mobile-chat-app-using-realm-new-way/).
