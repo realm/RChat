@@ -11,6 +11,7 @@
 		0A28D33A258B9ABC005D68E3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D339258B9ABC005D68E3 /* RealmSwift */; };
 		0A4EA3B4258D32960003F0E4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EA3B3258D32960003F0E4 /* CheckBox.swift */; };
 		0A87398825C9BECD0038F2FE /* ChatRoomBubblesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87398725C9BECD0038F2FE /* ChatRoomBubblesView.swift */; };
+		0AC8E20F26EF5753006EF60C /* MarkDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC8E20E26EF5753006EF60C /* MarkDown.swift */; };
 		0AD0C7F825D4418A00C2A44D /* SaveConversationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD0C7F725D4418A00C2A44D /* SaveConversationButton.swift */; };
 		0AEBFBFE25D2DF1A0003D631 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBFBFD25D2DF1A0003D631 /* AuthorView.swift */; };
 		49012A2F256BEA4C00C3614B /* RChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012A2E256BEA4C00C3614B /* RChatApp.swift */; };
@@ -100,6 +101,7 @@
 		0A3520E125949D00006DCC46 /* RChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RChat.entitlements; sourceTree = "<group>"; };
 		0A4EA3B3258D32960003F0E4 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		0A87398725C9BECD0038F2FE /* ChatRoomBubblesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomBubblesView.swift; sourceTree = "<group>"; };
+		0AC8E20E26EF5753006EF60C /* MarkDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkDown.swift; sourceTree = "<group>"; };
 		0AD0C7F725D4418A00C2A44D /* SaveConversationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveConversationButton.swift; sourceTree = "<group>"; };
 		0AEBFBFD25D2DF1A0003D631 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		0DD53676A72DF2CD401CD75D /* Pods_RChat_RChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RChat_RChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +344,7 @@
 				49012B8D256D8A7700C3614B /* OnOffCircleView.swift */,
 				4910B02B257FF91F00F274F0 /* SearchBox.swift */,
 				0A4EA3B3258D32960003F0E4 /* CheckBox.swift */,
+				0AC8E20E26EF5753006EF60C /* MarkDown.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 			files = (
 				4950E10D256FD9F300FA7E26 /* MugShotGridView.swift in Sources */,
 				49CF1C9325791C3000DF251E /* ButtonTemplate.swift in Sources */,
+				0AC8E20F26EF5753006EF60C /* MarkDown.swift in Sources */,
 				49012A6F256BECF200C3614B /* PreviewHelpers.swift in Sources */,
 				49012B7E256D841900C3614B /* LocationHelper.swift in Sources */,
 				49012B5D256D2D9700C3614B /* PhotoFullSizeView.swift in Sources */,
@@ -815,7 +819,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -871,7 +875,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -894,7 +898,7 @@
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RChat/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -919,7 +923,7 @@
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RChat/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -941,7 +945,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				INFOPLIST_FILE = RChatTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -964,7 +968,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				INFOPLIST_FILE = RChatTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

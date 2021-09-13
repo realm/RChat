@@ -32,7 +32,6 @@ struct MapThumbnailWithExpand: View {
                 Map(coordinateRegion: $region, annotationItems: annotationItems) { item in
                     MapPin(coordinate: item.coordinate)
                 }
-                .animation(.easeIn)
                 .frame(width: Dimensions.imageSize, height: Dimensions.imageSize, alignment: .center)
                 .clipShape(RoundedRectangle(cornerRadius: Dimensions.radius))
             }
