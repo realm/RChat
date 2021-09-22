@@ -33,7 +33,8 @@ struct OpaqueProgressView: View {
             }
         }
         .padding(Dimensions.padding)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Dimensions.cornerRadius))
+        .background(.ultraThinMaterial,
+                    in: RoundedRectangle(cornerRadius: Dimensions.cornerRadius))
     }
 }
 
