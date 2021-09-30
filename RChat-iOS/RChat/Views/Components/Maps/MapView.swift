@@ -32,7 +32,6 @@ struct MapView: View {
             annotationItems: annotationItems) { item in
             MapPin(coordinate: item.coordinate)
         }
-        .animation(.easeIn)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
             BackButton(label: "Dismiss")

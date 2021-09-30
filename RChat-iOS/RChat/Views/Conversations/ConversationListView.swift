@@ -18,7 +18,6 @@ struct ConversationListView: View {
     @State var showConversation = false
     @State var showingAddChat = false
     
-    private let animationDuration = 0.5
     private let sortDescriptors = [
         SortDescriptor(keyPath: "unreadCount", ascending: false),
         SortDescriptor(keyPath: "displayName", ascending: true)
@@ -35,7 +34,6 @@ struct ConversationListView: View {
                         }) { ConversationCardView(conversation: conversation, isPreview: isPreview) }
                     }
                 }
-                .animation(.easeIn(duration: animationDuration))
                 Button(action: { showingAddChat.toggle() }) {
                     Text("New Chat Room")
                 }

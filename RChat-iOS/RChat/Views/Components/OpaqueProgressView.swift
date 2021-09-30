@@ -13,7 +13,7 @@ struct OpaqueProgressView: View {
     private enum Dimensions {
         static let padding: CGFloat = 100
         static let bgColor = Color("Clear")
-        static let cornerRadius: CGFloat = 25
+        static let cornerRadius: CGFloat = 16
     }
 
     init() {
@@ -33,8 +33,8 @@ struct OpaqueProgressView: View {
             }
         }
         .padding(Dimensions.padding)
-        .background(Dimensions.bgColor)
-        .clipShape(RoundedRectangle(cornerRadius: Dimensions.cornerRadius))
+        .background(.ultraThinMaterial,
+                    in: RoundedRectangle(cornerRadius: Dimensions.cornerRadius))
     }
 }
 
