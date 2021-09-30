@@ -15,6 +15,8 @@ struct ChatInputBox: View {
     var send: (_: ChatMessage) -> Void = { _ in }
     var focusAction: () -> Void = {}
     
+    @FocusState var isTextFocussed: Bool
+    
     private enum Dimensions {
         static let maxHeight: CGFloat = 100
         static let minHeight: CGFloat = 100
@@ -41,6 +43,7 @@ struct ChatInputBox: View {
                 }
                 TextEditor(text: $chatText)
                     .onTapGesture(perform: focusAction)
+                    .focused($isTextFocussed)
                     .padding(Dimensions.padding)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: Dimensions.minHeight, maxHeight: Dimensions.maxHeight)
                     .background(Color("GreenBackground"))
@@ -56,7 +59,14 @@ struct ChatInputBox: View {
             .frame(height: Dimensions.toolStripHeight)
         }
         .padding(Dimensions.padding)
-        .onAppear(perform: { clearBackground() })
+        .onAppear(perform: onAppear)
+    }
+    
+    private func onAppear() {
+        clearBackground()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            isTextFocussed = true
+        }
     }
     
     private func addLocation() {
@@ -91,6 +101,7 @@ struct ChatInputBox: View {
         photo = nil
         chatText = ""
         location = []
+        isTextFocussed = true
     }
     
     private func clearBackground() {
