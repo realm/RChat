@@ -22,6 +22,16 @@ class User: Object, ObjectKeyIdentifiable {
         get { return Presence(rawValue: presence) ?? .hidden }
         set { presence = newValue.asString }
     }
+    
+    convenience init(userName: String, id: String) {
+        self.init()
+        self.userName = userName
+        _id = id
+        partition = "user=\(id)"
+        userPreferences = UserPreferences()
+        userPreferences?.displayName = ""
+        presence = "On-Line"
+    }
 }
 
 enum Presence: String {

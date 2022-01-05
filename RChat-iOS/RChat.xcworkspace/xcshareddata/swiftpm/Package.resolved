@@ -5,18 +5,18 @@
         "package": "Realm",
         "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
-          "branch": null,
-          "revision": "052f92ef8dd411616cfcfae8dd82888dcd4ecf45",
-          "version": "10.16.0"
+          "branch": "dp/flexible_sync_v1.0.0",
+          "revision": "95ea6f4dced090346422bc3e90e9b8f55cac9d85",
+          "version": null
         }
       },
       {
         "package": "RealmDatabase",
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
-          "branch": null,
-          "revision": "23f60515a00f076a9e3f2dc672fe1ae07601ee90",
-          "version": "11.4.1"
+          "branch": "dp/flexible_sync",
+          "revision": "21cde6c4ddafb487b50557b71b36f098a486c5ff",
+          "version": null
         }
       }
     ]

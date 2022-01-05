@@ -12,40 +12,38 @@ struct LogoutButton: View {
     @EnvironmentObject var state: AppState
     @Environment(\.realm) var userRealm
     
+    @ObservedRealmObject var user: User
     var action: () -> Void = {}
     
+    @State private var isConfirming = false
+    
     var body: some View {
-        Button("Log Out") {
-            state.shouldIndicateActivity = true
-            do {
-                try userRealm.write {
-                    state.user?.presenceState = .offLine
-                }
-            } catch {
-                state.error = "Unable to open Realm write transaction"
-            }
-            logout()
+        Button("Log Out") { isConfirming = true }
+        .confirmationDialog("Are you that you want to logout",
+                            isPresented: $isConfirming) {
+            Button("Confirm Logout", role: .destructive, action: logout)
+            Button("Cancel", role: .cancel) {}
         }
         .disabled(state.shouldIndicateActivity)
     }
     
     private func logout() {
+        state.shouldIndicateActivity = true
         action()
-        app.currentUser?.logOut()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            }, receiveValue: {
+        $user.presenceState.wrappedValue = .offLine
+        app.currentUser?.logOut { _ in
+            DispatchQueue.main.async {
                 state.shouldIndicateActivity = false
-                state.logoutPublisher.send($0)
-            })
-            .store(in: &state.cancellables)
+                state.userID = nil
+            }
+        }
     }
 }
 
 struct LogoutButton_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            LogoutButton()
+            LogoutButton(user: User())
                 .environmentObject(AppState())
                 .previewLayout(.sizeThatFits)
                 .padding()

@@ -10,95 +10,38 @@ import SwiftUI
 import RealmSwift
 
 struct SetProfileView: View {
-    @EnvironmentObject var state: AppState
-    @Environment(\.realm) var userRealm
-    @AppStorage("shouldShareLocation") var shouldShareLocation = false
+    @ObservedResults(User.self) var users
     
     @Binding var isPresented: Bool
-
-    @State private var displayName = ""
-    @State private var photo: Photo?
-    @State private var photoAdded = false
+    
+    // TODO: Check if still needed
+    @State private var isWaiting = true
     
     var body: some View {
-        Form {
-            Section(header: Text("User Profile")) {
-                if let photo = photo {
-                    AvatarButton(photo: photo) {
-                        self.showPhotoTaker()
-                    }
-                }
-                if photo == nil {
-                    Button(action: { self.showPhotoTaker() }) {
-                        Text("Add Photo")
-                    }
-                }
-                InputField(title: "Display Name", text: $displayName)
-                CallToActionButton(title: "Save User Profile", action: saveProfile)
+        ZStack {
+            if let user = users.first {
+                SetUserProfileView(user: user, isPresented: $isPresented)
             }
-            Section(header: Text("Device Settings")) {
-                Toggle(isOn: $shouldShareLocation, label: {
-                    Text("Share Location")
-                })
-                .onChange(of: shouldShareLocation) { value in
-                    if value {
-                        _ = LocationHelper.currentLocation
-                    }
-                }
-                OnlineAlertSettings()
+            if isWaiting {
+                ProgressView()
+                    .onAppear(perform: waitABit)
             }
         }
-        .onAppear { initData() }
-        .padding()
-        .navigationBarTitle("Edit Profile", displayMode: .inline)
-        .navigationBarItems(
-            leading: Button(action: { isPresented = false }) { BackButton() },
-            trailing: state.loggedIn ? LogoutButton(action: { isPresented = false }) : nil)
     }
     
-    private func initData() {
-        displayName = state.user?.userPreferences?.displayName ?? ""
-        photo = state.user?.userPreferences?.avatarImage
-    }
-    
-    private func saveProfile() {
-        state.shouldIndicateActivity = true
-        do {
-            try userRealm.write {
-                state.user?.userPreferences?.displayName = displayName
-                if photoAdded {
-                    guard let newPhoto = photo else {
-                        print("Missing photo")
-                        state.shouldIndicateActivity = false
-                        return
-                    }
-                    state.user?.userPreferences?.avatarImage = newPhoto
-                }
-                state.user?.presenceState = .onLine
-            }
-        } catch {
-            state.error = "Unable to open Realm write transaction"
-        }
-        state.shouldIndicateActivity = false
-    }
-
-    private func showPhotoTaker() {
-        PhotoCaptureController.show(source: .camera) { controller, photo in
-            self.photo = photo
-            photoAdded = true
-            controller.hide()
+    private func waitABit() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            isWaiting = false
         }
     }
 }
 
 struct SetProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        let previewState: AppState = .sample
         return AppearancePreviews(
             NavigationView {
                 SetProfileView(isPresented: .constant(true))
             }
         )
-        .environmentObject(previewState)
     }
 }
