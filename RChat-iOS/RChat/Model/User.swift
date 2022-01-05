@@ -29,7 +29,7 @@ class User: Object, ObjectKeyIdentifiable {
         _id = id
         partition = "user=\(id)"
         userPreferences = UserPreferences()
-        userPreferences?.displayName = ""
+        userPreferences?.displayName = "userName"
         presence = "On-Line"
     }
 }

@@ -13,7 +13,6 @@ class AppState: ObservableObject {
     
     @Published var error: String?
     @Published var busyCount = 0
-    @Published var userID: String?
     
     var cancellables = Set<AnyCancellable>()
 
@@ -34,15 +33,12 @@ class AppState: ObservableObject {
         }
     }
 
-    var user: User?
-
     var loggedIn: Bool {
-        app.currentUser != nil && app.currentUser?.state == .loggedIn && userID != nil
+        app.currentUser != nil && app.currentUser?.state == .loggedIn
     }
 
     init() {
         app.currentUser?.logOut { _ in
-            self.userID = nil
         }
     }
 }

@@ -14,31 +14,19 @@ struct ContentView: View {
 
     @AppStorage("shouldRemindOnlineUser") var shouldRemindOnlineUser = false
     @AppStorage("onlineUserReminderHours") var onlineUserReminderHours = 8.0
-
-    @State private var showingProfileView = false
+    
+    @State private var userID: String?
 
     var body: some View {
         NavigationView {
             ZStack {
                 VStack {
                     if state.loggedIn {
-                        if (state.user != nil) && !state.user!.isProfileSet || showingProfileView {
-                            SetProfileView(isPresented: $showingProfileView)
-                                .environment(\.realmConfiguration,
-                                             app.currentUser!.configuration(partitionValue: "user=\(state.userID ?? "unknown")"))
-                        } else {
-                            ConversationListView()
-                                .environment(\.realmConfiguration,
-                                              app.currentUser!.configuration(partitionValue: "user=\(state.userID ?? "unknown")"))
-                            .navigationBarTitle("Chats", displayMode: .inline)
-                            .navigationBarItems(
-                                trailing: state.loggedIn && !state.shouldIndicateActivity ? UserAvatarView(
-                                    photo: state.user?.userPreferences?.avatarImage,
-                                    online: true) { showingProfileView.toggle() } : nil
-                            )
-                        }
+                        LoggedInView()
+                            .environment(\.realmConfiguration,
+                                          app.currentUser!.configuration(partitionValue: "user=\(userID ?? "Unknown")"))
                     } else {
-                        LoginView()
+                        LoginView(userID: $userID)
                     }
                     Spacer()
                     if let error = state.error {
@@ -53,10 +41,8 @@ struct ContentView: View {
         }
         .currentDeviceNavigationViewStyle(alwaysStacked: !state.loggedIn)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            if let user = state.user {
-                if user.presenceState == .onLine && shouldRemindOnlineUser {
+            if shouldRemindOnlineUser {
                     addNotification(timeInHours: Int(onlineUserReminderHours))
-                }
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in

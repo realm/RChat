@@ -9,9 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct ChatRoomBubblesView: View {
-    @EnvironmentObject var state: AppState
     @ObservedResults(ChatMessage.self, sortDescriptor: SortDescriptor(keyPath: "timestamp", ascending: true)) var chats
     
+    @ObservedRealmObject var user: User
     var conversation: Conversation?
     var isPreview = false
     
@@ -29,7 +29,7 @@ struct ChatRoomBubblesView: View {
                     VStack {
                         ForEach(chats) { chatMessage in
                             ChatBubbleView(chatMessage: chatMessage,
-                                           authorName: chatMessage.author != state.user?.userName ? chatMessage.author : nil,
+                                           authorName: chatMessage.author != user.userName ? chatMessage.author : nil,
                                            isPreview: isPreview)
                         }
                     }
@@ -47,13 +47,11 @@ struct ChatRoomBubblesView: View {
                 }
             }
             Spacer()
-            if let user = state.user {
-                if isPreview {
-                    ChatInputBox(send: sendMessage, focusAction: scrollToBottom)
-                } else {
-                    ChatInputBox(send: sendMessage, focusAction: scrollToBottom)
-                        .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)"))
-                }
+            if isPreview {
+                ChatInputBox(user: user, send: sendMessage, focusAction: scrollToBottom)
+            } else {
+                ChatInputBox(user: user, send: sendMessage, focusAction: scrollToBottom)
+                    .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)"))
             }
         }
         .navigationBarTitle(conversation?.displayName ?? "Chat", displayMode: .inline)
@@ -93,7 +91,7 @@ struct ChatRoomBubblesView_Previews: PreviewProvider {
     static var previews: some View {
         Realm.bootstrap()
         
-        return AppearancePreviews(ChatRoomBubblesView(isPreview: true))
+        return AppearancePreviews(ChatRoomBubblesView(user: .sample, isPreview: true))
             .environmentObject(AppState.sample)
     }
 }

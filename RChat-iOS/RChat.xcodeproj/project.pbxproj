@@ -12,6 +12,7 @@
 		0A0E1CB02785AF280087D3C2 /* PreviewOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E1CAC2785AF280087D3C2 /* PreviewOrientation.swift */; };
 		0A0E1CB12785AF280087D3C2 /* PreviewDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E1CAD2785AF280087D3C2 /* PreviewDevices.swift */; };
 		0A0E1CB32785F4430087D3C2 /* SetUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E1CB22785F4430087D3C2 /* SetUserProfileView.swift */; };
+		0A0E1CB5278600DA0087D3C2 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E1CB4278600DA0087D3C2 /* LoggedInView.swift */; };
 		0A28D338258B9ABC005D68E3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D337258B9ABC005D68E3 /* Realm */; };
 		0A28D33A258B9ABC005D68E3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A28D339258B9ABC005D68E3 /* RealmSwift */; };
 		0A4EA3B4258D32960003F0E4 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4EA3B3258D32960003F0E4 /* CheckBox.swift */; };
@@ -49,7 +50,6 @@
 		49012B58256D2BF600C3614B /* UIImage+Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B57256D2BF600C3614B /* UIImage+Thumbnail.swift */; };
 		49012B5D256D2D9700C3614B /* PhotoFullSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B5C256D2D9700C3614B /* PhotoFullSizeView.swift */; };
 		49012B62256D2E2B00C3614B /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B61256D2E2B00C3614B /* BackButton.swift */; };
-		49012B70256D527800C3614B /* SetProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B6F256D527800C3614B /* SetProfileView.swift */; };
 		49012B75256D658000C3614B /* AvatarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B74256D658000C3614B /* AvatarButton.swift */; };
 		49012B7E256D841900C3614B /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B7D256D841900C3614B /* LocationHelper.swift */; };
 		49012B89256D89F100C3614B /* UserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49012B88256D89F100C3614B /* UserAvatarView.swift */; };
@@ -109,6 +109,7 @@
 		0A0E1CAC2785AF280087D3C2 /* PreviewOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewOrientation.swift; sourceTree = "<group>"; };
 		0A0E1CAD2785AF280087D3C2 /* PreviewDevices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewDevices.swift; sourceTree = "<group>"; };
 		0A0E1CB22785F4430087D3C2 /* SetUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUserProfileView.swift; sourceTree = "<group>"; };
+		0A0E1CB4278600DA0087D3C2 /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
 		0A3520E125949D00006DCC46 /* RChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RChat.entitlements; sourceTree = "<group>"; };
 		0A4EA3B3258D32960003F0E4 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		0A87398725C9BECD0038F2FE /* ChatRoomBubblesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomBubblesView.swift; sourceTree = "<group>"; };
@@ -153,7 +154,6 @@
 		49012B57256D2BF600C3614B /* UIImage+Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Thumbnail.swift"; sourceTree = "<group>"; };
 		49012B5C256D2D9700C3614B /* PhotoFullSizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFullSizeView.swift; sourceTree = "<group>"; };
 		49012B61256D2E2B00C3614B /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
-		49012B6F256D527800C3614B /* SetProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileView.swift; sourceTree = "<group>"; };
 		49012B74256D658000C3614B /* AvatarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarButton.swift; sourceTree = "<group>"; };
 		49012B7D256D841900C3614B /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 		49012B88256D89F100C3614B /* UserAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatarView.swift; sourceTree = "<group>"; };
@@ -344,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				49012A30256BEA4C00C3614B /* ContentView.swift */,
+				0A0E1CB4278600DA0087D3C2 /* LoggedInView.swift */,
 				49012A9F256BEEAB00C3614B /* Components */,
 				49012B03256C239C00C3614B /* User Accounts & Profile */,
 				499E1E94256ED5F30036614F /* Conversations */,
@@ -388,7 +389,6 @@
 				49012B04256C23CB00C3614B /* LoginView.swift */,
 				49012B11256C240F00C3614B /* LogoutButton.swift */,
 				49012B28256C678E00C3614B /* UserProfileButton.swift */,
-				49012B6F256D527800C3614B /* SetProfileView.swift */,
 				0A0E1CB22785F4430087D3C2 /* SetUserProfileView.swift */,
 				49012B88256D89F100C3614B /* UserAvatarView.swift */,
 				49012BA4256E83EB00C3614B /* OnlineAlertSettings.swift */,
@@ -704,7 +704,6 @@
 				49012A6F256BECF200C3614B /* PreviewHelpers.swift in Sources */,
 				49012B7E256D841900C3614B /* LocationHelper.swift in Sources */,
 				49012B5D256D2D9700C3614B /* PhotoFullSizeView.swift in Sources */,
-				49012B70256D527800C3614B /* SetProfileView.swift in Sources */,
 				49012BA5256E83EB00C3614B /* OnlineAlertSettings.swift in Sources */,
 				49D9327725790E8800F9EB45 /* SendButton.swift in Sources */,
 				49012B58256D2BF600C3614B /* UIImage+Thumbnail.swift in Sources */,
@@ -739,6 +738,7 @@
 				496F1AE02577EC1F00B946A9 /* ThumbNailView.swift in Sources */,
 				49012AA1256BEEC500C3614B /* LabeledText.swift in Sources */,
 				499E1E8A256EB6F50036614F /* Chatster.swift in Sources */,
+				0A0E1CB5278600DA0087D3C2 /* LoggedInView.swift in Sources */,
 				49012B62256D2E2B00C3614B /* BackButton.swift in Sources */,
 				49012B53256D25BC00C3614B /* PhotoCaptureController.swift in Sources */,
 				49F00E9D25715C0100ADC23F /* NewConversationView.swift in Sources */,
@@ -1102,8 +1102,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
-				branch = dp/flexible_sync_v1.0.0;
-				kind = branch;
+				kind = exactVersion;
+				version = 10.20.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

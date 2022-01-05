@@ -9,8 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct ConversationListView: View {
+    
     @EnvironmentObject var state: AppState
-    @ObservedResults(User.self) var users
+    @ObservedRealmObject var user: User
     
     var isPreview = false
     
@@ -27,7 +28,7 @@ struct ConversationListView: View {
     var body: some View {
         ZStack {
             VStack {
-                if let conversations = users.first?.conversations.sorted(by: sortDescriptors) {
+                if let conversations = user.conversations.sorted(by: sortDescriptors) {
                     List {
                         ForEach(conversations) { conversation in
                             Button(action: {
@@ -44,15 +45,13 @@ struct ConversationListView: View {
                 Spacer()
                 if isPreview {
                     NavigationLink(
-                        destination: ChatRoomView(conversation: conversation),
+                        destination: ChatRoomView(user: user, conversation: conversation),
                         isActive: $showConversation) { EmptyView() }
                 } else {
-                    if let user = state.user {
-                        NavigationLink(
-                            destination: ChatRoomView(conversation: conversation)
-                                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)")),
-                            isActive: $showConversation) { EmptyView() }
-                    }
+                    NavigationLink(
+                        destination: ChatRoomView(user: user, conversation: conversation)
+                            .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)")),
+                        isActive: $showConversation) { EmptyView() }
                 }
             }
             if isWaiting {
@@ -61,7 +60,7 @@ struct ConversationListView: View {
             }
         }
         .sheet(isPresented: $showingAddChat) {
-            NewConversationView()
+            NewConversationView(user: user)
                 .environmentObject(state)
                 .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
         }
@@ -79,7 +78,7 @@ struct ConversationListViewPreviews: PreviewProvider {
     static var previews: some View {
         Realm.bootstrap()
         
-        return ConversationListView(isPreview: true)
+        return ConversationListView(user: .sample, isPreview: true)
             .environmentObject(AppState.sample)
     }
 }

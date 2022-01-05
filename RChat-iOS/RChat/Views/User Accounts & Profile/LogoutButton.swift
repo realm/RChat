@@ -10,7 +10,6 @@ import SwiftUI
 
 struct LogoutButton: View {
     @EnvironmentObject var state: AppState
-    @Environment(\.realm) var userRealm
     
     @ObservedRealmObject var user: User
     var action: () -> Void = {}
@@ -34,7 +33,6 @@ struct LogoutButton: View {
         app.currentUser?.logOut { _ in
             DispatchQueue.main.async {
                 state.shouldIndicateActivity = false
-                state.userID = nil
             }
         }
     }

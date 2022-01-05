@@ -11,6 +11,8 @@ import RealmSwift
 struct LoginView: View {
     @EnvironmentObject var state: AppState
     
+    @Binding var userID: String?
+    
     enum Field: Hashable {
         case username
         case password
@@ -66,7 +68,7 @@ struct LoginView: View {
                     try await app.emailPasswordAuth.registerUser(email: email, password: password)
                 }
                 let user = try await app.login(credentials: .emailPassword(email: email, password: password))
-                state.userID = user.id
+                userID = user.id
                 let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
                 do {
                     let realm = try await Realm(configuration: realmConfig)
@@ -75,10 +77,6 @@ struct LoginView: View {
                         try realm.write {
                             realm.add(userToStore)
                         }
-                        state.user = userToStore
-                    } else {
-                        // TODO: When logging in for the first time, this is nil?
-                        state.user = realm.objects(User.self).first
                     }
                 } catch {
                     state.error = error.localizedDescription
@@ -94,7 +92,7 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         PreviewColorScheme(PreviewOrientation(
-            LoginView()
+            LoginView(userID: .constant("1234554321"))
             .environmentObject(AppState())
         ))
     }

@@ -9,9 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct ChatInputBox: View {
-    @EnvironmentObject var state: AppState
     @AppStorage("shouldShareLocation") var shouldShareLocation = false
     
+    @ObservedRealmObject var user: User
     var send: (_: ChatMessage) -> Void = { _ in }
     var focusAction: () -> Void = {}
     
@@ -110,7 +110,7 @@ struct ChatInputBox: View {
     
     private func sendMessage(text: String, photo: Photo?, location: [Double]) {
             let chatMessage = ChatMessage(
-                author: state.user?.userName ?? "Unknown",
+                author: user.userName,
                 text: text,
                 image: photo,
                 location: location)
@@ -122,9 +122,9 @@ struct ChatInputBox_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
             Group {
-                ChatInputBox()
-                ChatInputBox(photo: .sample, location: [])
-                ChatInputBox(photo: .sample, location: [-0.10689139236939127, 51.506520923981554])
+                ChatInputBox(user: .sample)
+                ChatInputBox(user: .sample, photo: .sample, location: [])
+                ChatInputBox(user: .sample, photo: .sample, location: [-0.10689139236939127, 51.506520923981554])
             }
         )
         .previewLayout(.sizeThatFits)
