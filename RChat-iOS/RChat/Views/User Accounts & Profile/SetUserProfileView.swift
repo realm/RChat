@@ -13,6 +13,7 @@ struct SetUserProfileView: View {
     
     @ObservedRealmObject var user: User
     @Binding var isPresented: Bool
+    @Binding var userID: String?
     
     @State private var displayName = ""
     @State private var photo: Photo?
@@ -49,7 +50,7 @@ struct SetUserProfileView: View {
         .onAppear(perform: initData)
         .navigationBarItems(
             leading: Button(action: { isPresented = false }) { BackButton() },
-            trailing: LogoutButton(user: user, action: { isPresented = false }))
+            trailing: LogoutButton(user: user, userID: $userID, action: { isPresented = false }))
         .padding()
         .navigationBarTitle("Edit Profile", displayMode: .inline)
     }
@@ -85,6 +86,6 @@ struct SetUserProfileView: View {
 
 struct SetUserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        SetUserProfileView(user: User(), isPresented: .constant(true))
+        SetUserProfileView(user: User(), isPresented: .constant(true), userID: .constant("Andrew"))
     }
 }

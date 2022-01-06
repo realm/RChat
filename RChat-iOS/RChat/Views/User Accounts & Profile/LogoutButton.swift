@@ -12,6 +12,7 @@ struct LogoutButton: View {
     @EnvironmentObject var state: AppState
     
     @ObservedRealmObject var user: User
+    @Binding var userID: String?
     var action: () -> Void = {}
     
     @State private var isConfirming = false
@@ -41,7 +42,7 @@ struct LogoutButton: View {
 struct LogoutButton_Previews: PreviewProvider {
     static var previews: some View {
         AppearancePreviews(
-            LogoutButton(user: User())
+            LogoutButton(user: User(), userID: .constant("Andrew"))
                 .environmentObject(AppState())
                 .previewLayout(.sizeThatFits)
                 .padding()

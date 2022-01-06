@@ -17,7 +17,7 @@ struct LoginView: View {
         case username
         case password
     }
-
+    
     @State private var email = ""
     @State private var password = ""
     @State private var newUser = false
@@ -63,27 +63,28 @@ struct LoginView: View {
         state.error = nil
         state.shouldIndicateActivity = true
         Task {
-            do {
-                if newUser {
-                    try await app.emailPasswordAuth.registerUser(email: email, password: password)
-                }
-                let user = try await app.login(credentials: .emailPassword(email: email, password: password))
-                userID = user.id
-                let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
+            if newUser {
                 do {
-                    let realm = try await Realm(configuration: realmConfig)
-                    if newUser {
-                        let userToStore = User(userName: email, id: user.id)
-                        try realm.write {
-                            realm.add(userToStore)
-                        }
+                    try await app.emailPasswordAuth.registerUser(email: email, password: password)
+                } catch {
+                    state.error = error.localizedDescription
+                }
+            }
+            let user = try await app.login(credentials: .emailPassword(email: email, password: password))
+            
+            if newUser {
+                let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
+                let realm = try await Realm(configuration: realmConfig)
+                let userToStore = User(userName: email, id: user.id)
+                do {
+                    try realm.write {
+                        realm.add(userToStore)
                     }
                 } catch {
                     state.error = error.localizedDescription
                 }
-            } catch {
-                state.error = error.localizedDescription
             }
+            userID = user.id
             state.shouldIndicateActivity = false
         }
     }
@@ -93,7 +94,7 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         PreviewColorScheme(PreviewOrientation(
             LoginView(userID: .constant("1234554321"))
-            .environmentObject(AppState())
+                .environmentObject(AppState())
         ))
     }
 }

@@ -18,7 +18,6 @@ struct ConversationListView: View {
     @State private var conversation: Conversation?
     @State private var showConversation = false
     @State private var showingAddChat = false
-    @State private var isWaiting = true
     
     private let sortDescriptors = [
         SortDescriptor(keyPath: "unreadCount", ascending: false),
@@ -48,27 +47,19 @@ struct ConversationListView: View {
                         destination: ChatRoomView(user: user, conversation: conversation),
                         isActive: $showConversation) { EmptyView() }
                 } else {
-                    NavigationLink(
-                        destination: ChatRoomView(user: user, conversation: conversation)
-                            .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "user=\(user._id)")),
-                        isActive: $showConversation) { EmptyView() }
+                    if let realmUser = app.currentUser {
+                        NavigationLink(
+                            destination: ChatRoomView(user: user, conversation: conversation)
+                                .environment(\.realmConfiguration, realmUser.configuration(partitionValue: "user=\(user._id)")),
+                            isActive: $showConversation) { EmptyView() }
+                    }
                 }
-            }
-            if isWaiting {
-                ProgressView()
-                    .onAppear(perform: waitABit)
             }
         }
         .sheet(isPresented: $showingAddChat) {
             NewConversationView(user: user)
                 .environmentObject(state)
                 .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
-        }
-    }
-    
-    private func waitABit() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            isWaiting = false
         }
     }
 }

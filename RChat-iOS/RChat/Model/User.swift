@@ -15,7 +15,7 @@ class User: Object, ObjectKeyIdentifiable {
     @Persisted var userPreferences: UserPreferences?
     @Persisted var lastSeenAt: Date?
     @Persisted var conversations = List<Conversation>()
-    @Persisted var presence = "Off-Line"
+    @Persisted var presence = "On-Line"
 
     var isProfileSet: Bool { !(userPreferences?.isEmpty ?? true) }
     var presenceState: Presence {

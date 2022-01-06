@@ -21,8 +21,8 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 VStack {
-                    if state.loggedIn {
-                        LoggedInView()
+                    if state.loggedIn && userID != nil {
+                        LoggedInView(userID: $userID)
                             .environment(\.realmConfiguration,
                                           app.currentUser!.configuration(partitionValue: "user=\(userID ?? "Unknown")"))
                     } else {
