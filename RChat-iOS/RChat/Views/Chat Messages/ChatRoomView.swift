@@ -38,7 +38,6 @@ struct ChatRoomView: View {
     private func clearUnreadCount() {
         if let conversationId = conversation?.id {
             if let conversationIndex = user.conversations.firstIndex(where: { $0.id == conversationId }) {
-                // TODO: Check if this crashes
                 $user.conversations[conversationIndex].unreadCount.wrappedValue = 0
             }
         }
