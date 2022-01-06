@@ -12,8 +12,11 @@ struct SaveConversationButton: View {
     @EnvironmentObject var state: AppState
     
     @ObservedRealmObject var user: User
+//    @ObservedRealmObject var conversations: RealmSwift.List<Conversation>
+    @Environment(\.realm) var userRealm
     
     let name: String
+//    let userName: String
     let members: [String]
     var done: () -> Void = { }
     
@@ -29,7 +32,16 @@ struct SaveConversationButton: View {
         conversation.displayName = name
         conversation.members.append(Member(userName: user.userName, state: .active))
         conversation.members.append(objectsIn: members.map { Member($0) })
-        $user.conversations.wrappedValue.append(conversation)
+//        do {
+//            try userRealm.write {
+//                user.conversations.append(conversation)
+//            }
+//        } catch {
+//            state.error = error.localizedDescription
+//        }
+        $user.conversations.wrappedValue = user.addConversation(conversation)
+//        $user.conversations.wrappedValue.append(conversation)
+//        $conversations.append(conversation)
         done()
     }
 }

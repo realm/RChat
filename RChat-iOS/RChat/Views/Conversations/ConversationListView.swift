@@ -56,6 +56,9 @@ struct ConversationListView: View {
                 }
             }
         }
+        .onAppear {
+            $user.presenceState.wrappedValue = .onLine
+        }
         .sheet(isPresented: $showingAddChat) {
             NewConversationView(user: user)
                 .environmentObject(state)
