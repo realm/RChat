@@ -15,12 +15,31 @@ class User: Object, ObjectKeyIdentifiable {
     @Persisted var userPreferences: UserPreferences?
     @Persisted var lastSeenAt: Date?
     @Persisted var conversations = List<Conversation>()
-    @Persisted var presence = "Off-Line"
+    @Persisted var presence = "On-Line"
 
     var isProfileSet: Bool { !(userPreferences?.isEmpty ?? true) }
     var presenceState: Presence {
         get { return Presence(rawValue: presence) ?? .hidden }
         set { presence = newValue.asString }
+    }
+    
+    convenience init(userName: String, id: String) {
+        self.init()
+        self.userName = userName
+        _id = id
+        partition = "user=\(id)"
+        userPreferences = UserPreferences()
+        userPreferences?.displayName = userName
+        presence = "On-Line"
+    }
+    
+    func addConversation(_ newConversation: Conversation) -> List<Conversation> {
+        let newConversations = List<Conversation>()
+        conversations.forEach { conversation in
+            newConversations.append(conversation.copy)
+        }
+        newConversations.append(newConversation)
+        return newConversations
     }
 }
 

@@ -9,110 +9,92 @@ import SwiftUI
 import RealmSwift
 
 struct LoginView: View {
-
     @EnvironmentObject var state: AppState
     
-    @State private var username = ""
-    @State private var password = ""
-    @State private var newUser = false
-
-    private enum Dimensions {
-        static let padding: CGFloat = 16.0
-    }
-
-    var body: some View {
-        VStack(spacing: Dimensions.padding) {
-            Spacer()
-            InputField(title: "Email/Username",
-                       text: self.$username)
-                .keyboardType(.emailAddress)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-            InputField(title: "Password",
-                       text: self.$password,
-                       showingSecureField: true)
-            CallToActionButton(
-                title: newUser ? "Register User" : "Log In",
-                action: { self.userAction(username: self.username, password: self.password) })
-            HStack {
-                CheckBox(title: "Register new user", isChecked: $newUser)
-                Spacer()
-            }
-            
-            Spacer()
-        }
-        .padding(.horizontal, Dimensions.padding)
-        .navigationBarTitle("Log In", displayMode: .inline)
-        .navigationBarItems(trailing: EmptyView())
+    @Binding var userID: String?
+    
+    enum Field: Hashable {
+        case username
+        case password
     }
     
-    private func userAction(username: String, password: String) {
+    @State private var email = ""
+    @State private var password = ""
+    @State private var newUser = false
+    
+    @FocusState private var focussedField: Field?
+    
+    var body: some View {
+        ZStack {
+            VStack(spacing: 16) {
+                Spacer()
+                TextField("username", text: $email)
+                    .focused($focussedField, equals: .username)
+                    .submitLabel(.next)
+                    .onSubmit { focussedField = .password }
+                SecureField("password", text: $password)
+                    .focused($focussedField, equals: .password)
+                    .onSubmit(userAction)
+                    .submitLabel(.go)
+                Button(action: { newUser.toggle() }) {
+                    HStack {
+                        Image(systemName: newUser ? "checkmark.square" : "square")
+                        Text("Register new user")
+                        Spacer()
+                    }
+                }
+                Button(action: userAction) {
+                    Text(newUser ? "Register new user" : "Log in")
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                Spacer()
+            }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                focussedField = .username
+            }
+        }
+        .padding()
+    }
+    
+    func userAction() {
+        state.error = nil
         state.shouldIndicateActivity = true
-        if newUser {
-            signup(username: username, password: password)
-        } else {
-            login(username: username, password: password)
-        }
-    }
-
-    private func signup(username: String, password: String) {
-        if username.isEmpty || password.isEmpty {
-            state.shouldIndicateActivity = false
-            return
-        }
-        self.state.error = nil
-        app.emailPasswordAuth.registerUser(email: username, password: password)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: {
-                state.shouldIndicateActivity = false
-                switch $0 {
-                case .finished:
-                    break
-                case .failure(let error):
-                    self.state.error = error.localizedDescription
+        Task {
+            if newUser {
+                do {
+                    try await app.emailPasswordAuth.registerUser(email: email, password: password)
+                } catch {
+                    state.error = error.localizedDescription
                 }
-            }, receiveValue: {
-                self.state.error = nil
-                login(username: username, password: password)
-            })
-            .store(in: &state.cancellables)
-    }
-
-    private func login(username: String, password: String) {
-        if username.isEmpty || password.isEmpty {
-            state.shouldIndicateActivity = false
-            return
-        }
-        self.state.error = nil
-        app.login(credentials: .emailPassword(email: username, password: password))
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: {
-                state.shouldIndicateActivity = false
-                switch $0 {
-                case .finished:
-                    break
-                case .failure(let error):
-                    self.state.error = error.localizedDescription
+            }
+            let user = try await app.login(credentials: .emailPassword(email: email, password: password))
+            
+            if newUser {
+                let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
+                let realm = try await Realm(configuration: realmConfig)
+                let userToStore = User(userName: email, id: user.id)
+                do {
+                    try realm.write {
+                        realm.add(userToStore)
+                    }
+                } catch {
+                    state.error = error.localizedDescription
                 }
-            }, receiveValue: {
-                self.state.error = nil
-                state.loginPublisher.send($0)
-            })
-            .store(in: &state.cancellables)
+            }
+            userID = user.id
+            state.shouldIndicateActivity = false
+        }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        AppearancePreviews(
-            Group {
-                LoginView()
-                    .environmentObject(AppState())
-                Landscape(
-                    LoginView()
-                        .environmentObject(AppState())
-                )
-            }
-        )
+        PreviewColorScheme(PreviewOrientation(
+            LoginView(userID: .constant("1234554321"))
+                .environmentObject(AppState())
+        ))
     }
 }

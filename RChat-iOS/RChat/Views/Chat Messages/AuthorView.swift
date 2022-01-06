@@ -10,6 +10,7 @@ import RealmSwift
 
 struct AuthorView: View {
     @ObservedResults(Chatster.self) var chatsters
+    
     let userName: String
     
     var chatster: Chatster? {

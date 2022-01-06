@@ -10,7 +10,8 @@ import RealmSwift
 
 struct SaveConversationButton: View {
     @EnvironmentObject var state: AppState
-    @Environment(\.realm) var userRealm
+    
+    @ObservedRealmObject var user: User
     
     let name: String
     let members: [String]
@@ -26,23 +27,9 @@ struct SaveConversationButton: View {
         state.error = nil
         let conversation = Conversation()
         conversation.displayName = name
-        guard let userName = state.user?.userName else {
-            state.error = "Current user is not set"
-            return
-        }
-        conversation.members.append(Member(userName: userName, state: .active))
+        conversation.members.append(Member(userName: user.userName, state: .active))
         conversation.members.append(objectsIn: members.map { Member($0) })
-        state.shouldIndicateActivity = true
-        do {
-            try userRealm.write {
-                state.user?.conversations.append(conversation)
-            }
-        } catch {
-            state.error = "Unable to open Realm write transaction"
-            state.shouldIndicateActivity = false
-            return
-        }
-        state.shouldIndicateActivity = false
+        $user.conversations.wrappedValue = user.addConversation(conversation)
         done()
     }
 }
@@ -51,7 +38,7 @@ struct SaveConversationButton_Previews: PreviewProvider {
     static var previews: some View {
         return AppearancePreviews(
             SaveConversationButton(
-                name: "Example Conversation",
+                user: .sample, name: "Example Conversation",
                 members: ["rod@contoso.com", "jane@contoso.com", "freddy@contoso.com"])
         )
         .previewLayout(.sizeThatFits)
