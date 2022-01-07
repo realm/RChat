@@ -32,15 +32,6 @@ class User: Object, ObjectKeyIdentifiable {
         userPreferences?.displayName = userName
         presence = "On-Line"
     }
-    
-    func addConversation(_ newConversation: Conversation) -> List<Conversation> {
-        let newConversations = List<Conversation>()
-        conversations.forEach { conversation in
-            newConversations.append(conversation.copy)
-        }
-        newConversations.append(newConversation)
-        return newConversations
-    }
 }
 
 enum Presence: String {

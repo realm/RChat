@@ -29,7 +29,7 @@ struct SaveConversationButton: View {
         conversation.displayName = name
         conversation.members.append(Member(userName: user.userName, state: .active))
         conversation.members.append(objectsIn: members.map { Member($0) })
-        $user.conversations.wrappedValue = user.addConversation(conversation)
+        $user.conversations.append(conversation)
         done()
     }
 }
