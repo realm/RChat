@@ -24,10 +24,6 @@ class Member: EmbeddedObject, ObjectKeyIdentifiable {
         membershipState = state
     }
     
-    var copy: Member {
-        Member(userName: userName, state: membershipState)
-    }
-    
     var membershipState: MembershipStatus {
         get { return MembershipStatus(rawValue: membershipStatus) ?? .left }
         set { membershipStatus = newValue.asString }

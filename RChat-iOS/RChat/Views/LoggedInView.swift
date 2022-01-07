@@ -11,6 +11,7 @@ import RealmSwift
 struct LoggedInView: View {
     @EnvironmentObject var state: AppState
     
+//    @ObservedResults(User.self, subscriptions: []) var sumfin
     @ObservedResults(User.self) var users
     @Binding var userID: String?
     
