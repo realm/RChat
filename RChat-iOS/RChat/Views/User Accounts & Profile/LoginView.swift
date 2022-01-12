@@ -67,25 +67,31 @@ struct LoginView: View {
                 do {
                     try await app.emailPasswordAuth.registerUser(email: email, password: password)
                 } catch {
-                    state.error = error.localizedDescription
+                    DispatchQueue.main.async {
+                        state.error = error.localizedDescription
+                        state.shouldIndicateActivity = false
+                    }
+                    return
                 }
             }
-            let user = try await app.login(credentials: .emailPassword(email: email, password: password))
-            
-            if newUser {
-                let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
-                let realm = try await Realm(configuration: realmConfig)
-                let userToStore = User(userName: email, id: user.id)
-                do {
+            do {
+                let user = try await app.login(credentials: .emailPassword(email: email, password: password))
+                if newUser {
+                    let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
+                    let realm = try await Realm(configuration: realmConfig)
+                    let userToStore = User(userName: email, id: user.id)
                     try realm.write {
                         realm.add(userToStore)
                     }
-                } catch {
+                }
+                userID = user.id
+                state.shouldIndicateActivity = false
+            } catch {
+                DispatchQueue.main.async {
                     state.error = error.localizedDescription
+                    state.shouldIndicateActivity = false
                 }
             }
-            userID = user.id
-            state.shouldIndicateActivity = false
         }
     }
 }
