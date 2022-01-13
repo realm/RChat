@@ -1102,8 +1102,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
-				kind = exactVersion;
-				version = 10.20.2;
+				branch = dp/flexible_sync_v1.0.0;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

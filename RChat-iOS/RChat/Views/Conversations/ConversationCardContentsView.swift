@@ -9,7 +9,9 @@ import SwiftUI
 import RealmSwift
 
 struct ConversationCardContentsView: View {
+    @EnvironmentObject var state: AppState
     @ObservedResults(Chatster.self) var chatsters
+    @Environment(\.realm) var realm
     
     let conversation: Conversation
     
@@ -46,6 +48,30 @@ struct ConversationCardContentsView: View {
             RoundedRectangle(cornerRadius: Dimensions.cornerRadius)
                 .stroke(Color.gray, lineWidth: Dimensions.lineWidth)
         )
+        .onAppear(perform: setSubscription)
+    }
+    
+    private func setSubscription() {
+        if let subscriptions = realm.subscriptions {
+            print("ConversationCardContentsView: Currently \(subscriptions.count) subscriptions")
+            if subscriptions.first(named: "all_chatsters") != nil {
+                print("all_chatsters already subscribed, so skipping")
+            } else {
+                do {
+                    try subscriptions.write {
+                        subscriptions.append({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
+                            chatster.userName != ""
+                        }})
+                    }
+                } catch {
+                    state.error = error.localizedDescription
+                }
+                if let subscriptions = realm.subscriptions {
+                    print("Now \(subscriptions.count) subscriptions")
+                }
+            }
+            print("chatsters count == \(chatsters.count)")
+        }
     }
 }
 

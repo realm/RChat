@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LogoutButton: View {
     @EnvironmentObject var state: AppState
+    @Environment(\.realm) var realm
     
     @ObservedRealmObject var user: User
     @Binding var userID: String?
@@ -31,12 +32,28 @@ struct LogoutButton: View {
         state.shouldIndicateActivity = true
         action()
         $user.presenceState.wrappedValue = .offLine
+        clearSubscriptions()
         app.currentUser?.logOut { _ in
             DispatchQueue.main.async {
                 state.shouldIndicateActivity = false
             }
         }
     }
+    
+    private func clearSubscriptions() {
+        if let subscriptions = realm.subscriptions {
+            print("Clearing subscription. Current count = \(subscriptions.count)")
+            do {
+                try subscriptions.write {
+                    subscriptions.removeAll()
+                }
+            } catch {
+                state.error = error.localizedDescription
+            }
+            print("Cleared subscription. Current count = \(subscriptions.count)")
+        }
+    }
+    
 }
 
 struct LogoutButton_Previews: PreviewProvider {

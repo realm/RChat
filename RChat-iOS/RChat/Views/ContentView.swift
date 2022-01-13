@@ -24,7 +24,7 @@ struct ContentView: View {
                     if state.loggedIn && userID != nil {
                         LoggedInView(userID: $userID)
                             .environment(\.realmConfiguration,
-                                          app.currentUser!.configuration(partitionValue: "user=\(userID ?? "Unknown")"))
+                                          app.currentUser!.flexibleSyncConfiguration())
                     } else {
                         LoginView(userID: $userID)
                     }

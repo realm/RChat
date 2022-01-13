@@ -9,6 +9,8 @@ import SwiftUI
 import RealmSwift
 
 struct AuthorView: View {
+    @EnvironmentObject var state: AppState
+    @Environment(\.realm) var realm
     @ObservedResults(Chatster.self) var chatsters
     
     let userName: String
@@ -37,8 +39,32 @@ struct AuthorView: View {
                 }
                 Spacer()
             }
+            .onAppear(perform: setSubscription)
             .frame(maxHeight: Dimensions.authorHeight)
             .padding(Dimensions.padding)
+        }
+    }
+    
+    private func setSubscription() {
+        if let subscriptions = realm.subscriptions {
+            print("AuthorView: Currently \(subscriptions.count) subscriptions")
+            if subscriptions.first(named: "all_chatsters") != nil {
+                print("all_chatsters already subscribed, so skipping")
+            } else {
+                do {
+                    try subscriptions.write {
+                        subscriptions.append({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
+                            chatster.userName != ""
+                        }})
+                    }
+                } catch {
+                    state.error = error.localizedDescription
+                }
+                if let subscriptions = realm.subscriptions {
+                    print("Now \(subscriptions.count) subscriptions")
+                }
+            }
+            print("chatsters count == \(chatsters.count)")
         }
     }
 }

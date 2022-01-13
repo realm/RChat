@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct ChatBubbleView: View {
-    let chatMessage: ChatMessage
+    @ObservedRealmObject var chatMessage: ChatMessage
     let authorName: String?
     var isPreview = false
     
@@ -31,7 +31,8 @@ struct ChatBubbleView: View {
                             AuthorView(userName: authorName)
                         } else {
                             AuthorView(userName: authorName)
-                                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
+                            // TODO: Needed?
+//                                .environment(\.realmConfiguration, app.currentUser!.flexibleSyncConfiguration())
                         }
                     }
                     Spacer()

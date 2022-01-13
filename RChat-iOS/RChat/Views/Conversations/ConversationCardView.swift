@@ -19,7 +19,6 @@ struct ConversationCardView: View {
                 ConversationCardContentsView(conversation: conversation)
             } else {
                 ConversationCardContentsView(conversation: conversation)
-                    .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
             }
         }
     }

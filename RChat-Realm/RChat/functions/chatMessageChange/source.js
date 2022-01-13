@@ -1,12 +1,16 @@
-exports = function(changeEvent) {
+exports = async function(changeEvent) {
   if (changeEvent.operationType != "insert") {
     console.log(`ChatMessage ${changeEvent.operationType} event – currently ignored.`);
     return;
   }
   
   console.log(`ChatMessage Insert event being processed`);
+  console.log(`context.user: ${JSON.stringify(context.user)}`);
+  console.log(`context.user.id: ${context.user.id}`);
   let userCollection = context.services.get("mongodb-atlas").db("RChat").collection("User");
+  let eventCollection = context.services.get("mongodb-atlas").db("RChat").collection("Event");
   let chatMessage = changeEvent.fullDocument;
+  console.log(`Message: ${JSON.stringify(chatMessage)}`);
   let conversation = "";
   
   if (chatMessage.partition) {
@@ -45,10 +49,17 @@ exports = function(changeEvent) {
       ]
   };
   
-  userCollection.updateMany(matchingUserQuery, updateOperator, arrayFilter)
-  .then ( result => {
-    console.log(`Matched ${result.matchedCount} User docs; updated ${result.modifiedCount}`);
-  }, error => {
-    console.log(`Failed to match and update User docs: ${error}`);
-  });
+  await eventCollection.insertOne(changeEvent);
+  // .then ( result => {
+  //   console.log(`Stored event log`);
+  // }, error => {
+  //   console.error(`Failed to store event doc: ${error}`);
+  // });
+  
+  await userCollection.updateMany(matchingUserQuery, updateOperator, arrayFilter);
+  // .then ( result => {
+  //   console.log(`Matched ${result.matchedCount} User docs; updated ${result.modifiedCount}`);
+  // }, error => {
+  //   console.log(`Failed to match and update User docs: ${error}`);
+  // });
 };

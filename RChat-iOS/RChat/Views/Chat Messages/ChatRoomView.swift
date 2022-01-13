@@ -24,7 +24,7 @@ struct ChatRoomView: View {
                     ChatRoomBubblesView(user: user, conversation: conversation, isPreview: isPreview)
                 } else {
                     ChatRoomBubblesView(user: user, conversation: conversation)
-                        .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "conversation=\(conversation.id)"))
+                        .environment(\.realmConfiguration, app.currentUser!.flexibleSyncConfiguration())
                 }
             }
             Spacer()

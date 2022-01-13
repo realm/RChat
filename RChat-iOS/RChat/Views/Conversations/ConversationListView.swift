@@ -49,8 +49,9 @@ struct ConversationListView: View {
                 } else {
                     if let realmUser = app.currentUser {
                         NavigationLink(
-                            destination: ChatRoomView(user: user, conversation: conversation)
-                                .environment(\.realmConfiguration, realmUser.configuration(partitionValue: "user=\(user._id)")),
+                            destination: ChatRoomView(user: user, conversation: conversation),
+                            // TODO: Needed?
+//                                .environment(\.realmConfiguration, realmUser.flexibleSyncConfiguration()),
                             isActive: $showConversation) { EmptyView() }
                     }
                 }
@@ -62,7 +63,7 @@ struct ConversationListView: View {
         .sheet(isPresented: $showingAddChat) {
             NewConversationView(user: user)
                 .environmentObject(state)
-                .environment(\.realmConfiguration, app.currentUser!.configuration(partitionValue: "all-users=all-the-users"))
+                .environment(\.realmConfiguration, app.currentUser!.flexibleSyncConfiguration())
         }
     }
 }

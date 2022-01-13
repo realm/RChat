@@ -12,6 +12,7 @@ struct NewConversationView: View {
     @EnvironmentObject var state: AppState
     @Environment(\.presentationMode) var presentationMode
     @ObservedResults(Chatster.self) var chatsters
+    @Environment(\.realm) var realm
     
     @ObservedRealmObject var user: User
     
@@ -85,16 +86,16 @@ struct NewConversationView: View {
                     SaveConversationButton(user: user, name: name, members: members, done: { presentationMode.wrappedValue.dismiss() })
                 } else {
                     SaveConversationButton(user: user, name: name, members: members, done: { presentationMode.wrappedValue.dismiss() })
-                    .environment(
-                        \.realmConfiguration,
-                        app.currentUser!.configuration(partitionValue: "user=\(user._id)"))
                 }
             }
             .disabled(isEmpty)
             .padding()
             )
         }
-        .onAppear(perform: searchUsers)
+        .onAppear {
+            setSubscription()
+            searchUsers()
+        }
     }
     
     private func searchUsers() {
@@ -126,6 +127,25 @@ struct NewConversationView: View {
     
     private func deleteMember(at offsets: IndexSet) {
         members.remove(atOffsets: offsets)
+    }
+    
+    private func setSubscription() {
+        if let subscriptions = realm.subscriptions {
+            print("Currently \(subscriptions.count) subscriptions")
+            do {
+                try subscriptions.write {
+                    subscriptions.append({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
+                        chatster.userName != ""
+                    }})
+                }
+            } catch {
+                state.error = error.localizedDescription
+            }
+            if let subscriptions = realm.subscriptions {
+                print("Now \(subscriptions.count) subscriptions")
+            }
+            print("chatsters count == \(chatsters.count)")
+        }
     }
 }
 
