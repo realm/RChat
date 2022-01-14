@@ -69,6 +69,8 @@ struct SetUserProfileView: View {
                 return
             }
             userPreferences.avatarImage = newPhoto
+        } else {
+            userPreferences.avatarImage = Photo(user.userPreferences?.avatarImage)
         }
         $user.userPreferences.wrappedValue = userPreferences
         $user.presenceState.wrappedValue = .onLine
