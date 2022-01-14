@@ -47,13 +47,9 @@ struct ConversationListView: View {
                         destination: ChatRoomView(user: user, conversation: conversation),
                         isActive: $showConversation) { EmptyView() }
                 } else {
-                    if let realmUser = app.currentUser {
-                        NavigationLink(
-                            destination: ChatRoomView(user: user, conversation: conversation),
-                            // TODO: Needed?
-//                                .environment(\.realmConfiguration, realmUser.flexibleSyncConfiguration()),
-                            isActive: $showConversation) { EmptyView() }
-                    }
+                    NavigationLink(
+                        destination: ChatRoomView(user: user, conversation: conversation),
+                        isActive: $showConversation) { EmptyView() }
                 }
             }
         }

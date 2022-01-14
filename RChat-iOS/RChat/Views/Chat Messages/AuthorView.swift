@@ -48,24 +48,26 @@ struct AuthorView: View {
     private func setSubscription() {
         if let subscriptions = realm.subscriptions {
             print("AuthorView: Currently \(subscriptions.count) subscriptions")
-            if subscriptions.first(named: "all_chatsters") != nil {
-                print("all_chatsters already subscribed, so skipping")
-            } else {
-                do {
-                    try subscriptions.write {
+            do {
+                try subscriptions.write {
+                    if let currentSubscription = subscriptions.first(named: "all_chatsters") {
+                        currentSubscription.update({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
+                            chatster.userName != ""
+                        }})
+                    } else {
                         subscriptions.append({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
                             chatster.userName != ""
                         }})
                     }
-                } catch {
-                    state.error = error.localizedDescription
                 }
-                if let subscriptions = realm.subscriptions {
-                    print("Now \(subscriptions.count) subscriptions")
-                }
+            } catch {
+                state.error = error.localizedDescription
             }
-            print("chatsters count == \(chatsters.count)")
+            if let subscriptions = realm.subscriptions {
+                print("Now \(subscriptions.count) subscriptions")
+            }
         }
+        print("chatsters count == \(chatsters.count)")
     }
 }
 

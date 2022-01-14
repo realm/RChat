@@ -39,7 +39,7 @@ struct ConversationCardContentsView: View {
                 Text(conversation.displayName)
                     .fontWeight(conversation.unreadCount > 0 ? .bold : .regular)
                 CaptionLabel(title: conversation.unreadCount == 0 ? "" :
-                        "\(conversation.unreadCount) new \(conversation.unreadCount == 1 ? "message" : "messages")")
+                                "\(conversation.unreadCount) new \(conversation.unreadCount == 1 ? "message" : "messages")")
             }
             Spacer()
         }
@@ -53,24 +53,21 @@ struct ConversationCardContentsView: View {
     
     private func setSubscription() {
         if let subscriptions = realm.subscriptions {
-            print("ConversationCardContentsView: Currently \(subscriptions.count) subscriptions")
-            if subscriptions.first(named: "all_chatsters") != nil {
-                print("all_chatsters already subscribed, so skipping")
-            } else {
-                do {
-                    try subscriptions.write {
+            do {
+                try subscriptions.write {
+                    if let currentSubscription = subscriptions.first(named: "all_chatsters") {
+                        currentSubscription.update({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
+                            chatster.userName != ""
+                        }})
+                    } else {
                         subscriptions.append({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
                             chatster.userName != ""
                         }})
                     }
-                } catch {
-                    state.error = error.localizedDescription
                 }
-                if let subscriptions = realm.subscriptions {
-                    print("Now \(subscriptions.count) subscriptions")
-                }
+            } catch {
+                state.error = error.localizedDescription
             }
-            print("chatsters count == \(chatsters.count)")
         }
     }
 }
@@ -78,12 +75,12 @@ struct ConversationCardContentsView: View {
 struct ConversationCardContentsView_Previews: PreviewProvider {
     static var previews: some View {
         Realm.bootstrap()
-
+        
         return AppearancePreviews(
             ForEach(Conversation.samples) { conversation in
                 ConversationCardContentsView(conversation: conversation)
             }
         )
-        .previewLayout(.sizeThatFits)
+            .previewLayout(.sizeThatFits)
     }
 }

@@ -73,30 +73,6 @@ struct LoginView: View {
             }
             do {
                 let user = try await app.login(credentials: .emailPassword(email: email, password: password))
-                if newUser {
-                    let realmConfig = user.flexibleSyncConfiguration()
-                    let realm = try await Realm(configuration: realmConfig)
-                    guard let subscriptions = realm.subscriptions else {
-                        state.error = "Cannot find Realm subscriptions"
-                        state.shouldIndicateActivity = false
-                        return
-                    }
-                    try subscriptions.write {
-                        subscriptions.append({ QuerySubscription<User>(name: "user_id") {
-                            $0._id == user.id
-                        }})
-                    }
-                    let userToStore = User(userName: email, id: user.id)
-                    do {
-                        try realm.write {
-                            realm.add(userToStore)
-                            print("Added user doc to Realm")
-                        }
-                    } catch {
-                        state.error = error.localizedDescription
-                        state.shouldIndicateActivity = false
-                    }
-                }
                 userID = user.id
                 state.shouldIndicateActivity = false
             } catch {

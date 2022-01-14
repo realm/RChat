@@ -44,21 +44,25 @@ struct LoggedInView: View {
         if let subscriptions = realm.subscriptions {
             print("Currently \(subscriptions.count) subscriptions")
             print("userID == \(userID ?? "nil")")
-            if subscriptions.first(named: "user_id") != nil {
-                print("user_id subscription already set - skipping")
-            } else {
-                do {
-                    try subscriptions.write {
+            do {
+                try subscriptions.write {
+                    if let currentSubscription = subscriptions.first(named: "user_id") {
+                        print("Replacing subscription for user_id")
+                        currentSubscription.update({QuerySubscription<User>(name: "user_id") { user in
+                            user._id == userID!
+                        }})
+                    } else {
+                        print("Appending subscription for user_id")
                         subscriptions.append({QuerySubscription<User>(name: "user_id") { user in
                             user._id == userID!
                         }})
                     }
-                } catch {
-                    state.error = error.localizedDescription
                 }
-                print("Now \(subscriptions.count) subscriptions")
-                print("users count == \(users.count)")
+            } catch {
+                state.error = error.localizedDescription
             }
+            print("Now \(subscriptions.count) subscriptions")
+            print("users count == \(users.count)")
         }
     }
 }

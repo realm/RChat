@@ -10,7 +10,6 @@ import RealmSwift
 
 class User: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var _id = UUID().uuidString
-    @Persisted var partition = "" // "user=_id"
     @Persisted var userName = ""
     @Persisted var userPreferences: UserPreferences?
     @Persisted var lastSeenAt: Date?
@@ -27,7 +26,6 @@ class User: Object, ObjectKeyIdentifiable {
         self.init()
         self.userName = userName
         _id = id
-        partition = "user=\(id)"
         userPreferences = UserPreferences()
         userPreferences?.displayName = userName
         presence = "On-Line"

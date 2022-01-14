@@ -1,4 +1,5 @@
 {
+    "id": "61e05996d16f7c9ba49db244",
     "name": "userRegistered",
     "type": "AUTHENTICATION",
     "config": {
@@ -7,6 +8,12 @@
             "local-userpass"
         ]
     },
-    "function_name": "createNewUserDocument",
-    "disabled": false
+    "disabled": false,
+    "event_processors": {
+        "FUNCTION": {
+            "config": {
+                "function_name": "createNewUserDocument"
+            }
+        }
+    }
 }

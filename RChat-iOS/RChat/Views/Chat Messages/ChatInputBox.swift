@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealmSwift
+import AuthenticationServices
 
 struct ChatInputBox: View {
     @AppStorage("shouldShareLocation") var shouldShareLocation = false
@@ -111,6 +112,7 @@ struct ChatInputBox: View {
     private func sendMessage(text: String, photo: Photo?, location: [Double]) {
             let chatMessage = ChatMessage(
                 author: user.userName,
+                authorID: user._id,
                 text: text,
                 image: photo,
                 location: location)

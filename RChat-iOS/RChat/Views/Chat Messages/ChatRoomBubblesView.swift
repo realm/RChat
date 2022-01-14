@@ -20,6 +20,8 @@ struct ChatRoomBubblesView: View {
     @State private var realmChatsNotificationToken: NotificationToken?
     @State private var latestChatId = ""
     
+    @State private var counter = 0
+    
     private enum Dimensions {
         static let padding: CGFloat = 8
     }
@@ -70,17 +72,18 @@ struct ChatRoomBubblesView: View {
     }
     
     private func closeChatRoom() {
+        clearSunscription()
         if let token = realmChatsNotificationToken {
             token.invalidate()
         }
     }
     
     private func sendMessage(chatMessage: ChatMessage) {
-        guard let conversataionString = conversation else {
+        guard let conversation = conversation else {
             print("comversation not set")
             return
         }
-        chatMessage.conversationId = conversataionString.id
+        chatMessage.conversationID = conversation.id
         $chats.append(chatMessage)
     }
     
@@ -90,23 +93,34 @@ struct ChatRoomBubblesView: View {
     
     private func setSubscription() {
         if let subscriptions = realm.subscriptions, let conversation = conversation {
-            print("ChatRoomBubblesView: Currently \(subscriptions.count) subscriptions")
-            let subscriptionName = "conversation_\(conversation.id)"
-            if subscriptions.first(named: subscriptionName) != nil {
-                print("\(subscriptionName) already subscribed, so skipping")
-            } else {
-                do {
-                    try subscriptions.write {
-                        subscriptions.append({QuerySubscription<ChatMessage>(name: subscriptionName) { chatMessage in
-                            chatMessage.partition == "conversation=\(conversation.id)"
+            do {
+                try subscriptions.write {
+                    if let currentSubscription = subscriptions.first(named: "conversation") {
+                        currentSubscription.update({QuerySubscription<ChatMessage>(name: "conversation") { chatMessage in
+                            chatMessage.conversationID == conversation.id
+                        }})
+                    } else {
+                        subscriptions.append({QuerySubscription<ChatMessage>(name: "conversation") { chatMessage in
+                            chatMessage.conversationID == conversation.id
                         }})
                     }
-                } catch {
-                    state.error = error.localizedDescription
                 }
-                print("Now \(subscriptions.count) subscriptions")
+            } catch {
+                state.error = error.localizedDescription
             }
-            print("chats count == \(chats.count)")
+        }
+    }
+    
+    private func clearSunscription() {
+        if let subscriptions = realm.subscriptions {
+            print("Leaving room, clearing subscription")
+            do {
+                try subscriptions.write {
+                    subscriptions.remove(named: "conversation")
+                }
+            } catch {
+                state.error = error.localizedDescription
+            }
         }
     }
 }

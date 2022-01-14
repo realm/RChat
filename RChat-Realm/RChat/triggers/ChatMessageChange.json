@@ -1,12 +1,10 @@
 {
+    "id": "61ddb0dea9366930af2ec80e",
     "name": "ChatMessageChange",
     "type": "DATABASE",
     "config": {
         "operation_types": [
-            "INSERT",
-            "UPDATE",
-            "DELETE",
-            "REPLACE"
+            "INSERT"
         ],
         "database": "RChat",
         "collection": "ChatMessage",
@@ -14,8 +12,15 @@
         "match": {},
         "project": {},
         "full_document": true,
-        "unordered": true
+        "full_document_before_change": false,
+        "unordered": false
     },
-    "function_name": "chatMessageChange",
-    "disabled": false
+    "disabled": false,
+    "event_processors": {
+        "FUNCTION": {
+            "config": {
+                "function_name": "chatMessageChange"
+            }
+        }
+    }
 }

@@ -131,20 +131,21 @@ struct NewConversationView: View {
     
     private func setSubscription() {
         if let subscriptions = realm.subscriptions {
-            print("Currently \(subscriptions.count) subscriptions")
             do {
                 try subscriptions.write {
-                    subscriptions.append({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
-                        chatster.userName != ""
-                    }})
+                    if let currentSubscription = subscriptions.first(named: "all_chatsters") {
+                        currentSubscription.update({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
+                            chatster.userName != ""
+                        }})
+                    } else {
+                        subscriptions.append({QuerySubscription<Chatster>(name: "all_chatsters") { chatster in
+                            chatster.userName != ""
+                        }})
+                    }
                 }
             } catch {
                 state.error = error.localizedDescription
             }
-            if let subscriptions = realm.subscriptions {
-                print("Now \(subscriptions.count) subscriptions")
-            }
-            print("chatsters count == \(chatsters.count)")
         }
     }
 }

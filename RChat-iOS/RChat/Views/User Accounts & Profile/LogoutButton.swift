@@ -42,7 +42,6 @@ struct LogoutButton: View {
     
     private func clearSubscriptions() {
         if let subscriptions = realm.subscriptions {
-            print("Clearing subscription. Current count = \(subscriptions.count)")
             do {
                 try subscriptions.write {
                     subscriptions.removeAll()
@@ -50,7 +49,6 @@ struct LogoutButton: View {
             } catch {
                 state.error = error.localizedDescription
             }
-            print("Cleared subscription. Current count = \(subscriptions.count)")
         }
     }
     

@@ -1,0 +1,24 @@
+[
+    {
+        "name": "resetFunc",
+        "private": true
+    },
+    {
+        "name": "chatMessageChange",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "countChats",
+        "private": false
+    },
+    {
+        "name": "userDocWrittenTo",
+        "private": true,
+        "run_as_system": true
+    },
+    {
+        "name": "createNewUserDocument",
+        "private": true
+    }
+]

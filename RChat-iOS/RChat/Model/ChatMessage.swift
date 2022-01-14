@@ -10,8 +10,9 @@ import RealmSwift
 
 class ChatMessage: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var _id = UUID().uuidString
-    @Persisted var partition = "" // "conversation=<conversation-id>"
+    @Persisted var conversationID = ""
     @Persisted var author: String? // username
+    @Persisted var authorID: String
     @Persisted var text = ""
     @Persisted var image: Photo?
     @Persisted var location = List<Double>()
@@ -21,22 +22,14 @@ class ChatMessage: Object, ObjectKeyIdentifiable {
         return "_id"
     }
     
-    convenience init(author: String, text: String, image: Photo?, location: [Double] = []) {
+    convenience init(author: String, authorID: String, text: String, image: Photo?, location: [Double] = []) {
         self.init()
         self.author = author
+        self.authorID = authorID
         self.text = text
         self.image = image ?? nil
         location.forEach { coord in
             self.location.append(coord)
         }
     }
-    
-    var conversationId: String {
-        get { partition.components(separatedBy: "=")[1] }
-        set(conversationId) { partition = "conversation=\(conversationId)"}
-    }
-}
-
-extension ChatMessage: Identifiable {
-    var id: String { _id }
 }

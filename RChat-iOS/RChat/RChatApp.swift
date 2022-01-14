@@ -8,8 +8,9 @@
 import SwiftUI
 import RealmSwift
 
+// TODO: Remove once not working with realm-dev
 let appConfiguration = AppConfiguration(baseURL: "https://realm-dev.mongodb.com", transport: nil, localAppName: "RChat", localAppVersion: "1")
-let app = RealmSwift.App(id: "rchat-xxxxx", configuration: appConfiguration) // TODO: Set the Realm application ID
+let app = RealmSwift.App(id: "rchat-xxxx", configuration: appConfiguration) // TODO: Set the Realm application ID
 
 @main
 struct RChatApp: SwiftUI.App {

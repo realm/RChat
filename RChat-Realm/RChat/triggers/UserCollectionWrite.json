@@ -1,12 +1,13 @@
 {
+    "id": "61df0b0c6269885f2e6a4bac",
     "name": "UserCollectionWrite",
     "type": "DATABASE",
     "config": {
         "operation_types": [
             "INSERT",
+            "UPDATE",
             "DELETE",
-            "REPLACE",
-            "UPDATE"
+            "REPLACE"
         ],
         "database": "RChat",
         "collection": "User",
@@ -14,8 +15,15 @@
         "match": {},
         "project": {},
         "full_document": true,
+        "full_document_before_change": false,
         "unordered": false
     },
-    "function_name": "userDocWrittenTo",
-    "disabled": false
+    "disabled": false,
+    "event_processors": {
+        "FUNCTION": {
+            "config": {
+                "function_name": "userDocWrittenTo"
+            }
+        }
+    }
 }

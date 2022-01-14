@@ -26,7 +26,6 @@ extension Date {
 extension User {
     convenience init(username: String, presence: Presence, userPreferences: UserPreferences, conversations: [Conversation]) {
         self.init()
-        partition = "user=\(_id)"
         self.userName = username
         self.presence = presence.asString
         self.userPreferences = userPreferences
@@ -38,7 +37,6 @@ extension User {
     
     convenience init(_ user: User) {
         self.init()
-        partition = user.partition
         userName = user.userName
         userPreferences = UserPreferences(user.userPreferences)
         lastSeenAt = user.lastSeenAt
@@ -150,7 +148,6 @@ extension Chatster {
     
     convenience init(_ chatster: Chatster) {
         self.init()
-        partition = chatster.partition
         userName = chatster.userName
         displayName = chatster.displayName
         avatarImage = Photo(chatster.avatarImage)
@@ -205,7 +202,7 @@ extension ChatMessage {
                      includePhoto: Bool = false,
                      includeLocation: Bool = false) {
         self.init()
-        partition = "conversation=\(conversation.id)"
+        conversationID = conversation.id
         self.author = author.userName
         self.text = text
         if includePhoto { self.image = Photo.spud }
@@ -218,7 +215,7 @@ extension ChatMessage {
     
     convenience init(_ chatMessage: ChatMessage) {
         self.init()
-        partition = chatMessage.partition
+        conversationID = chatMessage.conversationID
         author = chatMessage.author
         text = chatMessage.text
         image = Photo(chatMessage.image)

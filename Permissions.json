@@ -1,0 +1,53 @@
+{
+    "flexible_sync": {
+        "state": "enabled",
+        "permissions": {
+            "rules": {},
+            "User": {
+                "roles": [
+                    {
+                        "name": "anyone",
+                        "applyWhen": {},
+                        "read": {
+                            "_id": "%%user.id"
+                        },
+                        "write": {
+                            "_id": "%%user.id"
+                        }
+                    }
+                ]
+            },
+            "Chatster": {
+                "roles": [
+                    {
+                        "name": "anyone",
+                        "applyWhen": {},
+                        "read": true,
+                        "write": false
+                    }
+                ]
+            },
+            "ChatMessage": {
+                "roles": [
+                    {
+                        "name": "anyone",
+                        "applyWhen": {},
+                        "read": {},
+                        "write": {
+                            "authorID": "%%user.id"
+                        }
+                    }
+                ]
+            },
+            "defaultRoles": [
+                {
+                    "name": "all",
+                    "applyWhen": {},
+                    "read": {},
+                    "write": {}
+                }
+            ]
+        },
+        "queryable_fields_names": ["_id", "userName", "conversationID", "authorID"]
+    }
+}

@@ -31,8 +31,6 @@ struct ChatBubbleView: View {
                             AuthorView(userName: authorName)
                         } else {
                             AuthorView(userName: authorName)
-                            // TODO: Needed?
-//                                .environment(\.realmConfiguration, app.currentUser!.flexibleSyncConfiguration())
                         }
                     }
                     Spacer()
