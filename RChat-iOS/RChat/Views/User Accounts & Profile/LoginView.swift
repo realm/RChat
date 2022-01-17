@@ -76,14 +76,6 @@ struct LoginView: View {
             }
             do {
                 let user = try await app.login(credentials: .emailPassword(email: email, password: password))
-                if newUser {
-                    let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
-                    let realm = try await Realm(configuration: realmConfig)
-                    let userToStore = User(userName: email, id: user.id)
-                    try realm.write {
-                        realm.add(userToStore)
-                    }
-                }
                 userID = user.id
                 state.shouldIndicateActivity = false
             } catch {
