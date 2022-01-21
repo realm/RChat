@@ -12,12 +12,14 @@ struct ThumbnailPhotoView: View {
     var imageSize: CGFloat = 64
     
     var body: some View {
-        let mugShot = UIImage(data: photo.thumbNail!)
-        Image(uiImage: mugShot ?? UIImage())
-            .renderingMode(.original)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: imageSize, height: imageSize)
+        if let photo = photo.thumbNail {
+            let mugShot = UIImage(data: photo)
+            Image(uiImage: mugShot ?? UIImage())
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: imageSize, height: imageSize)
+        }
     }
 }
 
