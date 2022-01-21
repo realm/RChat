@@ -22,7 +22,7 @@ realm-cli import # Then answer prompts, naming the app RChat
 ![Realm application Id](assets/realm-app-id.png)
 
 5. (Optional) Use `mongoimport` to import the empty database from the `dump` folder to create database indexes
-1. Open the iOS project
+1. Open the iOS project (using Xcode 13.2 or later)
 ```
 cd ../../RChat-iOS
 open RChat.xcodeproj
