@@ -3,5 +3,5 @@
     "config_version": 20210101,
     "name": "RChat",
     "location": "US-VA",
-    "deployment_model": "GLOBAL"
+    "deployment_model": "LOCAL"
 }

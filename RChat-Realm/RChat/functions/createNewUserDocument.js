@@ -1,5 +1,6 @@
 exports = async function({user}) {
-  const db = context.services.get("mongodb-atlas").db("RChat");
+  const dbName = context.values.get("dbName");
+  const db = context.services.get("mongodb-atlas").db(dbName);
   const userCollection = db.collection("User");
   
   const partition = `user=${user.id}`;

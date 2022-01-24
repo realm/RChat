@@ -1,13 +1,13 @@
 {
-    "collection": "User",
+    "collection": "Chatster",
     "database": "RChat",
     "roles": [
         {
             "name": "default",
             "apply_when": {},
-            "insert": true,
-            "delete": true,
-            "search": true,
+            "insert": false,
+            "delete": false,
+            "search": false,
             "additional_fields": {}
         }
     ]

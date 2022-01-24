@@ -1,5 +1,6 @@
 exports = async function(changeEvent) {
-  const db = context.services.get("mongodb-atlas").db("RChat");
+  const dbName = context.values.get("dbName");
+  const db = context.services.get("mongodb-atlas").db(dbName);
   const chatster = db.collection("Chatster");
   const userCollection = db.collection("User");
   let eventCollection = context.services.get("mongodb-atlas").db("RChat").collection("Event");
@@ -30,12 +31,6 @@ exports = async function(changeEvent) {
       }
       console.log('About to replaceOne Chatster doc');
       await chatster.replaceOne({ _id: user._id }, chatsterDoc, { upsert: true });
-      // chatster.replaceOne({ _id: user._id }, chatsterDoc, { upsert: true }).then (() => {
-      //   console.log(`Wrote Chatster document for _id: ${docId}`);
-      // }, error => {
-      //   console.log(`Failed to write Chatster document for _id=${docId}: ${error}`);
-      // });
-      
       if (user.conversations && user.conversations.length > 0) {
         for (i = 0; i < user.conversations.length; i++) {
           let membersToAdd = [];
@@ -50,11 +45,6 @@ exports = async function(changeEvent) {
           } 
           if (membersToAdd.length > 0) {
             await userCollection.updateMany({userName: {$in: membersToAdd}}, {$push: {conversations: user.conversations[i]}});
-            // .then (result => {
-            //   console.log(`Updated ${result.modifiedCount} other User documents`);
-            // }, error => {
-            //   console.log(`Failed to copy new conversation to other users: ${error}`);
-            // });
           }
         }
       }
@@ -64,11 +54,6 @@ exports = async function(changeEvent) {
       break;
     case "delete":
       await chatster.deleteOne({_id: docId});
-      // .then (() => {
-      //   console.log(`Deleted Chatster document for _id: ${docId}`);
-      // }, error => {
-      //   console.log(`Failed to delete Chatster document for _id=${docId}: ${error}`);
-      // });
       break;
   }
 };

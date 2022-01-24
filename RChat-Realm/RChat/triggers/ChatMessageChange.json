@@ -1,12 +1,12 @@
 {
-    "id": "61ddb0dea9366930af2ec80e",
+    "id": "61eebc26ef295f71984f48b0",
     "name": "ChatMessageChange",
     "type": "DATABASE",
     "config": {
         "operation_types": [
             "INSERT"
         ],
-        "database": "RChat",
+        "database": "RChatFlex",
         "collection": "ChatMessage",
         "service_name": "mongodb-atlas",
         "match": {},

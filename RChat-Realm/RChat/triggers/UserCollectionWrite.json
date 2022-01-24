@@ -1,5 +1,5 @@
 {
-    "id": "61df0b0c6269885f2e6a4bac",
+    "id": "61eebc75ef295f71984fa707",
     "name": "UserCollectionWrite",
     "type": "DATABASE",
     "config": {
@@ -9,7 +9,7 @@
             "DELETE",
             "REPLACE"
         ],
-        "database": "RChat",
+        "database": "RChatFlex",
         "collection": "User",
         "service_name": "mongodb-atlas",
         "match": {},
