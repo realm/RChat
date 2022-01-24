@@ -80,7 +80,9 @@ struct NewConversationView: View {
             }
             .padding()
             .navigationBarTitle("New Chat", displayMode: .inline)
-            .navigationBarItems(trailing: VStack {
+            .navigationBarItems(
+                leading: Button("Dismiss") { presentationMode.wrappedValue.dismiss() },
+                trailing: VStack {
                 if isPreview {
                     SaveConversationButton(user: user, name: name, members: members, done: { presentationMode.wrappedValue.dismiss() })
                 } else {
