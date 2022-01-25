@@ -41,14 +41,9 @@ struct LogoutButton: View {
     }
     
     private func clearSubscriptions() {
-        if let subscriptions = realm.subscriptions {
-            do {
-                try subscriptions.write {
-                    subscriptions.removeAll()
-                }
-            } catch {
-                state.error = error.localizedDescription
-            }
+        let subscriptions = realm.subscriptions
+        subscriptions.write {
+            subscriptions.removeAll()
         }
     }
     

@@ -92,35 +92,27 @@ struct ChatRoomBubblesView: View {
     }
     
     private func setSubscription() {
-        if let subscriptions = realm.subscriptions, let conversation = conversation {
-            do {
-                try subscriptions.write {
-                    if let currentSubscription = subscriptions.first(named: "conversation") {
-                        currentSubscription.update({QuerySubscription<ChatMessage>(name: "conversation") { chatMessage in
-                            chatMessage.conversationID == conversation.id
-                        }})
-                    } else {
-                        subscriptions.append({QuerySubscription<ChatMessage>(name: "conversation") { chatMessage in
-                            chatMessage.conversationID == conversation.id
-                        }})
+        let subscriptions = realm.subscriptions
+        subscriptions.write {
+            if let conversation = conversation {
+                if let currentSubscription = subscriptions.first(named: "conversation") {
+                    currentSubscription.update(toType: ChatMessage.self) { chatMessage in
+                        chatMessage.conversationID == conversation.id
                     }
+                } else {
+                    subscriptions.append(QuerySubscription<ChatMessage>(name: "conversation") { chatMessage in
+                        chatMessage.conversationID == conversation.id
+                    })
                 }
-            } catch {
-                state.error = error.localizedDescription
             }
         }
     }
     
     private func clearSunscription() {
-        if let subscriptions = realm.subscriptions {
-            print("Leaving room, clearing subscription")
-            do {
-                try subscriptions.write {
-                    subscriptions.remove(named: "conversation")
-                }
-            } catch {
-                state.error = error.localizedDescription
-            }
+        print("Leaving room, clearing subscription")
+        let subscriptions = realm.subscriptions
+        subscriptions.write {
+            subscriptions.remove(named: "conversation")
         }
     }
 }

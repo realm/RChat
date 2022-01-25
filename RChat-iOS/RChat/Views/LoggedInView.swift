@@ -41,28 +41,19 @@ struct LoggedInView: View {
     }
     
     private func setSubscription() {
-        if let subscriptions = realm.subscriptions {
-            print("Currently \(subscriptions.count) subscriptions")
-            print("userID == \(userID ?? "nil")")
-            do {
-                try subscriptions.write {
-                    if let currentSubscription = subscriptions.first(named: "user_id") {
-                        print("Replacing subscription for user_id")
-                        currentSubscription.update({QuerySubscription<User>(name: "user_id") { user in
-                            user._id == userID!
-                        }})
-                    } else {
-                        print("Appending subscription for user_id")
-                        subscriptions.append({QuerySubscription<User>(name: "user_id") { user in
-                            user._id == userID!
-                        }})
-                    }
+        let subscriptions = realm.subscriptions
+        subscriptions.write {
+            if let currentSubscription = subscriptions.first(named: "user_id") {
+                print("Replacing subscription for user_id")
+                currentSubscription.update(toType: User.self) { user in
+                    user._id == userID!
                 }
-            } catch {
-                state.error = error.localizedDescription
+            } else {
+                print("Appending subscription for user_id")
+                subscriptions.append(QuerySubscription<User>(name: "user_id") { user in
+                    user._id == userID!
+                })
             }
-            print("Now \(subscriptions.count) subscriptions")
-            print("users count == \(users.count)")
         }
     }
 }
