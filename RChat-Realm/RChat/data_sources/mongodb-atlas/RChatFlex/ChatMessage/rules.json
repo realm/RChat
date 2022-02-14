@@ -1,6 +1,6 @@
 {
     "collection": "ChatMessage",
-    "database": "RChat",
+    "database": "RChatFlex",
     "roles": [
         {
             "name": "default",

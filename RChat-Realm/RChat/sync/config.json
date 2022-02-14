@@ -1,3 +1,56 @@
 {
-    "development_mode_enabled": false
+    "type": "flexible",
+    "state": "enabled",
+    "development_mode_enabled": false,
+    "service_name": "mongodb-atlas",
+    "last_disabled": 1643384411,
+    "permissions": {
+        "rules": {
+            "ChatMessage": [
+                {
+                    "name": "anyone",
+                    "applyWhen": {},
+                    "read": {},
+                    "write": {
+                        "authorID": "%%user.id"
+                    }
+                }
+            ],
+            "Chatster": [
+                {
+                    "name": "anyone",
+                    "applyWhen": {},
+                    "read": true,
+                    "write": false
+                }
+            ],
+            "User": [
+                {
+                    "name": "anyone",
+                    "applyWhen": {},
+                    "read": {
+                        "_id": "%%user.id"
+                    },
+                    "write": {
+                        "_id": "%%user.id"
+                    }
+                }
+            ]
+        },
+        "defaultRoles": [
+            {
+                "name": "all",
+                "applyWhen": {},
+                "read": false,
+                "write": false
+            }
+        ]
+    },
+    "queryable_fields_names": [
+        "_id",
+        "authorID",
+        "conversationID",
+        "timestamp",
+        "userName"
+    ]
 }

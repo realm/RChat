@@ -1,6 +1,6 @@
 {
-    "collection": "Chatster",
-    "database": "RChatFlex",
+    "collection": "Log",
+    "database": "RealmLog",
     "roles": [
         {
             "name": "default",
