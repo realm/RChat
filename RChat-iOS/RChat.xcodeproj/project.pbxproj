@@ -213,6 +213,8 @@
 				0A0E1CAA2785AF280087D3C2 /* PreviewColorScheme.swift */,
 				0A0E1CAB2785AF280087D3C2 /* PreviewNoDevice.swift */,
 				0A0E1CAC2785AF280087D3C2 /* PreviewOrientation.swift */,
+				49012A6E256BECF200C3614B /* PreviewHelpers.swift */,
+				49012B23256C4F4F00C3614B /* SampleData.swift */,
 				0A0E1CAD2785AF280087D3C2 /* PreviewDevices.swift */,
 			);
 			path = "Custom Previews";
@@ -259,8 +261,6 @@
 			isa = PBXGroup;
 			children = (
 				49012A35256BEA4E00C3614B /* Preview Assets.xcassets */,
-				49012A6E256BECF200C3614B /* PreviewHelpers.swift */,
-				49012B23256C4F4F00C3614B /* SampleData.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -804,6 +804,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RChat/RChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"RChat/Preview Content\"";
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				ENABLE_PREVIEWS = YES;
@@ -828,6 +829,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RChat/RChat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"RChat/Preview Content\"";
 				DEVELOPMENT_TEAM = CV5PJSAH7N;
 				ENABLE_PREVIEWS = YES;
@@ -976,7 +978,7 @@
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
 				kind = exactVersion;
-				version = 10.25.0;
+				version = 10.26.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
