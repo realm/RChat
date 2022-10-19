@@ -49,9 +49,7 @@ struct ChatBubbleView: View {
                         }
                     }
                     if chatMessage.text != "" {
-                        // TODO: Check why the MarkDown view isn't showing the updated text when a change is made in Atlas
-//                        MarkDown(text: chatMessage.text)
-                        Text(chatMessage.text)
+                        MarkDown(text: chatMessage.text)
                         .padding(Dimensions.padding)
                     }
                     Spacer()
