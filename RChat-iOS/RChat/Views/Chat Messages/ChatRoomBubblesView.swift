@@ -93,10 +93,10 @@ struct ChatRoomBubblesView: View {
     
     private func setSubscription() {
         let subscriptions = realm.subscriptions
-        subscriptions.write {
+        subscriptions.update {
             if let conversation = conversation {
                 if let currentSubscription = subscriptions.first(named: "conversation") {
-                    currentSubscription.update(toType: ChatMessage.self) { chatMessage in
+                    currentSubscription.updateQuery(toType: ChatMessage.self) { chatMessage in
                         chatMessage.conversationID == conversation.id
                     }
                 } else {
@@ -111,7 +111,7 @@ struct ChatRoomBubblesView: View {
     private func clearSunscription() {
         print("Leaving room, clearing subscription")
         let subscriptions = realm.subscriptions
-        subscriptions.write {
+        subscriptions.update {
             subscriptions.remove(named: "conversation")
         }
     }

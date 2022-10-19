@@ -133,9 +133,9 @@ struct NewConversationView: View {
     
     private func setSubscription() {
         let subscriptions = realm.subscriptions
-        subscriptions.write {
+        subscriptions.update {
             if let currentSubscription = subscriptions.first(named: "all_chatsters") {
-                currentSubscription.update(toType: Chatster.self) { chatster in
+                currentSubscription.updateQuery(toType: Chatster.self) { chatster in
                     chatster.userName != ""
                 }
 

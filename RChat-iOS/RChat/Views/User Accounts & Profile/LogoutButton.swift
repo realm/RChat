@@ -42,7 +42,7 @@ struct LogoutButton: View {
     
     private func clearSubscriptions() {
         let subscriptions = realm.subscriptions
-        subscriptions.write {
+        subscriptions.update {
             subscriptions.removeAll()
         }
     }

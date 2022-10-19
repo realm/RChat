@@ -42,10 +42,10 @@ struct LoggedInView: View {
     
     private func setSubscription() {
         let subscriptions = realm.subscriptions
-        subscriptions.write {
+        subscriptions.update {
             if let currentSubscription = subscriptions.first(named: "user_id") {
                 print("Replacing subscription for user_id")
-                currentSubscription.update(toType: User.self) { user in
+                currentSubscription.updateQuery(toType: User.self) { user in
                     user._id == userID!
                 }
             } else {
