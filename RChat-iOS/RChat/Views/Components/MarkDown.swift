@@ -26,6 +26,6 @@ private func safeAttributedString(_ sourceString: String) -> AttributedString {
 
 struct MarkDown_Previews: PreviewProvider {
     static var previews: some View {
-        MarkDown(text: "Some **bold** text")
+        MarkDown(text: "Sample of *italics*, **bold**, ~~strikethrough~~, [link](https://realm.io)")
     }
 }
