@@ -9,26 +9,18 @@ import SwiftUI
 
 struct MarkDown: View {
     let text: String
-    
-    @State private var formattedText: AttributedString?
 
     var body: some View {
-        Group {
-            if let formattedText = formattedText {
-                Text(formattedText)
-            } else {
-                Text(text)
-            }
-        }
-        .onAppear(perform: formatText)
+        Text(safeAttributedString(text))
     }
-    
-    private func formatText() {
-        do {
-            try formattedText = AttributedString(markdown: text)
-        } catch {
-            print("Couldn't convert this from markdown: \(text)")
-        }
+}
+
+private func safeAttributedString(_ sourceString: String) -> AttributedString {
+    do {
+        return try AttributedString(markdown: sourceString)
+    } catch {
+        print("Failed to convert Markdown to AttributedString: \(error.localizedDescription)")
+        return try! AttributedString(markdown: "Text could not be rendered")
     }
 }
 
