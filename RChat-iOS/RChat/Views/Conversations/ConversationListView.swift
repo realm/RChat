@@ -27,20 +27,19 @@ struct ConversationListView: View {
     var body: some View {
         ZStack {
             VStack {
-                if let conversations = user.conversations.sorted(by: sortDescriptors) {
-                    List {
-                        ForEach(conversations) { conversation in
-                            Button(action: {
-                                self.conversation = conversation
-                                showConversation.toggle()
-                            }) { ConversationCardView(conversation: conversation, isPreview: isPreview) }
-                        }
+                let conversations = user.conversations.sorted(by: sortDescriptors)
+                List {
+                    ForEach(conversations) { conversation in
+                        Button(action: {
+                            self.conversation = conversation
+                            showConversation.toggle()
+                        }) { ConversationCardView(conversation: conversation, isPreview: isPreview) }
                     }
-                    Button(action: { showingAddChat.toggle() }) {
-                        Text("New Chat Room")
-                    }
-                    .disabled(showingAddChat)
                 }
+                Button(action: { showingAddChat.toggle() }) {
+                    Text("New Chat Room")
+                }
+                .disabled(showingAddChat)
                 Spacer()
                 if isPreview {
                     NavigationLink(
