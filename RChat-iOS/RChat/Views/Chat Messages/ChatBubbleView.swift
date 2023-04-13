@@ -42,11 +42,10 @@ struct ChatBubbleView: View {
                         ThumbnailWithExpand(photo: photo)
                         .padding(Dimensions.padding)
                     }
-                    if let location = chatMessage.location {
-                        if location.count == 2 {
-                            MapThumbnailWithExpand(location: location.map { $0 })
-                                .padding(Dimensions.padding)
-                        }
+                    let location = chatMessage.location
+                    if location.count == 2 {
+                        MapThumbnailWithExpand(location: location.map { $0 })
+                            .padding(Dimensions.padding)
                     }
                     if chatMessage.text != "" {
                         MarkDown(text: chatMessage.text)

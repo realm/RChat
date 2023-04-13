@@ -19,15 +19,7 @@ struct AvatarThumbNailView: View {
 
     var body: some View {
         VStack {
-            if let photo = photo {
-                ThumbNailView(photo: photo)
-            } else {
-                if let photo = photo.picture {
-                    Thumbnail(imageData: photo)
-                } else {
-                    Thumbnail(imageData: UIImage().jpegData(compressionQuality: Dimensions.compressionQuality)!)
-                }
-            }
+            ThumbNailView(photo: photo)
         }
         .frame(width: imageSize, height: imageSize)
         .background(Color.gray)
