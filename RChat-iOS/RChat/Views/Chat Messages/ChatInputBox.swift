@@ -47,6 +47,7 @@ struct ChatInputBox: View {
                     .focused($isTextFocussed)
                     .padding(Dimensions.padding)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: Dimensions.minHeight, maxHeight: Dimensions.maxHeight)
+                    .scrollContentBackground(.hidden)
                     .background(Color("GreenBackground"))
                     .clipShape(RoundedRectangle(cornerRadius: Dimensions.radius))
             }
@@ -64,7 +65,6 @@ struct ChatInputBox: View {
     }
     
     private func onAppear() {
-        clearBackground()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             isTextFocussed = true
         }
@@ -103,10 +103,6 @@ struct ChatInputBox: View {
         chatText = ""
         location = []
         isTextFocussed = true
-    }
-    
-    private func clearBackground() {
-        UITextView.appearance().backgroundColor = .clear
     }
     
     private func sendMessage(text: String, photo: Photo?, location: [Double]) {
