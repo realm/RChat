@@ -954,7 +954,7 @@
 			repositoryURL = "https://github.com/realm/realm-cocoa.git";
 			requirement = {
 				kind = exactVersion;
-				version = 10.32.0;
+				version = 10.38.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
