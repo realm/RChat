@@ -28,7 +28,7 @@ struct MapThumbnailWithDelete: View {
     var body: some View {
         ZStack {
             Map(coordinateRegion: $region, annotationItems: annotationItems) { item in
-                MapPin(coordinate: item.coordinate)
+                MapMarker(coordinate: item.coordinate)
             }
             .frame(width: Dimensions.imageSize, height: Dimensions.imageSize, alignment: .center)
             .clipShape(RoundedRectangle(cornerRadius: Dimensions.radius))

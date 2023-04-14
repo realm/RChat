@@ -8,9 +8,7 @@
 import MapKit
 import SwiftUI
 
-struct MapView: View {
-    @Environment(\.presentationMode) var presentationMode
-    
+struct MapView: View { 
     let location: CLLocationCoordinate2D
     let annotationItems: [MyAnnotationItem]
     
@@ -30,12 +28,8 @@ struct MapView: View {
             interactionModes: .all,
             showsUserLocation: true,
             annotationItems: annotationItems) { item in
-            MapPin(coordinate: item.coordinate)
+            MapMarker(coordinate: item.coordinate)
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-            BackButton(label: "Dismiss")
-        })
         .onAppear(perform: setupLocation)
     }
     

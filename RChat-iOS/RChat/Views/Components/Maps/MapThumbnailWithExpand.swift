@@ -16,7 +16,6 @@ struct MapThumbnailWithExpand: View {
         span: MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0))
     @State private var annotationItems = [MyAnnotationItem]()
     @State private var position = CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)
-    @State private var showingFullMap = false
     
     private enum Dimensions {
         static let frameSize: CGFloat = 100
@@ -28,15 +27,14 @@ struct MapThumbnailWithExpand: View {
     
     var body: some View {
         VStack {
-            Button(action: { showingFullMap.toggle() }) {
+            NavigationLink {
+                MapView(location: position, annotationItems: annotationItems)
+            } label: {
                 Map(coordinateRegion: $region, annotationItems: annotationItems) { item in
-                    MapPin(coordinate: item.coordinate)
+                    MapMarker(coordinate: item.coordinate)
                 }
                 .frame(width: Dimensions.imageSize, height: Dimensions.imageSize, alignment: .center)
                 .clipShape(RoundedRectangle(cornerRadius: Dimensions.radius))
-            }
-            NavigationLink(destination: MapView(location: position, annotationItems: annotationItems), isActive: $showingFullMap) {
-                EmptyView()
             }
         }
         .onAppear(perform: setupLocation)
