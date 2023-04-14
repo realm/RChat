@@ -11,8 +11,6 @@ import SwiftUI
 struct PhotoFullSizeView: View {
     let photo: Photo
 
-    @Environment(\.presentationMode) var presentationMode
-
     var body: some View {
         VStack {
             if let picture = photo.picture {
@@ -23,10 +21,6 @@ struct PhotoFullSizeView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-            BackButton(label: "Dismiss")
-        })
     }
 }
 

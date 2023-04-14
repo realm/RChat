@@ -16,7 +16,6 @@ struct ConversationListView: View {
     var isPreview = false
     
     @State private var conversation: Conversation?
-    @State private var showConversation = false
     @State private var showingAddChat = false
     
     private let sortDescriptors = [
@@ -28,12 +27,12 @@ struct ConversationListView: View {
         ZStack {
             VStack {
                 let conversations = user.conversations.sorted(by: sortDescriptors)
-                List {
-                    ForEach(conversations) { conversation in
-                        Button(action: {
-                            self.conversation = conversation
-                            showConversation.toggle()
-                        }) { ConversationCardView(conversation: conversation, isPreview: isPreview) }
+                List(conversations) { conversation in
+                    NavigationLink {
+                        ChatRoomView(user: user, conversation: conversation)
+                    } label: {
+                        ConversationCardView(conversation: conversation, isPreview: isPreview)
+                            .listRowSeparator(.hidden)
                     }
                 }
                 Button(action: { showingAddChat.toggle() }) {
@@ -41,15 +40,6 @@ struct ConversationListView: View {
                 }
                 .disabled(showingAddChat)
                 Spacer()
-                if isPreview {
-                    NavigationLink(
-                        destination: ChatRoomView(user: user, conversation: conversation),
-                        isActive: $showConversation) { EmptyView() }
-                } else {
-                    NavigationLink(
-                        destination: ChatRoomView(user: user, conversation: conversation),
-                        isActive: $showConversation) { EmptyView() }
-                }
             }
         }
         .onAppear {
@@ -64,10 +54,10 @@ struct ConversationListView: View {
 }
 
 struct ConversationListViewPreviews: PreviewProvider {
-    
+
     static var previews: some View {
         Realm.bootstrap()
-        
+
         return ConversationListView(user: .sample, isPreview: true)
             .environmentObject(AppState.sample)
     }

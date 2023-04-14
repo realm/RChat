@@ -20,16 +20,13 @@ struct ThumbnailWithExpand: View {
     
     var body: some View {
         VStack {
-//            NavigationStack {
-                NavigationLink() {
-                    PhotoFullSizeView(photo: photo)
-                }
-                label: {
-                    ThumbNailView(photo: photo)
+            NavigationLink(destination: {
+                PhotoFullSizeView(photo: photo)
+            }, label: {
+                ThumbNailView(photo: photo)
                     .frame(width: Dimensions.imageSize, height: Dimensions.imageSize, alignment: .center)
                     .clipShape(RoundedRectangle(cornerRadius: Dimensions.radius))
-                }
-//            }
+            })
         }
     }
 }
