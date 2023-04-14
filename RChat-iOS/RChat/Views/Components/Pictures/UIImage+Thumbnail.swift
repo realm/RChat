@@ -16,7 +16,7 @@ extension UIImage {
         let options = [
             kCGImageSourceCreateThumbnailWithTransform: true,
             kCGImageSourceCreateThumbnailFromImageAlways: true,
-            kCGImageSourceThumbnailMaxPixelSize: size] as CFDictionary
+            kCGImageSourceThumbnailMaxPixelSize: size] as [CFString : Any] as CFDictionary
         
         imageData.withUnsafeBytes { ptr in
             if let bytes = ptr.baseAddress?.assumingMemoryBound(to: UInt8.self),
