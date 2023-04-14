@@ -27,11 +27,7 @@ struct ChatBubbleView: View {
             VStack {
                 HStack {
                     if let authorName = authorName {
-                        if isPreview {
-                            AuthorView(userName: authorName)
-                        } else {
-                            AuthorView(userName: authorName)
-                        }
+                        AuthorView(userName: authorName)
                     }
                     Spacer()
                     TextDate(date: chatMessage.timestamp)

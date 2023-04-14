@@ -18,7 +18,7 @@ struct ContentView: View {
     @State private var userID: String?
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 VStack {
                     if state.loggedIn && userID != nil {

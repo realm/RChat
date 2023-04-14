@@ -10,8 +10,6 @@ import SwiftUI
 struct ThumbnailWithExpand: View {
     let photo: Photo
     
-    @State private var showingFullImage = false
-    
     private enum Dimensions {
         static let frameSize: CGFloat = 100
         static let imageSize: CGFloat = 70
@@ -22,14 +20,16 @@ struct ThumbnailWithExpand: View {
     
     var body: some View {
         VStack {
-            Button(action: { showingFullImage = true }) {
-                ThumbNailView(photo: photo)
+//            NavigationStack {
+                NavigationLink() {
+                    PhotoFullSizeView(photo: photo)
+                }
+                label: {
+                    ThumbNailView(photo: photo)
                     .frame(width: Dimensions.imageSize, height: Dimensions.imageSize, alignment: .center)
                     .clipShape(RoundedRectangle(cornerRadius: Dimensions.radius))
-            }
-            NavigationLink(destination: PhotoFullSizeView(photo: photo), isActive: $showingFullImage) {
-                EmptyView()
-            }
+                }
+//            }
         }
     }
 }
