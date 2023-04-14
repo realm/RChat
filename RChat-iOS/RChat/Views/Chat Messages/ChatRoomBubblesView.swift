@@ -35,13 +35,11 @@ struct ChatRoomBubblesView: View {
                             ChatBubbleView(chatMessage: chatMessage,
                                            authorName: chatMessage.author != user.userName ? chatMessage.author : nil,
                                            isPreview: isPreview)
+                            .id(chatMessage._id)
                         }
                     }
                     .onAppear {
                         scrollToBottom()
-                        withAnimation(.linear(duration: 0.2)) {
-                            proxy.scrollTo(latestChatId, anchor: .bottom)
-                        }
                     }
                     .onChange(of: latestChatId) { target in
                         withAnimation {
@@ -51,11 +49,7 @@ struct ChatRoomBubblesView: View {
                 }
             }
             Spacer()
-            if isPreview {
-                ChatInputBox(user: user, send: sendMessage, focusAction: scrollToBottom)
-            } else {
-                ChatInputBox(user: user, send: sendMessage, focusAction: scrollToBottom)
-            }
+            ChatInputBox(user: user, send: sendMessage, focusAction: scrollToBottom)
         }
         .navigationBarTitle(conversation?.displayName ?? "Chat", displayMode: .inline)
         .padding(.horizontal, Dimensions.padding)
