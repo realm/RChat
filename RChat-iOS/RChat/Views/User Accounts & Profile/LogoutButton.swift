@@ -31,8 +31,10 @@ struct LogoutButton: View {
     private func logout() {
         state.shouldIndicateActivity = true
         action()
+        // TODO: Find a way that this gets synced to backend
         $user.presenceState.wrappedValue = .offLine
-        clearSubscriptions()
+        // TODO: Is there a way to do this without causing issues when users log out back in on the same devoce?
+        // clearSubscriptions()
         app.currentUser?.logOut { _ in
             DispatchQueue.main.async {
                 state.shouldIndicateActivity = false
